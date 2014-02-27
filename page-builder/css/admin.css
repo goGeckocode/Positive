@@ -114,30 +114,8 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 	padding: 7px 9px;
 }
 
-#so-panels-panels .panels-container .panel h4 {
-	height: 1em;
-	
-	color: #474747;
-	cursor: pointer;
-	display: inline-block;
-	font-weight: 600;
-	line-height: 1em;
-	margin: 0 0 3px 0;
-	margin-right: 15px;
-	overflow: hidden;
-	text-shadow: 0 1px 0 #FFF;
-	white-space: nowrap;
-}
-
-#so-panels-panels .panels-container .panel h4 span {
-	color: #999;
-	display: inline-block;
-	font-style: italic;
-	font-weight: normal;
-	margin-left: 12px;
-	margin-right: 5px;
-	text-shadow: 0 1px 0 #FFF;
-}
+#so-panels-panels .panels-container .panel h4 {	height: 1.1em;color: #666;	cursor: pointer;	display: inline-block;	font-weight: normal;	line-height: 1em;	margin: 0 0 3px 0;	margin-right: 15px;	overflow: hidden;	text-shadow: 0 1px 0 #FFF;	white-space: nowrap;font-style: italic;}
+#so-panels-panels .panels-container .panel h4 span {color: #999;display: inline-block;font-style: normal;font-weight: normal;margin-left: 12px;	margin-right: 5px;	text-shadow: 0 1px 0 #FFF;}
 
 #so-panels-panels .panels-container .panel .title a {
 	display: none;
@@ -153,6 +131,7 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 #so-panels-panels .panels-container .panel.panel-being-dragged .title .actions {display:none}
 
 #so-panels-panels .panels-container .panel small {display:block; overflow: hidden;}
+#so-panels-panels .panels-container .panel small img {max-width: 100px; height: auto;}
 #so-panels-panels .panels-container .panel .form {display:none}
 #so-panels-panels .panels-container .panel.ui-sortable-helper h4 {cursor:move}
 
@@ -168,7 +147,8 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 .panels-admin-dialog {display:none}
 #panels-dialog .panels-text-filter {margin-bottom:10px}
 .panels-admin-dialog img {display:inline-block; vertical-align:middle;}
-
+.panels-admin-dialog #thumbnail {width: 170px; max-height: 170px;}
+.panels-admin-dialog #thumbnail img {width: 100%; height:auto; margin:5px 0; }
 /* The Tooltips */
 .panels-tooltip {position:absolute; background:#1c1c1c; background:rgba(0, 0, 0, 0.8); -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; color:white; font-size:11px; padding:4px 8px; z-index:999999}
 .panels-tooltip .pointer {
