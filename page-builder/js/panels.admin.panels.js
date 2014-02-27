@@ -145,11 +145,8 @@
                 })
             ;
 
-            if(panels.animations) panel.slideUp( remove );
-            else {
-                panel.hide();
-                remove();
-            }
+            panel.hide();
+            remove();
         };
 
         // Add the action buttons
@@ -321,17 +318,8 @@
         }
 
         container.sortable( "refresh" ).trigger( 'refreshcells' );
-        if(animate) {
-            if(panels.animations)
-                $('#panels-container .panel.new-panel')
-                    .hide()
-                    .slideDown(450 , function(){ panel.find('a.edit').click() } )
-                    .removeClass('new-panel');
-            else {
-                $('#panels-container .panel.new-panel').show().removeClass('new-panel');
-                panel.find('a.edit').click();
-            }
-        }
+        $('#panels-container .panel.new-panel').show().removeClass('new-panel');
+        panel.find('a.edit').click();
     }
 
     /**
@@ -356,6 +344,7 @@
             
             }
         });
+    }
 
     /**
      * Loads panel data

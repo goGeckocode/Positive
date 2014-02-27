@@ -6,8 +6,6 @@
  */
 
 jQuery( function ( $ ) {
-	panels.animations = $('#panels').data('animations');
-
 	// populate cloned forms
 	$('#grid-edit-dialog').prepend( $('#grid-add-dialog').html() );
 	$('#section-change-dialog').prepend( $('#section-add-dialog').html() );
@@ -35,8 +33,7 @@ jQuery( function ( $ ) {
 		var sectionClass = $('#section-add-dialog').find('select').val();
 		var newsection = window.panels.createSection(sectionClass,true);
 
-		if(panels.animations) newsection.hide().slideDown();
-		else newsection.show();
+		newsection.show();
 		$( '#section-add-dialog' ).dialog( 'close' );
 	};
 	// Create the dialog that we use to add a section
@@ -125,8 +122,7 @@ jQuery( function ( $ ) {
 		var columns = $('#grid-add-dialog').find('input[name="column_count"]:checked').val();
 		var gridContainer = window.panels.createGrid(null, columns);
 
-		if(panels.animations) gridContainer.hide().slideDown();
-		else gridContainer.show();
+		gridContainer.show();
 
 		$( '#grid-add-dialog' ).dialog( 'close' );
 	};
@@ -241,8 +237,7 @@ jQuery( function ( $ ) {
 								// We don't want to animate the new widgets
 								$('#panels-container .panel').removeClass('new-panel');
 
-								if(panels.animations) registeredGrid.hide().slideDown();
-								else registeredGrid.show();
+								registeredGrid.show();
 
 							},
 							[section, oldContainerData, grid],
@@ -317,8 +312,7 @@ jQuery( function ( $ ) {
 			},
 			close:       function () {
 				$(this).data('overlay').remove();
-				if(panels.animations) $( '#panels-container .panel.new-panel' ).hide().slideDown( 1000 ).removeClass( 'new-panel' );
-				else $( '#panels-container .panel.new-panel' ).show().removeClass( 'new-panel' );
+				$( '#panels-container .panel.new-panel' ).show().removeClass( 'new-panel' );
 			}
 		} )
 		.on('keydown', function(e) {

@@ -30,7 +30,7 @@ jQuery( function ( $ ) {
                 top: $$.offset().top - 12 - $$.outerHeight(),
                 left:$$.offset().left - tooltip.outerWidth() / 2 + $$.outerWidth() / 2
             } );
-            if(panels.animations) tooltip.hide().fadeIn( 100 );
+            tooltip.hide().fadeIn( 100 );
 
             $$.data( 'tooltip', tooltip );
         } );
@@ -48,12 +48,9 @@ jQuery( function ( $ ) {
             var tooltip = $$.data( 'tooltip' );
             if ( tooltip != undefined ) {
                 $$.data( 'tooltip', undefined );
-                if(panels.animations){
-                    tooltip.fadeOut( 100, function () {
-                        tooltip.remove();
-                    } );
-                }
-                else tooltip.remove();
+                tooltip.fadeOut( 100, function () {
+                    tooltip.remove();
+                });
             }
         } );
         return this;

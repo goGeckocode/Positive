@@ -146,8 +146,7 @@
 							// We don't want to animate the new widgets
 							$( '#panels-container .panel' ).removeClass( 'new-panel' );
 
-							if(panels.animations) gridContainer.hide().slideDown();
-							else gridContainer.show();
+							gridContainer.show();
 
 						},
 						[containerData, container.index()],
@@ -179,11 +178,8 @@
 							.find( '.panels-container' ).trigger( 'refreshcells' );
 					};
 
-					if(panels.animations) container.slideUp( remove );
-					else {
-						container.hide();
-						remove();
-					}
+					container.hide();
+					remove();
 
 					return false;
 				} )
@@ -345,8 +341,7 @@
 								// We don't want to animate the new widgets
 								$('#panels-container .panel').removeClass('new-panel');
 
-								if(panels.animations) registeredGrid.hide().slideDown();
-								else registeredGrid.show();
+								registeredGrid.show();
 
 							},
 							[gridContainer.closest('.section-container').index(), containerData, gridContainer.index()],
@@ -375,11 +370,8 @@
 								.find('.panels-container').trigger('refreshcells');
 						};
 
-						if(panels.animations) gridContainer.slideUp(remove);
-						else {
-							gridContainer.hide();
-							remove();
-						}
+						gridContainer.hide();
+						remove();
 
 						return false;
 					})

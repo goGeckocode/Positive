@@ -80,7 +80,7 @@ function siteorigin_panels_metabox_render( $post ) {
 function siteorigin_panels_admin_enqueue_scripts($prefix) {
 	$screen = get_current_screen();
 
-	if ( ( $screen->base == 'post' && in_array( $screen->id, siteorigin_panels_setting('post-types') ) ) || $screen->base == 'appearance_page_so_panels_home_page') {
+	if ( $screen->base == 'post' && in_array( $screen->id, siteorigin_panels_setting('post-types') ) ) {
 		wp_enqueue_script( 'jquery-ui-resizable' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		wp_enqueue_script( 'jquery-ui-dialog' );
