@@ -83,7 +83,7 @@
 
         // Hide the undo message
         $('#panels-undo-message' ).fadeOut(function(){ $(this ).remove() });
-        var panel = $( '<div class="panel new-panel"><div class="panel-wrapper"><div class="title"><h4></h4><span class="actions"></span></div><small class="description"></small></div></div>' );
+        var panel = $('<div class="panel new-panel"><div class="panel-wrapper"><div class="title"><h4></h4><span class="actions"></span></div><div class="content"></div></div></div>');
 
         var activeDialog;
         panel.attr('data-type', type)
@@ -105,12 +105,10 @@
                 $(this).closest('.panel').find('a.edit').click();
                 return false;
             })
-            // 1º .description es de la variable panel de unas lineas atras, el 2º .description es el de la pagina "metabox-panels.php"
-            .end().find( '.description' ).html( $$.find( '.description' ).html() )
             .end().find( '.title h4' ).html( $$.find( 'h3' ).html() );
 
-        // Set the title & description
-        panel.panelsSetPanelTitle( data );
+        // Set the title & content
+        panel.panelsSetPanelContent(data);
 
         // The delete button
         var deleteFunction = function () {
@@ -164,7 +162,7 @@
 
                         var panelData = panel.panelsGetPanelData();
 
-                        panel.panelsSetPanelTitle(panelData);
+                        panel.panelsSetPanelContent(panelData);
                         panel.find('input[name$="[data]"]').val( JSON.stringify(panelData) );
                         panel.find('input[name$="[info][raw]"]').val(1);
 
@@ -325,23 +323,19 @@
     /**
      * Set the title of the panel
      */
-    $.fn.panelsSetPanelTitle = function ( data ) {
-        return $(this ).each(function(){
-
-            var titleValue = '';
-
+    $.fn.panelsSetPanelContent = function(data){
+        return $(this).each(function(){
             if( typeof data != 'undefined' ) {
                 if( typeof data.title != 'undefined' && data.title != '' ) {
-                    $(this ).find( 'h4' ).html( $(this ).data( 'title' ) + '<span>' + data.title + '</span>' );
+                    $(this ).find( 'h4' ).append('<strong>' + data.title + '</strong>');
                 }
 
                 if( typeof data.text != 'undefined' && data.text != '' ){
-                    $(this).find( '.description' ).text(data.text); 
+                    $(this).find( '.content' ).text(data.text); 
                 } 
-                else if ( typeof data.url != 'undefined' && data.url != '' ){
-                    $(this).find( '.description' ).html('<img src="' + data.url + '">' );
+                else if ( typeof data.src != 'undefined' && data.src != '' ){
+                    $(this).find( '.content' ).html('<img src="' + data.src + '">' );
                 }
-            
             }
         });
     }

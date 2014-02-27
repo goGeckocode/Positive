@@ -78,62 +78,33 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 #panels-container .grid .cell.span-2 {width:32%}
 
 #so-panels-panels {background:#F8F8F8; margin-top:5px;}
-
-#so-panels-panels .ui-resizable-helper {
-	position: absolute;
-	border: 1px solid #ecd800;
-	-ms-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	min-height: 100px;
-}
-
 #so-panels-panels .hndle {margin-top:0!important}
 
-#so-panels-panels .panels-container .panel {
-	background:#f5f5f5;
-	border: 1px solid #ddd;
+#so-panels-panels .panels-container .panel {background:#f5f5f5; border:1px solid #ddd; cursor:move; margin-bottom:5px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
 	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), inset 0 0 2px #ffffff;
 	-moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), inset 0 0 2px #ffffff;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), inset 0 0 2px #ffffff;
-	cursor: move;
-	margin-bottom: 5px;
 }
-#so-panels-panels .panels-container .panel:hover {
-	border-color:#ccc;
-}
-
-#so-panels-panels .panels-container .panel .panel-wrapper {
-	position: relative;
-	
-	overflow: hidden;
-	padding: 7px 9px;
-}
-
-#so-panels-panels .panels-container .panel h4 {	height: 1.1em;color: #666;	cursor: pointer;	display: inline-block;	font-weight: normal;	line-height: 1em;	margin: 0 0 3px 0;	margin-right: 15px;	overflow: hidden;	text-shadow: 0 1px 0 #FFF;	white-space: nowrap;font-style: italic;}
-#so-panels-panels .panels-container .panel h4 span {color: #999;display: inline-block;font-style: normal;font-weight: normal;margin-left: 12px;	margin-right: 5px;	text-shadow: 0 1px 0 #FFF;}
-
-#so-panels-panels .panels-container .panel .title a {
-	display: none;
-	margin-right: 3px;
-}
+#so-panels-panels .panels-container .panel:hover {border-color:#ccc;}
+#so-panels-panels .panels-container .panel .panel-wrapper {position:relative; overflow:hidden; padding:7px 9px}
+#so-panels-panels .panels-container .panel h4 {color:#999; cursor:pointer; display:inline-block; font-weight:normal; line-height:1; margin:0 15px 6px 0; text-shadow:0 1px 0 #FFF; font-style:italic}
+#so-panels-panels .panels-container .panel h4 strong {color:#333; display:inline-block; vertical-align:top; font-style:normal;font-weight:bold; margin-left:12px; font-size:2em;}
+#so-panels-panels .panels-container .panel.ui-sortable-helper h4 {cursor:move}
 
 #so-panels-panels .panels-container .panel .title .actions {position:absolute; top:5px; right:7px; cursor:pointer; font-size:12px; padding:2px 2px 2px 15px; z-index:10}
-
+#so-panels-panels .panels-container .panel .title a {display:none; margin-right:3px;}
+#so-panels-panels .panels-container .panel:hover .title a {display:inline-block; opacity:0.5}
 #so-panels-panels .panels-container .panel .title .actions:hover a {opacity:1}
 #so-panels-panels .panels-container .panel .title .actions a.delete {color:#FF0000}
 #so-panels-panels .panels-container .panel .title .actions a.delete:hover {background:#FF0000; color:white;}
-#so-panels-panels .panels-container .panel:hover .title a {display:inline-block; opacity:0.5}
 #so-panels-panels .panels-container .panel.panel-being-dragged .title .actions {display:none}
 
-#so-panels-panels .panels-container .panel small {display:block; overflow: hidden;}
-#so-panels-panels .panels-container .panel small img {max-width: 100px; height: auto;}
+#so-panels-panels .panels-container .panel .content {overflow:hidden; font-size:.9em; line-height:1.4em}
+#so-panels-panels .panels-container .panel .content img {max-width:200px; height:auto; display:block; margin:0 auto}
 #so-panels-panels .panels-container .panel .form {display:none}
-#so-panels-panels .panels-container .panel.ui-sortable-helper h4 {cursor:move}
 
 #so-panels-panels .ui-state-highlight {position:relative; height:49px; background-color:#F8F8F8; border:solid 1px #bcccd2; margin-bottom:5px;
 	-webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px;

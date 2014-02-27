@@ -1,7 +1,7 @@
 jQuery(function($){
 	var file_frame;
  
-    $('body').on('click', '.POS-uploadImage', function(e){
+    $('body').on('click', '.positive-panels-uploadimage', function(e){
     	e.preventDefault();
     	button = $(this);
 
@@ -19,7 +19,6 @@ jQuery(function($){
 
         file_frame.on('select', function() {
             attachment = file_frame.state().get('selection').first().toJSON();
-            //console.log(attachment);
             $(button).prev().val(attachment['url']);
             $(button).next().val(attachment['id']);
             $('#thumbnail').html('<img src="'+ attachment['url'] +'">');

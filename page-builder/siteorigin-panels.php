@@ -96,7 +96,6 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 		wp_enqueue_script( 'so-panels-admin-tooltip', get_template_directory_uri().'/page-builder/js/panels.admin.tooltip.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
 		wp_enqueue_script( 'so-panels-admin-media', get_template_directory_uri().'/page-builder/js/upload-image.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
 		wp_enqueue_script( 'so-panels-admin-media', get_template_directory_uri().'/page-builder/js/panels.admin.media.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-styles', get_template_directory_uri().'/page-builder/js/panels.admin.styles.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
 
 		wp_localize_script( 'so-panels-admin', 'panels', array(
 			'previewUrl' => wp_nonce_url(add_query_arg('siteorigin_panels_preview', 'true', get_home_url()), 'siteorigin-panels-preview'),
@@ -371,7 +370,6 @@ function siteorigin_panels_render( $post_id = false, $panels_data = false ) {
 						$post_id 
 					);
 				}
-				if ( empty( $widgets ) ) echo '&nbsp;';
 				echo '</div>'; // close cell
 			}
 
@@ -406,7 +404,7 @@ function siteorigin_panels_the_widget( $widget, $instance, $section, $grid, $cel
 	$the_widget = new $widget;
 
 	$classes = array( 'panel' );
-	if ( !empty( $the_widget->id_base ) ) $classes[] = 'widget_' . $the_widget->id_base;
+	if ( !empty( $the_widget->id_base ) ) $classes[] = $the_widget->id_base;
 	if ( $is_last ) $classes[] = 'panel-last';
 	$classes[] = 'panel-'.($panel+1);
 

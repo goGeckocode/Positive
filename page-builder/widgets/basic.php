@@ -1,27 +1,32 @@
 <?php
+/**
+ * Basic widgets included in Positive Page builder
+ *
+ */
 
-/*-----------  HEADING -------------*/
-class SiteOrigin_Panels_Widgets_Heading extends WP_Widget {
+/* **********************
+ * HEADING
+ */
+class Positive_Panels_Widget_Heading extends WP_Widget {
 	function __construct() {
 		parent::__construct(
-			'siteorigin-panels-heading',
+			'positive-panels-heading',
 			__( 'Heading (Positive)', 'siteorigin-panels' ),
 			array(
-				'description' => __( 'Create a special Heading.', 'siteorigin-panels' ),
+				'description' => __( 'Create a custom Heading.', 'siteorigin-panels' ),
 			)
 		);
 	}
 
 	function widget( $args, $instance ) {
 		echo $args['before_widget'];
-
-
+		echo '<'.$instance['heading'].' class="align-'.$instance['align'].'">'.$instance['title'].'</'.$instance['heading'].'>';
 		echo $args['after_widget'];
 	}
 
 	function update($new, $old){
 		$new = wp_parse_args($new, array(
-			'content' => '',
+			'title' => '',
 			'heading' => '',
 			'align' => ''
 		));
@@ -30,24 +35,24 @@ class SiteOrigin_Panels_Widgets_Heading extends WP_Widget {
 
 	function form( $instance ) {
 		$instance = wp_parse_args($instance, array(
-			'content' => '',
+			'title' => '',
 			'heading' => '',
 			'align' => ''
 		));
 
 		?>
-		<!-- Title -->
-		<p><input type="text" class="widefat" id="<?php echo $this->get_field_id( 'content' ) ?>" name="<?php echo $this->get_field_name( 'content' ) ?>" value="<?php echo esc_attr($instance['content']) ?>" /></p>
-		<!-- Heading -->
+		<?php // Title ?>
+		<p><input type="text" class="widefat" id="<?php echo $this->get_field_id('title') ?>" name="<?php echo $this->get_field_name( 'title' ) ?>" value="<?php echo esc_attr($instance['title']) ?>" /></p>
+		<?php // Heading ?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'heading' ) ?>"><?php _e( 'Heading Type', 'siteorigin-panels' ) ?></label>
+			<label for="<?php echo $this->get_field_id( 'heading' ) ?>"><?php _e( 'Heading Level', 'siteorigin-panels' ) ?></label>
 			<select name="<?php echo $this->get_field_name( 'heading' ) ?>" id="<?php echo $this->get_field_id( 'heading' ) ?>">
-				<option value="heading1" <?php selected(empty($instance['heading'])) ?>><?php esc_html_e( 'H1', 'siteorigin-panels' ) ?></option>
-				<option value="heading2" <?php selected('heading2', $instance['heading']) ?>><?php esc_html_e( 'H2', 'siteorigin-panels' ) ?></option>
-				<option value="heading3" <?php selected('heading3', $instance['heading']) ?>><?php esc_html_e( 'H3', 'siteorigin-panels' ) ?></option>
+				<option value="h1" <?php selected(empty($instance['heading'])) ?>><?php esc_html_e( 'H1', 'siteorigin-panels' ) ?></option>
+				<option value="h2" <?php selected('h2', $instance['heading']) ?>><?php esc_html_e( 'H2', 'siteorigin-panels' ) ?></option>
+				<option value="h3" <?php selected('h3', $instance['heading']) ?>><?php esc_html_e( 'H3', 'siteorigin-panels' ) ?></option>
 			</select>
 		</p>
-		<!-- Align -->
+		<?php // Align ?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'align' ) ?>"><?php _e( 'Heading Align', 'siteorigin-panels' ) ?></label>
 			<select name="<?php echo $this->get_field_name( 'align' ) ?>" id="<?php echo $this->get_field_id( 'align' ) ?>">
@@ -59,11 +64,14 @@ class SiteOrigin_Panels_Widgets_Heading extends WP_Widget {
 	<?php
 	}
 }
-/*---------------- BUTTONS ---------------------*/
-class SiteOrigin_Panels_Widgets_Buttons extends WP_Widget {
+
+/* **********************
+ * BUTTON
+ */
+class Positive_Panels_Widget_Button extends WP_Widget {
 	function __construct() {
 		parent::__construct(
-			'siteorigin-panels-buttons',
+			'positive-panels-button',
 			__( 'Button (Positive)', 'siteorigin-panels' ),
 			array(
 				'description' => __( 'A simple button.', 'siteorigin-panels' ),
@@ -72,10 +80,15 @@ class SiteOrigin_Panels_Widgets_Buttons extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
-		echo $args['before_widget'];
-
-
-		echo $args['after_widget'];
+		$tag = ( $instance['link'] == '' ? 'span' : 'a');
+		echo '<p class="btn-container align-'.$instance['align'].'">';
+		echo '<'.$tag;
+		if($instance['link'] != ''){
+			echo ' href="'.$instance['link'].'"';
+			if($instance['open'] != '') echo ' target="_blank"';
+		} 
+		echo ' class="btn">'.$instance['text'].'</'.$tag.'>';
+		echo '</p>';
 	}
 
 	function update($new, $old){
@@ -109,8 +122,8 @@ class SiteOrigin_Panels_Widgets_Buttons extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'open' ) ?>"><?php _e( 'Open Link in new Window?', 'siteorigin-panels' ) ?></label>
 			<select name="<?php echo $this->get_field_name( 'open' ) ?>" id="<?php echo $this->get_field_id( 'open' ) ?>">
-				<option value="No, in the same window" <?php selected(empty($instance['open'])) ?>><?php esc_html_e( 'No, in the same window', 'siteorigin-panels' ) ?></option>
-				<option value="Yes, in new window" <?php selected('Yes, in new window', $instance['open']) ?>><?php esc_html_e( 'Yes, in new window', 'siteorigin-panels' ) ?></option>
+				<option value="" <?php selected(empty($instance['open'])) ?>><?php esc_html_e( 'No, in the same window', 'siteorigin-panels' ) ?></option>
+				<option value="_blank" <?php selected('Yes, in new window', $instance['open']) ?>><?php esc_html_e( 'Yes, in new window', 'siteorigin-panels' ) ?></option>
 			</select>
 		</p>
 		<!-- Align -->
@@ -314,7 +327,7 @@ class SiteOrigin_Panels_Widgets_Image extends WP_Widget {
 
 	function update($new, $old){
 		$new = wp_parse_args($new, array(
-			'url' => '',
+			'src' => '',
 			'size' => '',
 			'id'=>0,
 			'href' => ''
@@ -324,7 +337,7 @@ class SiteOrigin_Panels_Widgets_Image extends WP_Widget {
 
 	function form( $instance ) {
 		$instance = wp_parse_args($instance, array(
-			'url' => '',
+			'src' => '',
 			'size' => '',
 			'id'=>0,
 			'href' => ''
@@ -332,10 +345,12 @@ class SiteOrigin_Panels_Widgets_Image extends WP_Widget {
 
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ) ?>"><?php _e( 'Image', 'siteorigin-panels' ) ?></label>
-			<div id="thumbnail"><?php echo wp_get_attachment_image( $instance['id']); ?></div>
-			<input type="hidden" id="<?php echo $this->get_field_id( 'url' ) ?>" name="<?php echo $this->get_field_name( 'url' ) ?>" value="<?php echo esc_attr($instance['url']) ?>">
-			<input type="button" class="POS-uploadImage" value="Select or Upload image">
+			<label><?php _e( 'Image', 'siteorigin-panels' ) ?></label>
+			<div id="thumbnail">
+				<?php if($instance['id'] !='') echo wp_get_attachment_image( $instance['id']); ?>
+			</div>
+			<input type="hidden" id="<?php echo $this->get_field_id( 'src' ) ?>" name="<?php echo $this->get_field_name( 'src' ) ?>" value="<?php echo esc_attr($instance['src']) ?>">
+			<input type="button" class="positive-panels-uploadimage" value="<?php _e('Select or Upload image','siteorigin-panels');?>">
 			<input type="hidden" id="<?php echo $this->get_field_id( 'id' ) ?>" name="<?php echo $this->get_field_name( 'id' ) ?>" value="<?php echo esc_attr($instance['id']) ?>">
 		</p>
 		<p>
@@ -830,8 +845,8 @@ function siteorigin_panels_widgets_init(){
 	register_widget('SiteOrigin_Panels_Widgets_PostLoop');
 	register_widget('SiteOrigin_Panels_Widgets_EmbeddedVideo');
 	register_widget('SiteOrigin_Panels_Widgets_Video');
-	register_widget('SiteOrigin_Panels_Widgets_Heading');
-	register_widget('SiteOrigin_Panels_Widgets_Buttons');
+	register_widget('Positive_Panels_Widget_Heading');
+	register_widget('Positive_Panels_Widget_Button');
 	
 }
 add_action('widgets_init', 'siteorigin_panels_widgets_init');
