@@ -137,14 +137,13 @@
                 .click(function(){
                     panels.undoManager.undo();
                     $('#panels-undo-message' ).fadeOut(function(){
-                        $(this ).remove();
+                        $(this).remove();
                     });
                     return false;
                 })
             ;
 
-            panel.hide();
-            remove();
+            panel.hide().remove();
         };
 
         // Add the action buttons

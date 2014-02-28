@@ -178,8 +178,7 @@
 							.find( '.panels-container' ).trigger( 'refreshcells' );
 					};
 
-					container.hide();
-					remove();
+					container.hide().remove();
 
 					return false;
 				} )
@@ -208,7 +207,7 @@
 	 */
 	panels.setupSection = function($$) {
 		// Hide the undo message
-		$('#panels-undo-message' ).fadeOut(function(){ $(this ).remove() });
+		$('#panels-undo-message' ).fadeOut(function(){ $(this).remove() });
 
 		// sortable grids
 		$$.find('.section')
@@ -349,7 +348,7 @@
 						);
 
 						// Create the undo notification
-						$('#panels-undo-message' ).remove();
+						$('#panels-undo-message').remove();
 						$('<div id="panels-undo-message" class="updated"><p>' + panels.i10n.messages.deleteColumns + ' - <a href="#" class="undo">' + panels.i10n.buttons.undo + '</a></p></div>' )
 							.appendTo('body')
 							.hide()
@@ -357,7 +356,7 @@
 							.find('a.undo')
 							.click(function(){
 								window.panels.undoManager.undo();
-								$('#panels-undo-message' ).fadeOut(function(){ $( this ).remove() });
+								$('#panels-undo-message' ).fadeOut(function(){ $(this).remove() });
 								return false;
 							});
 
@@ -370,8 +369,7 @@
 								.find('.panels-container').trigger('refreshcells');
 						};
 
-						gridContainer.hide();
-						remove();
+						gridContainer.hide().remove();
 
 						return false;
 					})
@@ -419,7 +417,7 @@
 	 */
 	panels.setupGrid = function ($$) {
 		// Hide the undo message
-		$('#panels-undo-message' ).fadeOut(function(){ $(this ).remove() });
+		$('#panels-undo-message' ).fadeOut(function(){ $(this).remove() });
 
 		$$.find('.grid .cell')
 			.click(function(){
@@ -456,7 +454,7 @@
 	 * Clears all the grids
 	 */
 	panels.clearSections = function(){
-		$('#panels-container .section-container' ).remove();
+		$('#panels-container .section-container').remove();
 	}
 	
 })(jQuery);

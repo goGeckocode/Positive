@@ -87,16 +87,15 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 		wp_enqueue_script( 'jquery-ui-dialog' );
 		wp_enqueue_script( 'jquery-ui-button' );
 
-		wp_enqueue_script( 'so-undomanager', POSITIVE_PANELS_URL.'js/undomanager.min.js', array( ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-chosen', POSITIVE_PANELS_URL.'js/chosen/chosen.jquery.min.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('so-undomanager', POSITIVE_PANELS_URL.'js/undomanager.min.js', array(), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('so-panels-chosen', POSITIVE_PANELS_URL.'js/chosen/chosen.jquery.min.min.js', array('jquery'), POSITIVE_PANELS_VERSION);
 
-		wp_enqueue_script( 'so-panels-admin', POSITIVE_PANELS_URL.'js/panels.admin.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-panels', POSITIVE_PANELS_URL.'js/panels.admin.panels.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-grid', POSITIVE_PANELS_URL.'js/panels.admin.grid.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-prebuilt', POSITIVE_PANELS_URL.'js/panels.admin.prebuilt.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-tooltip', POSITIVE_PANELS_URL.'js/panels.admin.tooltip.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-media', POSITIVE_PANELS_URL.'js/upload-image.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-media', POSITIVE_PANELS_URL.'js/panels.admin.media.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('so-panels-admin', POSITIVE_PANELS_URL.'js/panels.admin.js', array('jquery'), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('so-panels-admin-panels', POSITIVE_PANELS_URL.'js/panels.admin.panels.js', array('jquery'), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('so-panels-admin-grid', POSITIVE_PANELS_URL.'js/panels.admin.grid.js', array('jquery'), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('so-panels-admin-prebuilt', POSITIVE_PANELS_URL.'js/panels.admin.prebuilt.min.js', array('jquery'), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('so-panels-admin-tooltip', POSITIVE_PANELS_URL.'js/panels.admin.tooltip.min.js', array('jquery'), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('so-panels-admin-media', POSITIVE_PANELS_URL.'js/panels.admin.media.js', array('jquery'), POSITIVE_PANELS_VERSION);
 
 		wp_localize_script( 'so-panels-admin', 'panels', array(
 			'previewUrl' => wp_nonce_url(add_query_arg('siteorigin_panels_preview', 'true', get_home_url()), 'siteorigin-panels-preview'),

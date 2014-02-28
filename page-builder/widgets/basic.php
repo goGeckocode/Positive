@@ -184,14 +184,14 @@ class Positive_Panels_Widget_Image extends WP_Widget {
 		));
 
 		?>
-		<p>
+		<p class="image-fields">
 			<label><?php _e( 'Image', 'siteorigin-panels' ) ?></label>
-			<div id="thumbnail">
+			<div class="thumbnail">
 				<?php if($instance['id'] !='') echo wp_get_attachment_image( $instance['id']); ?>
 			</div>
-			<input type="hidden" id="<?php echo $this->get_field_id( 'src' ) ?>" name="<?php echo $this->get_field_name( 'src' ) ?>" value="<?php echo esc_attr($instance['src']) ?>">
 			<input type="button" class="positive-panels-uploadimage" value="<?php _e('Select or Upload image','siteorigin-panels');?>">
-			<input type="hidden" id="<?php echo $this->get_field_id( 'id' ) ?>" name="<?php echo $this->get_field_name( 'id' ) ?>" value="<?php echo esc_attr($instance['id']) ?>">
+			<input type="hidden" class="positive-image-src" id="<?php echo $this->get_field_id( 'src' ) ?>" name="<?php echo $this->get_field_name( 'src' ) ?>" value="<?php echo esc_attr($instance['src']) ?>">
+			<input type="hidden" class="positive-image-id" id="<?php echo $this->get_field_id( 'id' ) ?>" name="<?php echo $this->get_field_name( 'id' ) ?>" value="<?php echo esc_attr($instance['id']) ?>">
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'size' ) ?>"><?php _e( 'Image Size', 'siteorigin-panels' ) ?></label>
@@ -211,95 +211,76 @@ class Positive_Panels_Widget_Image extends WP_Widget {
 }
 
 /* **********************
- * GALLERY
+ * SLIDER
  */
-class Positive_Panels_Widget_Gallery extends WP_Widget {
+class Positive_Panels_Widget_Slider extends WP_Widget {
 	function __construct() {
 		parent::__construct(
-			'positive-panels-gallery',
-			__( 'Gallery (PB)', 'siteorigin-panels' ),
+			'positive-panels-slider',
+			__( 'Slider (Positive)', 'siteorigin-panels' ),
 			array(
-				'description' => __( 'Displays a gallery.', 'siteorigin-panels' ),
+				'description' => __( 'Displays a simple image.', 'siteorigin-panels' ),
 			)
 		);
 	}
 
+	/**
+	 * @param array $args
+	 * @param array $instance
+	 */
 	function widget( $args, $instance ) {
 		echo $args['before_widget'];
-
-		$shortcode_attr = array();
-		foreach($instance as $k => $v){
-			if(empty($v)) continue;
-			$shortcode_attr[] = $k.'="'.esc_attr($v).'"';
-		}
-
-		echo do_shortcode('[gallery '.implode(' ', $shortcode_attr).']');
 
 		echo $args['after_widget'];
 	}
 
-	function update( $new, $old ) {
+	function update($new, $old){
+		$new = wp_parse_args($new, array(
+			'slides' => array()
+		));
 		return $new;
 	}
 
 	function form( $instance ) {
-		global $_wp_additional_image_sizes;
-
-		$types = apply_filters('siteorigin_panels_gallery_types', array());
-
 		$instance = wp_parse_args($instance, array(
-			'ids' => '',
-			'image_size' => apply_filters('siteorigin_panels_gallery_default_size', ''),
-			'type' => apply_filters('siteorigin_panels_gallery_default_type', ''),
-			'columns' => 3,
-			'link' => '',
-
+			'slides' => array(0 => array())
 		));
 
 		?>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'ids' ) ?>"><?php _e( 'Gallery Images', 'siteorigin-panels' ) ?></label>
-			<a href="#" onclick="return false;" class="so-gallery-widget-select-attachments hidden"><?php _e('edit gallery', 'siteorigin-panels') ?></a>
-			<input type="text" class="widefat" value="<?php echo esc_attr($instance['ids']) ?>" name="<?php echo $this->get_field_name('ids') ?>" />
-		</p>
-		<p class="description">
-			<?php _e("Comma separated attachment IDs. Defaults to all current page's attachments.") ?>
-		</p>
+		<div class="repeater-fields" data-name="<?php echo $this->get_field_name( 'slides' ); ?>" data-id="<?php echo $this->get_field_id( 'slides' ); ?>">
+			<span class="positive-clone-fields"><?php _e('Add slide','siteorigin-panels'); ?></span>
+			<?php foreach($instance['slides'] as $i => $slide){ ?>
+				<div class="fields slide-fields">
+					<span class="positive-delete-fields"><?php _e('Delete slide','siteorigin-panels'); ?></span>
+					<p class="image-fields">
+						<label><?php _e( 'Image', 'siteorigin-panels' ) ?></label>
+						<span class="thumbnail">
+							<?php if($slide['image'] !='') echo '<img src="'.$slide['image'].'">' ?>
+						</span>
+						<input type="button" class="positive-panels-uploadimage" value="<?php _e('Select or Upload image','siteorigin-panels');?>">
+						<?php // en el caso del slider no necesitamos ID 
+							// porque pintamos la imagen a tamaño completo ?>
+						<input type="hidden" data-key="image" class="positive-image-src" 
+							id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][image]' ?>" 
+							name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][image]' ?>" value="<?php echo $slide['image'] ?>">
+					</p>
+					<p>
+						<label><?php _e( 'Title', 'siteorigin-panels' ) ?></label>
+						<input type="text" data-key="title" class="widefat"
+							id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][title]' ?>" 
+							name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][title]' ?>" value="<?php echo $slide['title'] ?>">
+					</p>
+					<p>
+						<label><?php _e( 'Text', 'siteorigin-panels' ) ?></label>
+						<textarea data-key="text" class="widefat"
+							id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][text]' ?>" 
+							name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][text]' ?>"><?php echo $slide['text'] ?></textarea>
+					</p>
+				</div>
+			<?php } ?>
 
-		<p>
-			<label for="<?php echo $this->get_field_id( 'size' ) ?>"><?php _e( 'Image Size', 'siteorigin-panels' ) ?></label>
-			<select name="<?php echo $this->get_field_name( 'size' ) ?>" id="<?php echo $this->get_field_id( 'size' ) ?>">
-				<option value="" <?php selected(empty($instance['image_size'])) ?>><?php esc_html_e('Default', 'siteorigin-panels') ?></option>
-				<option value="large" <?php selected('large', $instance['image_size']) ?>><?php esc_html_e( 'Large', 'siteorigin-panels' ) ?></option>
-				<option value="medium" <?php selected('medium', $instance['image_size']) ?>><?php esc_html_e( 'Medium', 'siteorigin-panels' ) ?></option>
-				<option value="thumbnail" <?php selected('thumbnail', $instance['image_size']) ?>><?php esc_html_e( 'Thumbnail', 'siteorigin-panels' ) ?></option>
-				<option value="full" <?php selected('full', $instance['image_size']) ?>><?php esc_html_e( 'Full', 'siteorigin-panels' ) ?></option>
-				<?php if(!empty($_wp_additional_image_sizes)) : foreach ( $_wp_additional_image_sizes as $name => $info ) : ?>
-					<option value="<?php echo esc_attr( $name ) ?>" <?php selected($name, $instance['image_size']) ?>><?php echo esc_html( $name ) ?></option>
-				<?php endforeach; endif; ?>
-			</select>
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id( 'type' ) ?>"><?php _e( 'Gallery Type', 'siteorigin-panels' ) ?></label>
-			<input type="text" class="regular" value="<?php echo esc_attr($instance['type']) ?>" name="<?php echo $this->get_field_name('type') ?>" />
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id( 'columns' ) ?>"><?php _e( 'Columns', 'siteorigin-panels' ) ?></label>
-			<input type="text" class="regular" value="<?php echo esc_attr($instance['columns']) ?>" name="<?php echo $this->get_field_name('columns') ?>" />
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id( 'link' ) ?>"><?php _e( 'Link To', 'siteorigin-panels' ) ?></label>
-			<select name="<?php echo $this->get_field_name( 'link' ) ?>" id="<?php echo $this->get_field_id( 'link' ) ?>">
-				<option value="" <?php selected('', $instance['link']) ?>><?php esc_html_e('Attachment Page', 'siteorigin-panels') ?></option>
-				<option value="file" <?php selected('file', $instance['link']) ?>><?php esc_html_e('File', 'siteorigin-panels') ?></option>
-				<option value="none" <?php selected('none', $instance['link']) ?>><?php esc_html_e('None', 'siteorigin-panels') ?></option>
-			</select>
-		</p>
-
-		<?php
+		</div>
+	<?php
 	}
 }
 
@@ -850,11 +831,11 @@ function siteorigin_panels_widgets_init(){
 	register_widget('Positive_Panels_Widget_Heading');
 	register_widget('Positive_Panels_Widget_Button');
 	register_widget('Positive_Panels_Widget_Image');
-	register_widget('Positive_Panels_Widget_Gallery');
+	register_widget('Positive_Panels_Widget_Slider');
 	register_widget('Positive_Panels_Widget_PostContent');
 	//register_widget('SiteOrigin_Panels_Widgets_PostLoop');
 	register_widget('Positive_Panels_Widget_Video');
-	register_widget('Positive_Panels_Widget_VideoHtml5');
+	//register_widget('Positive_Panels_Widget_VideoHtml5');
 	
 }
 add_action('widgets_init', 'siteorigin_panels_widgets_init');

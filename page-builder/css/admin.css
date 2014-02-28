@@ -118,8 +118,9 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 .panels-admin-dialog {display:none}
 #panels-dialog .panels-text-filter {margin-bottom:10px}
 .panels-admin-dialog img {display:inline-block; vertical-align:middle;}
-.panels-admin-dialog #thumbnail {width: 170px; max-height: 170px;}
-.panels-admin-dialog #thumbnail img {width: 100%; height:auto; margin:5px 0; }
+.panels-admin-dialog .thumbnail {display:block; width:170px; max-height:170px;}
+.panels-admin-dialog .thumbnail img {width: 100%; height:auto; margin:5px 0; }
+
 /* The Tooltips */
 .panels-tooltip {position:absolute; background:#1c1c1c; background:rgba(0, 0, 0, 0.8); -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; color:white; font-size:11px; padding:4px 8px; z-index:999999}
 .panels-tooltip .pointer {
@@ -488,22 +489,10 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 	padding: 12px;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content *:first-child {
-	margin-top: 0;
-}
-
-.ui-dialog.panels-admin-dialog .ui-dialog-content *:last-child {
-	margin-bottom: 0;
-}
-
-.ui-dialog.panels-admin-dialog .ui-dialog-content label {
-	color: #333;
-}
-
-.ui-dialog.panels-admin-dialog .ui-dialog-content p:hover label {
-	color: #1c1c1c;
-}
-
+.ui-dialog.panels-admin-dialog .ui-dialog-content *:first-child {margin-top:0}
+.ui-dialog.panels-admin-dialog .ui-dialog-content *:last-child {margin-bottom:0}
+.ui-dialog.panels-admin-dialog .ui-dialog-content label {color: #333}
+.ui-dialog.panels-admin-dialog .ui-dialog-content p:hover label {color:#1c1c1c}
 .ui-dialog.panels-admin-dialog .ui-dialog-content textarea,
 .ui-dialog.panels-admin-dialog .ui-dialog-content input.widefat {
 	-ms-box-sizing: border-box;
@@ -512,23 +501,11 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 	box-sizing: border-box;
 	margin-top: 6px;
 }
+.ui-dialog.panels-admin-dialog .ui-dialog-content p {margin:15px 0 5px 0}
+.ui-dialog.panels-admin-dialog .ui-dialog-content p.description {margin-top:5px}
+.ui-dialog.panels-admin-dialog .ui-dialog-content.ui-dialog-content-loading {background-image:url('./images/ajax-loader-small.gif')}
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content p {
-	margin: 15px 0 5px 0;
-}
-
-.ui-dialog.panels-admin-dialog .ui-dialog-content p.description {
-	margin-top: 5px;
-}
-
-.ui-dialog.panels-admin-dialog .ui-dialog-content.ui-dialog-content-loading {
-	background-image: url('./images/ajax-loader-small.gif');
-}
-
-.ui-dialog.panels-admin-dialog .ui-dialog-buttonpane {
-	padding: 5px;
-}
-
+.ui-dialog.panels-admin-dialog .ui-dialog-buttonpane {padding:5px}
 .ui-dialog.panels-admin-dialog .ui-dialog-buttonpane .ui-button {
 	background: #21759b;
 	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #21759b), color-stop(1, #2e9fd2));
@@ -554,135 +531,8 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 	background: #f1f1f1 url(./images/ajax-loader-small-grey.gif) no-repeat 15px 22px;
 }
 
-#so-panels-recommended-plugins {
-	text-align: center;
-}
-
-#so-panels-recommended-plugins a {
-	background: #3288d4;
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #3288d4), color-stop(1, #43aee0));
-	background: -ms-linear-gradient(bottom, #3288d4, #43aee0);
-	background: -moz-linear-gradient(center bottom, #3288d4 0%, #43aee0 100%);
-	background: -o-linear-gradient(#43aee0, #3288d4);
-	border: 1px solid #2474a9;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	-webkit-box-shadow: inset 0 1px 0 #69d2ee;
-	-moz-box-shadow: inset 0 1px 0 #69d2ee;
-	box-shadow: inset 0 1px 0 #69d2ee;
-	color: #edffff;
-	display: inline-block;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#43aee0', endColorstr='#3288d4', GradientType=0);
-	font-size: 14px;
-	font-weight: bold;
-	padding: 12px 18px;
-	text-decoration: none;
-	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-}
-
-#so-panels-recommended-plugins small {
-	color: #666;
-	display: block;
-	font-size: 11px;
-	margin-top: 4px;
-}
-
-#panels-row-style-select {
-	position: absolute;
-	
-	background: #3f3f3f;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	display: none;
-	min-width: 250px;
-	z-index: 1000;
-}
-
-#panels-row-style-select ul {
-	list-style: none;
-	margin: 0;
-	padding: 8px;
-}
-
-#panels-row-style-select ul li {
-	background: #fefefe;
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #d6d6d6), color-stop(1, #fefefe));
-	background: -ms-linear-gradient(bottom, #d6d6d6, #fefefe);
-	background: -moz-linear-gradient(center bottom, #d6d6d6 0%, #fefefe 100%);
-	background: -o-linear-gradient(#fefefe, #d6d6d6);
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.4);
-	-moz-box-shadow: 0 1px 1px rgba(0,0,0,0.4);
-	box-shadow: 0 1px 1px rgba(0,0,0,0.4);
-	color: #474747;
-	cursor: pointer;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fefefe', endColorstr='#d6d6d6', GradientType=0);
-	font-size: 11px;
-	font-weight: bold;
-	line-height: 1em;
-	padding: 8px;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
-	-webkit-transition: all 0.2s ease;
-	-moz-transition: all 0.2s ease;
-	-o-transition: all 0.2s ease;
-	transition: all 0.2s ease;
-}
-
-#panels-row-style-select ul li:last-child {
-	margin-bottom: 0;
-}
-
-#panels-row-style-select ul li:hover,
-#panels-row-style-select ul li.selected {
-	background: #7fbadb;
-	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #5692b3), color-stop(1, #7fbadb));
-	background: -ms-linear-gradient(bottom, #5692b3, #7fbadb);
-	background: -moz-linear-gradient(center bottom, #5692b3 0%, #7fbadb 100%);
-	background: -o-linear-gradient(#7fbadb, #5692b3);
-	color: #004f70;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7fbadb', endColorstr='#5692b3', GradientType=0);
-}
-
-#panels-row-style-select:before {
-	position: absolute;
-	top: -4px;
-	right: 32px;
-	width: 8px;
-	height: 4px;
-	
-	background: url(./images/pointer.png);
-	content: '';
-	display: block;
-}
-
-#grid-styles-dialog p {
-	margin-bottom: 20px;
-}
-
-#grid-styles-dialog p:last-child {
-	margin-bottom: 0;
-}
-
-#grid-styles-dialog label {
-	width: 160px;
-	
-	display: inline-block;
-	font-weight: bold;
-}
-
-#grid-styles-dialog label.siteorigin-panels-checkbox-label {
-	width: auto;
-	
-	display: inline;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	-webkit-touch-callout: none;
-}
-
+.repeater-fields {position:relative; padding-bottom:25px}
+.repeater-fields .fields {position:relative; padding:0 15px 20px; background-color:#f1f1f1; border:solid 1px #ddd; margin-bottom:10px; overflow:hidden;}
+.repeater-fields > span, .repeater-fields .fields > span {position:absolute; bottom:3px; right:15px; cursor:pointer;}
+.ui-dialog.panels-admin-dialog .ui-dialog-content .slide-fields .image-fields {float:left; margin-left:0;}
+.ui-dialog.panels-admin-dialog .ui-dialog-content .slide-fields p {margin-left:190px;}

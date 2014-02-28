@@ -200,63 +200,6 @@ jQuery( function ( $ ) {
 							})
 						});
 
-						// Register this with the undo manager
-						/*window.panels.undoManager.register(
-							this,
-							function(section, containerData, position){
-								// Readd the grid
-								var columns = gridContainer.find('input[name$="[columns]"]').val();
-
-								var registeredGrid = window.panels.createGrid(section, columns);
-
-								// Now, start adding the widgets
-								for(var i = 0; i < containerData.length; i++){
-									for(var j = 0; j < containerData[i].widgets.length; j++){
-										// Readd the panel
-										var theWidget = containerData[i].widgets[j];
-										var panel = $('#panels-dialog').panelsCreatePanel(theWidget.type, theWidget.data);
-										window.panels.addPanel(panel, registeredGrid.find('.panels-container').eq(i));
-									}
-								}
-
-								// Finally, reposition the gridContainer
-								if(position != registeredGrid.index()){
-									var current = $('#panels-container .grid-container').eq(position);
-									if(current.length){
-										registeredGrid.insertBefore(current);
-										$('#panels-container').sortable("refresh");
-										$('#panels-container').find('.grid-container').each(function(){
-											gridIndex = $(this).index();
-											$(this).find('input[name$="[grid]"]').val(gridIndex);
-										});
-
-										$('#panels-container .panels-container').trigger('refreshcells');
-									}
-								}
-
-								// We don't want to animate the new widgets
-								$('#panels-container .panel').removeClass('new-panel');
-
-								registeredGrid.show();
-
-							},
-							[section, oldContainerData, grid],
-							'Columns number'
-						);
-
-						// Create the undo notification
-						$('#panels-undo-message' ).remove();
-						$('<div id="panels-undo-message" class="updated"><p>' + panels.i10n.messages.editColumns + ' - <a href="#" class="undo">' + panels.i10n.buttons.undo + '</a></p></div>' )
-							.appendTo('body')
-							.hide()
-							.fadeIn()
-							.find('a.undo')
-							.click(function(){
-								window.panels.undoManager.undo();
-								$('#panels-undo-message' ).fadeOut(function(){ $( this ).remove() });
-								return false;
-							});*/
-
 						newGrid = window.panels.createGrid(sectionIndex, newColumnsNb);
 						// Now, start adding the widgets
 

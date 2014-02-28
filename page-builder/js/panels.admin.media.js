@@ -1,112 +1,66 @@
-/**
- * Intercepts the standard WordPress gallery insert and edit.
- *
- * @copyright Greg Priday 2013
- * @license GPL 2.0 http://www.gnu.org/licenses/gpl-2.0.html
- */
-
 jQuery(function($){
 
-    var originalInsert = wp.media.editor.insert;
-    
-    wp.media.editor.insert = function(h){
+    // upload images with WordPress uploader
+	var file_frame;
+ 
+    $('body').on('click', '.positive-panels-uploadimage', function(e){
+    	e.preventDefault();
+    	image_fields = $(this).parent();
 
-        // Check that panels tab is active and that no dialogs are open.
-        if( !$('#wp-content-wrap').hasClass('panels-active') ) return originalInsert(h);
-        if( $('.panel-dialog:visible').length > 0 ) return originalInsert(h);
-
-        if(h.indexOf('[gallery') !== -1) {
-            // Get the IDs of the gallery
-            var attachments = wp.media.gallery.attachments( wp.shortcode.next( 'gallery', h ).shortcode );
-            var ids = attachments.models.map(function(e){ return e.id });
-
-            // Create a new gallery panel
-            var panel = $('#panels-dialog').panelsCreatePanel('SiteOrigin_Panels_Widgets_Gallery', {
-                'ids' : ids.join(',') 
-            } );
-            
-            // The panel couldn't be created. Possible the widgets gallery isn't being used.
-            if(panel == null) originalInsert(h);
-            else panels.addPanel(panel, null, null, true);
-            
-            return;
-        }
-        else if(h.indexOf('<a ') !== -1 || h.indexOf('<img ') !== -1) {
-            // Figure out how we can add this to panels
-            var $el = $(h);
-            
-            var panel;
-            if($el.prop("tagName") == 'A' && $el.children().eq(0 ).prop('tagName') == 'IMG'){
-                // This is an image with a link
-                panel = $('#panels-dialog').panelsCreatePanel('SiteOrigin_Panels_Widgets_Image', {
-                    'href' : $el.attr('href'),
-                    'src' : $el.children().eq(0 ).attr('src')
-                });
-            }
-            else if($el.prop("tagName") == 'IMG'){
-                // This is just an image tag
-                panel = $('#panels-dialog').panelsCreatePanel('SiteOrigin_Panels_Widgets_Image', {
-                    'src' : $el.attr('src')
-                });
-            }
-            else if($el.prop('tagName') == 'A' && ($el.attr('href' ).indexOf('.mp4') !== -1 || $el.attr('href' ).indexOf('.avi') !== -1)){
-                panel = $('#panels-dialog').panelsCreatePanel('SiteOrigin_Panels_Widgets_Video', {
-                    'url' : $el.attr('href' )
-                });
-            }
-
-            // The panel couldn't be created. Possible the widgets gallery isn't being used.
-            if(panel == null) originalInsert(h);
-            else panels.addPanel(panel, null, null, true);
-            
-            return;
-        }
-        else {
-            // Create a new gallery panel
-            var panel = $('#panels-dialog').panelsCreatePanel('WP_Widget_Text', {
-                'text' : h
-            });
-
-            // The panel couldn't be created. Possible the widgets gallery isn't being used.
-            if(panel == null) originalInsert(h);
-            else panels.addPanel(panel, null, null, true);
+        if ( file_frame ) {
+        	file_frame.open();
+        	return;
         }
 
-        // Incase we've added any new panels
-        originalInsert(h);
-    }
+        file_frame = wp.media.frames.file_frame = wp.media({
+            title: 'Choose Image',
+			button: {text: 'Choose Image'},
+			multiple: false,
+            library: {type: 'image'}
+        });
 
-    // When the user clicks on the select button, we need to display the gallery editing
-    $('body').on({
-        click: function(event){
-            // Make sure the media gallery API exists
-            if ( typeof wp === 'undefined' || ! wp.media || ! wp.media.gallery ) return;
-            event.preventDefault();
+        file_frame.on('select', function() {
+            attachment = file_frame.state().get('selection').first().toJSON();
+            $(image_fields).find('input.positive-image-src').val(attachment['url']);
+            $(image_fields).find('input.positive-image-id').val(attachment['id']);
+            $(image_fields).find('.thumbnail').html('<img src="'+ attachment['url'] +'">');
+        });
 
-            // Activate the media editor
-            var $$ = $(this);
+        file_frame.open();
+    });
 
-            var dialog = $('.panels-admin-dialog:visible' );
+    $('body').on('click', '.positive-clone-fields', function(e){
+        group = $(this).parent(); // the 'repeater-fields' layer
+        // almacenamos la base de los name & id de los input
+        // para hacer facilmente el incremento
+        groupName = group.attr('data-name');
+        groupID = group.attr('data-id');
+        
+        newFields = group.find('.fields:last').clone().appendTo(group).hide().slideDown();
+        fieldsIndex = newFields.index()-1;
+        newFields.find(':input[name]').each(function(){
+            key = '['+fieldsIndex+']['+ $(this).attr('data-key') +']';
+            $(this).attr('id',groupID+key)
+                .attr('name',groupName+key)
+                .val('');
+        })
+        newFields.find('.thumbnail').html('');
+    })
+    $('body').on('click', '.positive-delete-fields', function(e){
+        group = $(this).closest('.repeater-fields');
+        groupName = group.attr('data-name');
+        groupID = group.attr('data-id');
 
-            var val = dialog.find('*[name$="[ids]"]').val();
-            if(val.indexOf('{demo') === 0 || val.indexOf('{default') === 0) val = '-'; // This removes the demo or default content
-            if(val == '' && $('#post_ID' ).val() == null) val = '-';
+        $(this).parent().remove();
 
-            var frame = wp.media.gallery.edit('[gallery ids="' + val + '"]');
+        // reindexamos todos los inputs
+        group.find('.fields').each(function(i){
+            $(this).find(':input[name]').each(function(){
+                key = '['+i+']['+ $(this).attr('data-key') +']';
+                $(this).attr('id',groupID+key)
+                    .attr('name',groupName+key);
+            })
+        })
+    })
 
-            // When the gallery-edit state is updated, copy the attachment ids across
-            frame.state('gallery-edit').on( 'update', function( selection ) {
-                var ids = selection.models.map(function(e){ return e.id });
-
-                dialog.find('input[name$="[ids]"]' ).val(ids.join(','));
-            });
-
-            frame.on('escape', function(){
-                // Reopen the dialog
-                dialog.find('.ui-dialog-content' ).dialog('open');
-            });
-
-            return false;
-        }
-    }, '.so-gallery-widget-select-attachments');
 });
