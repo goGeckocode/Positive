@@ -31,13 +31,13 @@ add_action('admin_init', 'siteorigin_panels_black_studio_tinymce_admin_init');
 function siteorigin_panels_black_studio_tinymce_admin_enqueue($page) {
 	$screen = get_current_screen();
 	if ( ( $screen->base == 'post' && in_array( $screen->id, siteorigin_panels_setting('post-types') ) ) || $screen->base == 'appearance_page_so_panels_home_page') {
-		wp_enqueue_script('black-studio-tinymce-widget-siteorigin-panels', get_template_directory_uri().'/page-builder/widgets/compat/black-studio-tinymce/black-studio-tinymce-widget-siteorigin-panels.min.js', array('jquery'), POSITIVE_PANELS_VERSION);
-		wp_enqueue_style('black-studio-tinymce-widget-siteorigin-panels', get_template_directory_uri().'/page-builder/widgets/compat/black-studio-tinymce/black-studio-tinymce-widget-siteorigin-panels.css', array(), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('black-studio-tinymce-widget-siteorigin-panels', POSITIVE_PANELS_URL.'widgets/compat/black-studio-tinymce/black-studio-tinymce-widget-siteorigin-panels.min.js', array('jquery'), POSITIVE_PANELS_VERSION);
+		wp_enqueue_style('black-studio-tinymce-widget-siteorigin-panels', POSITIVE_PANELS_URL.'widgets/compat/black-studio-tinymce/black-studio-tinymce-widget-siteorigin-panels.css', array(), POSITIVE_PANELS_VERSION);
 
 		global $black_studio_tinymce_widget_version;
 		if(version_compare($black_studio_tinymce_widget_version, '1.2.0', '<=')) {
 			// We also need a modified javascript for older versions of Black Studio TinyMCE
-			wp_enqueue_script('black-studio-tinymce-widget', get_template_directory_uri().'/page-builder/widgets/compat/black-studio-tinymce/black-studio-tinymce-widget.min.js', array('jquery'), POSITIVE_PANELS_VERSION);
+			wp_enqueue_script('black-studio-tinymce-widget', POSITIVE_PANELS_URL.'widgets/compat/black-studio-tinymce/black-studio-tinymce-widget.min.js', array('jquery'), POSITIVE_PANELS_VERSION);
 		}
 	}
 }

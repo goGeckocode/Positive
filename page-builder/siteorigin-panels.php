@@ -10,7 +10,8 @@ License URI: http://www.gnu.org/licenses/gpl.html
 */
 
 define('POSITIVE_PANELS_VERSION', '1.0');
-define('POSITIVE_PANELS_DEV',true);
+define('POSITIVE_PANELS_URL', get_template_directory_uri().'/page-builder/');
+define('POSITIVE_PANELS_DEV', true);
 
 include 'widgets/basic.php';
 
@@ -86,16 +87,16 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 		wp_enqueue_script( 'jquery-ui-dialog' );
 		wp_enqueue_script( 'jquery-ui-button' );
 
-		wp_enqueue_script( 'so-undomanager', get_template_directory_uri().'/page-builder/js/undomanager.min.js', array( ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-chosen', get_template_directory_uri().'/page-builder/js/chosen/chosen.jquery.min.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script( 'so-undomanager', POSITIVE_PANELS_URL.'js/undomanager.min.js', array( ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script( 'so-panels-chosen', POSITIVE_PANELS_URL.'js/chosen/chosen.jquery.min.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
 
-		wp_enqueue_script( 'so-panels-admin', get_template_directory_uri().'/page-builder/js/panels.admin.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-panels', get_template_directory_uri().'/page-builder/js/panels.admin.panels.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-grid', get_template_directory_uri().'/page-builder/js/panels.admin.grid.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-prebuilt', get_template_directory_uri().'/page-builder/js/panels.admin.prebuilt.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-tooltip', get_template_directory_uri().'/page-builder/js/panels.admin.tooltip.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-media', get_template_directory_uri().'/page-builder/js/upload-image.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
-		wp_enqueue_script( 'so-panels-admin-media', get_template_directory_uri().'/page-builder/js/panels.admin.media.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script( 'so-panels-admin', POSITIVE_PANELS_URL.'js/panels.admin.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script( 'so-panels-admin-panels', POSITIVE_PANELS_URL.'js/panels.admin.panels.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script( 'so-panels-admin-grid', POSITIVE_PANELS_URL.'js/panels.admin.grid.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script( 'so-panels-admin-prebuilt', POSITIVE_PANELS_URL.'js/panels.admin.prebuilt.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script( 'so-panels-admin-tooltip', POSITIVE_PANELS_URL.'js/panels.admin.tooltip.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script( 'so-panels-admin-media', POSITIVE_PANELS_URL.'js/upload-image.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script( 'so-panels-admin-media', POSITIVE_PANELS_URL.'js/panels.admin.media.min.js', array( 'jquery' ), POSITIVE_PANELS_VERSION);
 
 		wp_localize_script( 'so-panels-admin', 'panels', array(
 			'previewUrl' => wp_nonce_url(add_query_arg('siteorigin_panels_preview', 'true', get_home_url()), 'siteorigin-panels-preview'),
@@ -161,8 +162,8 @@ add_action( 'admin_print_scripts-appearance_page_so_panels_home_page', 'siteorig
 function siteorigin_panels_admin_enqueue_styles() {
 	$screen = get_current_screen();
 	if ( in_array( $screen->id, siteorigin_panels_setting('post-types') ) || $screen->base == 'appearance_page_so_panels_home_page') {
-		wp_enqueue_style( 'so-panels-admin', get_template_directory_uri().'/page-builder/css/admin.css' );
-		wp_enqueue_style( 'so-panels-chosen', get_template_directory_uri().'/page-builder/js/chosen/chosen.css' );
+		wp_enqueue_style( 'so-panels-admin', POSITIVE_PANELS_URL.'css/admin.css' );
+		wp_enqueue_style( 'so-panels-chosen', POSITIVE_PANELS_URL.'js/chosen/chosen.css' );
 		do_action( 'siteorigin_panel_enqueue_admin_styles' );
 	}
 }

@@ -1,12 +1,12 @@
 <?php
 // Include all the basic widgets
-include get_template_directory_uri().'/page-builder/less/functions.php';
+include POSITIVE_PANELS_URL.'less/functions.php';
 
 /**
  * Include all the widget files and register their widgets
  */
 function origin_widgets_init(){
-	foreach(glob(get_template_directory_uri().'/page-builder/widgets/*/*.php') as $file) {
+	foreach(glob(POSITIVE_PANELS_URL.'widgets/*/*.php') as $file) {
 		include_once ($file);
 
 		$p = pathinfo($file);
@@ -24,7 +24,7 @@ add_action('widgets_init', 'origin_widgets_init');
 function origin_widgets_enqueue($prefix){
 	if($prefix == 'widgets.php'){
 		wp_enqueue_media();
-		wp_enqueue_script('origin-widgets-admin-script', get_template_directory_uri().'/page-builder/js/upload-image.js', array('jquery'), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('origin-widgets-admin-script', POSITIVE_PANELS_URL.'js/upload-image.js', array('jquery'), POSITIVE_PANELS_VERSION);
 	} 
 }
 add_action('admin_enqueue_scripts', 'origin_widgets_enqueue');
@@ -449,7 +449,7 @@ abstract class SiteOrigin_Panels_Widget extends WP_Widget{
 			$folders = array(
 				get_stylesheet_directory().'/widgets' => get_stylesheet_directory_uri().'/widgets/widgets',
 				get_template_directory().'/widgets' => get_template_directory_uri().'/widgets',
-				get_template_directory_uri().'/page-builder/widgets/widgets' => get_template_directory_uri().'/page-builder/widgets/widgets',
+				POSITIVE_PANELS_URL.'widgets/widgets' => POSITIVE_PANELS_URL.'widgets/widgets',
 			);
 			$folders = apply_filters('siteorigin_widget_folders', $folders);
 		}
@@ -468,7 +468,7 @@ abstract class SiteOrigin_Panels_Widget extends WP_Widget{
 			$folders = array(
 				get_stylesheet_directory().'/widgets/img' => get_stylesheet_directory_uri().'/widgets/img',
 				get_template_directory().'/widgets/img' => get_template_directory_uri().'/widgets/img',
-				get_template_directory_uri().'/page-builder/widgets/img' => get_template_directory_uri().'/page-builder/widgets/img',
+				POSITIVE_PANELS_URL.'widgets/img' => POSITIVE_PANELS_URL.'widgets/img',
 			);
 			$folders = apply_filters('siteorigin_widget_image_folders', $folders);
 		}

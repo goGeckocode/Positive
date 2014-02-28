@@ -139,11 +139,84 @@ class Positive_Panels_Widget_Button extends WP_Widget {
 	}
 }
 
-/*---------------- GALLERY ---------------------*/
-class SiteOrigin_Panels_Widgets_Gallery extends WP_Widget {
+/* **********************
+ * IMAGE
+ */
+class Positive_Panels_Widget_Image extends WP_Widget {
 	function __construct() {
 		parent::__construct(
-			'siteorigin-panels-gallery',
+			'positive-panels-image',
+			__( 'Image (Positive)', 'siteorigin-panels' ),
+			array(
+				'description' => __( 'Displays a simple image.', 'siteorigin-panels' ),
+			)
+		);
+	}
+
+	/**
+	 * @param array $args
+	 * @param array $instance
+	 */
+	function widget( $args, $instance ) {
+		echo $args['before_widget'];
+		if(!empty($instance['href'])) echo '<a href="' . $instance['href'] . '">';
+		echo wp_get_attachment_image( $instance['id'], $instance['size'] );
+		if(!empty($instance['href'])) echo '</a>';
+		echo $args['after_widget'];
+	}
+
+	function update($new, $old){
+		$new = wp_parse_args($new, array(
+			'src' => '',
+			'size' => '',
+			'id'=>0,
+			'href' => ''
+		));
+		return $new;
+	}
+
+	function form( $instance ) {
+		$instance = wp_parse_args($instance, array(
+			'src' => '',
+			'size' => '',
+			'id'=>0,
+			'href' => ''
+		));
+
+		?>
+		<p>
+			<label><?php _e( 'Image', 'siteorigin-panels' ) ?></label>
+			<div id="thumbnail">
+				<?php if($instance['id'] !='') echo wp_get_attachment_image( $instance['id']); ?>
+			</div>
+			<input type="hidden" id="<?php echo $this->get_field_id( 'src' ) ?>" name="<?php echo $this->get_field_name( 'src' ) ?>" value="<?php echo esc_attr($instance['src']) ?>">
+			<input type="button" class="positive-panels-uploadimage" value="<?php _e('Select or Upload image','siteorigin-panels');?>">
+			<input type="hidden" id="<?php echo $this->get_field_id( 'id' ) ?>" name="<?php echo $this->get_field_name( 'id' ) ?>" value="<?php echo esc_attr($instance['id']) ?>">
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'size' ) ?>"><?php _e( 'Image Size', 'siteorigin-panels' ) ?></label>
+			<select name="<?php echo $this->get_field_name( 'size' ) ?>" id="<?php echo $this->get_field_id( 'size' ) ?>">
+				<option value="full" <?php selected('full', $instance['size']) ?>><?php esc_html_e( 'Full', 'siteorigin-panels' ) ?></option>
+				<option value="large" <?php selected('large', $instance['size']) ?>><?php esc_html_e( 'Large', 'siteorigin-panels' ) ?></option>
+				<option value="medium" <?php selected('medium', $instance['size']) ?>><?php esc_html_e( 'Medium', 'siteorigin-panels' ) ?></option>
+				<option value="thumbnail" <?php selected('thumbnail', $instance['size']) ?>><?php esc_html_e( 'Thumbnail', 'siteorigin-panels' ) ?></option>
+			</select>
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'href' ) ?>"><?php _e( 'Destination URL', 'siteorigin-panels' ) ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'href' ) ?>" name="<?php echo $this->get_field_name( 'href' ) ?>" value="<?php echo esc_attr($instance['href']) ?>" />
+		</p>
+	<?php
+	}
+}
+
+/* **********************
+ * GALLERY
+ */
+class Positive_Panels_Widget_Gallery extends WP_Widget {
+	function __construct() {
+		parent::__construct(
+			'positive-panels-gallery',
 			__( 'Gallery (PB)', 'siteorigin-panels' ),
 			array(
 				'description' => __( 'Displays a gallery.', 'siteorigin-panels' ),
@@ -230,11 +303,13 @@ class SiteOrigin_Panels_Widgets_Gallery extends WP_Widget {
 	}
 }
 
-/*---------------- POSTCONTENT ---------------------*/
-class SiteOrigin_Panels_Widgets_PostContent extends WP_Widget {
+/* **********************
+ * POST CONTENT
+ */
+class Positive_Panels_Widget_PostContent extends WP_Widget {
 	function __construct() {
 		parent::__construct(
-			'siteorigin-panels-post-content',
+			'positive-panels-post-content',
 			__( 'Post Content (PB)', 'siteorigin-panels' ),
 			array(
 				'description' => __( 'Displays some form of post content form the current post.', 'siteorigin-panels' ),
@@ -301,79 +376,9 @@ class SiteOrigin_Panels_Widgets_PostContent extends WP_Widget {
 	}
 }
 
-/*---------------- IMAGE ---------------------*/
-class SiteOrigin_Panels_Widgets_Image extends WP_Widget {
-	function __construct() {
-		parent::__construct(
-			'siteorigin-panels-image',
-			__( 'Image (Positive)', 'siteorigin-panels' ),
-			array(
-				'description' => __( 'Displays a simple image.', 'siteorigin-panels' ),
-			)
-		);
-	}
 
-	/**
-	 * @param array $args
-	 * @param array $instance
-	 */
-	function widget( $args, $instance ) {
-		echo $args['before_widget'];
-		if(!empty($instance['href'])) echo '<a href="' . $instance['href'] . '">';
-		echo wp_get_attachment_image( $instance['id'], $instance['size'] );
-		if(!empty($instance['href'])) echo '</a>';
-		echo $args['after_widget'];
-	}
-
-	function update($new, $old){
-		$new = wp_parse_args($new, array(
-			'src' => '',
-			'size' => '',
-			'id'=>0,
-			'href' => ''
-		));
-		return $new;
-	}
-
-	function form( $instance ) {
-		$instance = wp_parse_args($instance, array(
-			'src' => '',
-			'size' => '',
-			'id'=>0,
-			'href' => ''
-		));
-
-		?>
-		<p>
-			<label><?php _e( 'Image', 'siteorigin-panels' ) ?></label>
-			<div id="thumbnail">
-				<?php if($instance['id'] !='') echo wp_get_attachment_image( $instance['id']); ?>
-			</div>
-			<input type="hidden" id="<?php echo $this->get_field_id( 'src' ) ?>" name="<?php echo $this->get_field_name( 'src' ) ?>" value="<?php echo esc_attr($instance['src']) ?>">
-			<input type="button" class="positive-panels-uploadimage" value="<?php _e('Select or Upload image','siteorigin-panels');?>">
-			<input type="hidden" id="<?php echo $this->get_field_id( 'id' ) ?>" name="<?php echo $this->get_field_name( 'id' ) ?>" value="<?php echo esc_attr($instance['id']) ?>">
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'size' ) ?>"><?php _e( 'Image Size', 'siteorigin-panels' ) ?></label>
-			<select name="<?php echo $this->get_field_name( 'size' ) ?>" id="<?php echo $this->get_field_id( 'size' ) ?>">
-				<option value="full" <?php selected('full', $instance['size']) ?>><?php esc_html_e( 'Full', 'siteorigin-panels' ) ?></option>
-				<option value="large" <?php selected('large', $instance['size']) ?>><?php esc_html_e( 'Large', 'siteorigin-panels' ) ?></option>
-				<option value="medium" <?php selected('medium', $instance['size']) ?>><?php esc_html_e( 'Medium', 'siteorigin-panels' ) ?></option>
-				<option value="thumbnail" <?php selected('thumbnail', $instance['size']) ?>><?php esc_html_e( 'Thumbnail', 'siteorigin-panels' ) ?></option>
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'href' ) ?>"><?php _e( 'Destination URL', 'siteorigin-panels' ) ?></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'href' ) ?>" name="<?php echo $this->get_field_name( 'href' ) ?>" value="<?php echo esc_attr($instance['href']) ?>" />
-		</p>
-	<?php
-	}
-}
-
-/**
- * Display a loop of posts.
- *
- * Class SiteOrigin_Panels_Widgets_PostLoop
+/* **********************
+ * LOOP POSTS
  */
 class SiteOrigin_Panels_Widgets_PostLoop extends WP_Widget{
 	function __construct() {
@@ -632,14 +637,14 @@ class SiteOrigin_Panels_Widgets_PostLoop extends WP_Widget{
 	}
 }
 
-/**
- * A panel that lets you embed video.
+/* **********************
+ * VIDEO (embeded)
  */
-class SiteOrigin_Panels_Widgets_EmbeddedVideo extends WP_Widget {
+class Positive_Panels_Widget_Video extends WP_Widget {
 	function __construct() {
 		parent::__construct(
-			'siteorigin-panels-embedded-video',
-			__( 'Embedded Video (PB)', 'siteorigin-panels' ),
+			'positive-panels-video',
+			__( 'Video (Positive)', 'siteorigin-panels' ),
 			array(
 				'description' => __( 'Embeds a video.', 'siteorigin-panels' ),
 			)
@@ -656,10 +661,10 @@ class SiteOrigin_Panels_Widgets_EmbeddedVideo extends WP_Widget {
 		$embed = new WP_Embed();
 
 		if(!wp_script_is('fitvids'))
-			wp_enqueue_script('fitvids', get_template_directory_uri().'/page-builder/widgets/js/jquery.fitvids.min.js', array('jquery'), POSITIVE_PANELS_VERSION);
+			wp_enqueue_script('fitvids', POSITIVE_PANELS_URL.'widgets/js/jquery.fitvids.min.js', array('jquery'), POSITIVE_PANELS_VERSION);
 
 		if(!wp_script_is('siteorigin-panels-embedded-video'))
-			wp_enqueue_script('siteorigin-panels-embedded-video', get_template_directory_uri().'/page-builder/widgets/js/embedded-video.min.js', array('jquery', 'fitvids'), POSITIVE_PANELS_VERSION);
+			wp_enqueue_script('siteorigin-panels-embedded-video', POSITIVE_PANELS_URL.'widgets/js/embedded-video.min.js', array('jquery', 'fitvids'), POSITIVE_PANELS_VERSION);
 
 		echo $args['before_widget'];
 		?><div class="siteorigin-fitvids"><?php echo $embed->run_shortcode( '[embed]' . $instance['video'] . '[/embed]' ) ?></div><?php
@@ -692,7 +697,10 @@ class SiteOrigin_Panels_Widgets_EmbeddedVideo extends WP_Widget {
 	}
 }
 
-class SiteOrigin_Panels_Widgets_Video extends WP_Widget {
+/* **********************
+ * VIDEO HTML5 (self hosted)
+ */
+class Positive_Panels_Widget_VideoHtml5 extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'siteorigin-panels-video',
@@ -716,15 +724,15 @@ class SiteOrigin_Panels_Widgets_Video extends WP_Widget {
 		));
 
 		// Enqueue jPlayer scripts and intializer
-		wp_enqueue_script( 'siteorigin-panels-video-jplayer', get_template_directory_uri().'/page-builder/video/jplayer/jquery.jplayer.min.min.js', array('jquery'), POSITIVE_PANELS_VERSION, true);
-		wp_enqueue_script( 'siteorigin-panels-video', get_template_directory_uri().'/page-builder/video/panels.video.jquery.min.js', array('jquery'), POSITIVE_PANELS_VERSION, true);
+		wp_enqueue_script( 'siteorigin-panels-video-jplayer', POSITIVE_PANELS_URL.'video/jplayer/jquery.jplayer.min.min.js', array('jquery'), POSITIVE_PANELS_VERSION, true);
+		wp_enqueue_script( 'siteorigin-panels-video', POSITIVE_PANELS_URL.'video/panels.video.jquery.min.js', array('jquery'), POSITIVE_PANELS_VERSION, true);
 
 		// Enqueue the SiteOrigin jPlayer skin
 		$skin = sanitize_file_name($instance['skin']);
-		wp_enqueue_style('siteorigin-panels-video-jplayer-skin', get_template_directory_uri().'/page-builder/video/jplayer/skins/'.$skin.'/jplayer.'.$skin.'.css', array(), POSITIVE_PANELS_VERSION);
+		wp_enqueue_style('siteorigin-panels-video-jplayer-skin', POSITIVE_PANELS_URL.'video/jplayer/skins/'.$skin.'/jplayer.'.$skin.'.css', array(), POSITIVE_PANELS_VERSION);
 
 		$file = $instance['url'];
-		$poster = !empty($instance['poster']) ? $instance['poster'] :  get_template_directory_uri().'/page-builder/video/poster.jpg';
+		$poster = !empty($instance['poster']) ? $instance['poster'] :  POSITIVE_PANELS_URL.'video/poster.jpg';
 		$instance['ratio'] = floatval($instance['ratio']);
 		if(empty($instance['ratio'])) $instance['ratio'] = 1.777;
 
@@ -738,7 +746,7 @@ class SiteOrigin_Panels_Widgets_Video extends WP_Widget {
 				     data-poster="<?php echo esc_url($poster) ?>"
 				     data-ratio="<?php echo floatval($instance['ratio']) ?>"
 				     data-autoplay="<?php echo esc_attr($instance['autoplay']) ?>"
-				     data-swfpath="<?php echo get_template_directory_uri().'/page-builder/video/jplayer/' ?>"
+				     data-swfpath="<?php echo POSITIVE_PANELS_URL.'video/jplayer/' ?>"
 				     data-mobile="<?php echo wp_is_mobile() ? 'true' : 'false' ?>"></div>
 
 				<?php $this->display_gui($instance['skin']) ?>
@@ -751,7 +759,7 @@ class SiteOrigin_Panels_Widgets_Video extends WP_Widget {
 	}
 
 	function display_gui($skin){
-		$file = get_template_directory_uri().'/page-builder/video/jplayer/skins/'.$skin.'/gui.php';
+		$file = POSITIVE_PANELS_URL.'video/jplayer/skins/'.$skin.'/gui.php';
 		if(file_exists($file)) include '../video/jplayer/skins/'.$skin.'/gui.php';
 	}
 
@@ -818,7 +826,7 @@ function siteorigin_panels_video_shortcode($atts){
 	$instance = shortcode_atts( array(
 		'url' => '',
 		'src' => '',
-		'poster' => get_template_directory_uri().'/page-builder/video/poster.jpg',
+		'poster' => POSITIVE_PANELS_URL.'video/poster.jpg',
 		'skin' => 'siteorigin',
 		'ratio' => 1.777,
 		'autoplay' => 0,
@@ -839,14 +847,14 @@ add_shortcode('self_video', 'siteorigin_panels_video_shortcode');
  * Register the widgets.
  */
 function siteorigin_panels_widgets_init(){
-	register_widget('SiteOrigin_Panels_Widgets_Gallery');
-	register_widget('SiteOrigin_Panels_Widgets_PostContent');
-	register_widget('SiteOrigin_Panels_Widgets_Image');
-	register_widget('SiteOrigin_Panels_Widgets_PostLoop');
-	register_widget('SiteOrigin_Panels_Widgets_EmbeddedVideo');
-	register_widget('SiteOrigin_Panels_Widgets_Video');
 	register_widget('Positive_Panels_Widget_Heading');
 	register_widget('Positive_Panels_Widget_Button');
+	register_widget('Positive_Panels_Widget_Image');
+	register_widget('Positive_Panels_Widget_Gallery');
+	register_widget('Positive_Panels_Widget_PostContent');
+	//register_widget('SiteOrigin_Panels_Widgets_PostLoop');
+	register_widget('Positive_Panels_Widget_Video');
+	register_widget('Positive_Panels_Widget_VideoHtml5');
 	
 }
 add_action('widgets_init', 'siteorigin_panels_widgets_init');
