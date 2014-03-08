@@ -188,7 +188,7 @@
                             },
                             open:        function () {
                                 // This fixes the A element focus issue
-                                $(this ).closest('.ui-dialog').find('a').blur();
+                                $(this).closest('.ui-dialog').find('a').blur();
 
                                 var overlay = $('<div class="ui-widget-overlay ui-front"></div>').css('z-index', 80001);
                                 $(this).data( 'overlay', overlay ).closest( '.ui-dialog' ).before( overlay );
@@ -250,6 +250,7 @@
                             }
 
                             activeDialog.html(result).dialog("option", "position", "center");
+                            activeDialog.setupforms();
 
                             // This is to refresh the dialog positions
                             $(window).resize();

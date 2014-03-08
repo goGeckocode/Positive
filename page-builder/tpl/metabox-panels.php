@@ -101,4 +101,3 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 	<?php wp_nonce_field('save', '_sopanels_nonce') ?>
 	<?php do_action('siteorigin_panels_metabox_end'); ?>
 </div>
-<?php //print_r( get_post_meta( $post->ID, 'panels_data', true ) ) ?>

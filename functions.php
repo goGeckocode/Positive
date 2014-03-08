@@ -19,6 +19,17 @@ require( 'page-builder/siteorigin-panels.php' );
  }
  add_action('widgets_init', 'unregister_default_widgets', 11);
 
+function positive_sidebars() {
+	register_sidebar(array(
+		'name' => __( 'Sidebar' ),
+  		'id' => 'sidebar',
+  		'description' => __( 'This is the sidebar of your site.' ),
+  		'before_title' => '<h2>',
+  		'after_title' => '</h2>'
+	));
+}
+add_action( 'init', 'positive_sidebars' );
+
 function register_my_menus() {
 	register_nav_menus(
 		array('header-menu' => __( 'Header Menu' ) )

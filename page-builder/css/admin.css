@@ -531,8 +531,9 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 	background: #f1f1f1 url(./images/ajax-loader-small-grey.gif) no-repeat 15px 22px;
 }
 
-.repeater-fields {position:relative; padding-bottom:25px}
-.repeater-fields .fields {position:relative; padding:0 15px 20px; background-color:#f1f1f1; border:solid 1px #ddd; margin-bottom:10px; overflow:hidden;}
-.repeater-fields > span, .repeater-fields .fields > span {position:absolute; bottom:3px; right:15px; cursor:pointer;}
+.cloneable-fields {position:relative; padding-bottom:25px}
+.cloneable-fields .fields {position:relative; padding:0 15px 20px 25px; background-color:#f1f1f1; border:solid 1px #ddd; margin-bottom:10px; overflow:hidden; position:relative;}
+.fields .reorder-handle {height:100%; width:22px; position:absolute; top:0; left:0; cursor:move; background:url(images/reorder.png) no-repeat center}
+.cloneable-fields > span, .cloneable-fields .fields > span {position:absolute; bottom:3px; right:15px; cursor:pointer;}
 .ui-dialog.panels-admin-dialog .ui-dialog-content .slide-fields .image-fields {float:left; margin-left:0;}
 .ui-dialog.panels-admin-dialog .ui-dialog-content .slide-fields p {margin-left:190px;}

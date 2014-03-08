@@ -5,8 +5,8 @@ include POSITIVE_PANELS_URL.'less/functions.php';
 /**
  * Include all the widget files and register their widgets
  */
-function origin_widgets_init(){
-	foreach(glob(POSITIVE_PANELS_URL.'widgets/*/*.php') as $file) {
+function positive_extra_widgets(){
+	foreach(glob(POSITIVE_PANELS_URL.'widgets/widgets/*/*.php') as $file) {
 		include_once ($file);
 
 		$p = pathinfo($file);
@@ -19,12 +19,13 @@ function origin_widgets_init(){
 		if(class_exists($class)) register_widget($class);
 	}
 }
-add_action('widgets_init', 'origin_widgets_init');
+add_action('widgets_init', 'positive_extra_widgets');
 
+// enqueue scripts on admin Widgets
 function origin_widgets_enqueue($prefix){
 	if($prefix == 'widgets.php'){
 		wp_enqueue_media();
-		wp_enqueue_script('origin-widgets-admin-script', POSITIVE_PANELS_URL.'js/upload-image.js', array('jquery'), POSITIVE_PANELS_VERSION);
+		wp_enqueue_script('origin-widgets-admin-script', POSITIVE_PANELS_URL.'js/panels.admin.forms.js', array('jquery'), POSITIVE_PANELS_VERSION);
 	} 
 }
 add_action('admin_enqueue_scripts', 'origin_widgets_enqueue');

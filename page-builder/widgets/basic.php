@@ -230,12 +230,25 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 	 */
 	function widget( $args, $instance ) {
 		echo $args['before_widget'];
-
+		foreach ($instance['slides'] as $slide) {
+			echo '<div>';
+			if ($slide['image'] != '') {
+				echo '<img src="'.$slide['image'].'">';
+			}
+			if ($slide['title'] != '' || $slide['text'] != '') {
+				echo '<div class="span-4">';
+				if ($slide['title'] != '') echo '<h2>'.$slide['title'].'</h2>';
+				if ($slide['text'] != '') echo '<p>'.$slide['text'].'</p>';
+				echo '</div>';
+			}
+			echo '</div>';
+		}
 		echo $args['after_widget'];
 	}
 
 	function update($new, $old){
 		$new = wp_parse_args($new, array(
+			'effect' => '',
 			'slides' => array()
 		));
 		return $new;
@@ -243,15 +256,24 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 
 	function form( $instance ) {
 		$instance = wp_parse_args($instance, array(
+			'effect' => '',
 			'slides' => array(0 => array())
 		));
 
 		?>
-		<div class="repeater-fields" data-name="<?php echo $this->get_field_name( 'slides' ); ?>" data-id="<?php echo $this->get_field_id( 'slides' ); ?>">
-			<span class="positive-clone-fields"><?php _e('Add slide','siteorigin-panels'); ?></span>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'effect' ) ?>"><?php _e( 'Transitions effect', 'siteorigin-panels' ) ?></label>
+			<select name="<?php echo $this->get_field_name( 'effect' ) ?>" id="<?php echo $this->get_field_id( 'effect' ) ?>">
+				<option value="fade" <?php selected('fade', $instance['effect']) ?>><?php esc_html_e( 'Fade', 'siteorigin-panels' ) ?></option>
+				<option value="horizontal" <?php selected('horizontal', $instance['effect']) ?>><?php esc_html_e( 'Horizontal slide', 'siteorigin-panels' ) ?></option>
+			</select>
+		</p>
+
+		<?php // cloneable fields for each slide ?>
+		<h3><?php _e('Slides','siteorigin-panels'); ?></h3>
+		<div class="cloneable-fields" data-name="<?php echo $this->get_field_name( 'slides' ); ?>" data-id="<?php echo $this->get_field_id( 'slides' ); ?>">
 			<?php foreach($instance['slides'] as $i => $slide){ ?>
 				<div class="fields slide-fields">
-					<span class="positive-delete-fields"><?php _e('Delete slide','siteorigin-panels'); ?></span>
 					<p class="image-fields">
 						<label><?php _e( 'Image', 'siteorigin-panels' ) ?></label>
 						<span class="thumbnail">
@@ -827,7 +849,7 @@ add_shortcode('self_video', 'siteorigin_panels_video_shortcode');
 /**
  * Register the widgets.
  */
-function siteorigin_panels_widgets_init(){
+function positive_panels_basic_widgets(){
 	register_widget('Positive_Panels_Widget_Heading');
 	register_widget('Positive_Panels_Widget_Button');
 	register_widget('Positive_Panels_Widget_Image');
@@ -838,7 +860,7 @@ function siteorigin_panels_widgets_init(){
 	//register_widget('Positive_Panels_Widget_VideoHtml5');
 	
 }
-add_action('widgets_init', 'siteorigin_panels_widgets_init');
+add_action('widgets_init', 'positive_panels_basic_widgets');
 
 /**
  * Enqueue widget compatibility files.
