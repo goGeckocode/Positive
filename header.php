@@ -12,14 +12,51 @@
 </head>
 <body>
 
-<div id="header">
-	<div class="wrapper">
+<header id="header-main">
+    <?php $data = get_option('demo_options');//metemos en $data todos los valores de Options Theme ?>
+    <div class="top-header">
+	   <div class="span-6">
+            <div class="top-header-lf">
+                <?php // SOCIAL NETWORK ?>
+                <?php if ($data['ps_header-redes']==1){ ?>
+                    <ul class="social-network">
+                    <?php foreach ($data['ps_redes'] as $red) {
+                        echo '<li class="'.$red['ps_redes_sociales_nombre'].'"><a target="_blank" title="'.$red['ps_redes_sociales_nombre'].'" href="'.$red['ps_redes_sociales_url'].'">'.$red['ps_redes_sociales_nombre'].'</a></li>';
+                    }?>
+                    </ul>
+                <?php } ?>
+                <?php // IDIOMAS ?>
+                <?php if ($data['ps_header_idiomas']=='header_idiomas_Activar'){ ?>
+                    <p class="idiomas">Idiomas</p>
+                <?php } ?>
+            </div><!-- top-header-lf -->
+            <div class="top-header-rg">
+                <?php // UNETE ?>
+                <a class="btn" href="#" title="">&Uacute;nete a nosotros</a>
+                <?php // MENU SUPERIOR ?>
+                <nav class="menu-top">
+                    <ul>
+                    <?php foreach ($data['ps_menu_top_header'] as $menu) {
+                        echo '<li class="li-'.$menu['ps_menu_top_header_icono'].'"><a title="'.$menu['ps_menu_top_header_nombre'].'" href="'.$menu['ps_menu_top_header_url'].'">'.$menu['ps_menu_top_header_nombre'].'</a></li>';
+                    }?>
+                    </ul>
+                </nav>
+            </div><!-- top-header-rg -->
+        </div><!-- .span-6 -->
+    </div><!-- .top-header -->
+    <div class="span-6">
+        <?php // LOGO ?>
         <?php if( is_home() ){ ?>
-            <h1 id="logo"><?php bloginfo('name'); ?></h1>
+            <h1 id="logo">
+                <?php if ($data['ps_header_logo']) echo'<img src="'. $data['ps_header_logo']['src'].'">'; ?>
+                <span><?php bloginfo('name');?></span>
+            </h1>
         <?php } else { ?>
-            <div id="logo"><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name'); ?></a></div>
+            <div id="logo"><a href="<?php echo get_option('home'); ?>">
+               <?php if ($data['ps_header_logo']) echo'<img src="'. $data['ps_header_logo']['src'].'">'; ?>
+                <span><?php bloginfo('name');?></span>
+            </a></div>
         <?php } ?>
-         	
         <?php wp_nav_menu( array('menu' => 'Menu principal' )); ?>
-    </div>
-</div>
+    </div><!-- .span-6 -->
+</header>
