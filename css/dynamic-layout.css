@@ -1,0 +1,34 @@
+.align-center {text-align:center}
+
+/* puebas */
+.grid {display:-webkit-box; display:-moz-box; display:-ms-flexbox; display:-webkit-flex; display:flex}
+.column {
+	-moz-box-sizing:border-box; -ms-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
+.panel {text-align:justify; margin-bottom: 15px}
+
+
+.span-6 {width:100%}
+.span-4 {width:65.5%}
+.span-3 {width:50%}
+.span-2 {width:31%}
+.span-2.column-1, .span-2.column-3, 
+.span-4 + .span-2.column-2 {width:34.5%}
+
+.panel+.panel {margin-top:15px}
+/* espaciado horizontal */
+.panel {padding:0 8%}
+.span-4 .panel {padding:0 4.5%}
+.span-4.column-1 .panel {padding-left:12.5%}
+.span-4.column-2 .panel {padding-right:12.5%}
+.span-3.column-1 .panel {padding:0 5% 0 16.5%}
+.span-3.column-2 .panel {padding:0 16.5% 0 5%}
+.span-2 .panel {padding:0 10%}
+.span-2.column-1 .panel {padding:0 4% 0 24%}
+.span-2.column-3 .panel,
+.span-4 + .span-2.column-2 .panel {padding:0 24% 0 4%}
+
+/* widgets al 100% (sin padding) */
+.positive-panels-slider, .positive-panels-video {padding:0!important}
+
+/* widget image */
+.grid img {max-width:100%;}
