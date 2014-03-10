@@ -1,0 +1,213 @@
+/**
+ * admin pages class
+ *
+ * CSS used for the admin pages class and other form items.
+ *
+ * Copyright 2011 Ohad Raz (admin@bainternet.info)
+ */
+
+/* =Common Rules for all fields.
+----------------------------------------------- */
+.form-table td.at-field{ border: 1px solid #DDD; padding: 10px 10px 20px; margin: 0px; font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue", Helvetica, Arial, sans-serif; }
+.at-label { margin: 0 !important; padding: 5px 0 0 0; 
+            font: 20px/31px "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue", Helvetica, Arial, sans-serif; 
+            text-shadow: rgba(255, 255, 255, 1) 0 1px 0; width: auto; }
+.at-radio-label{ padding-right: 10px; }        
+.at-file-upload-label{ clear: both; margin: 5px 0px 5px 1px; }  
+.clearboth{clear: both;}
+
+/* =Form Fields
+----------------------------------------------- */
+.postbox .at-field input,
+.postbox .at-field textarea { padding: 5px; line-height: 18px; } 
+.postbox .at-field input.at-radio{}
+.postbox .at-field input.at-color{ border: 0px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; margin-right: 10px; min-width: 100px; }
+.at-field input:focus, 
+.at-field textarea:focus { background: #fffff8; }
+#wpcontent select.at-select { min-height: 30px !important; padding: 5px; display: block; min-width: 200px; }
+.at-field .desc-field { color: #AAA; font-style: italic; margin: 5px 0 0 3px !important; font-size: 13px; }
+ .desc-field { color: #999999;margin: 25px 0 10px 0; font-size: 15px;   }
+.at-field .wp_themeSkin table.mceLayout{ border: 1px solid #DFDFDF; }
+#post-body .at-field .wp_themeSkin .mceStatusbar a.mceResize{ top: -25px; } 
+
+/* input text
+----------------------------------------------- */
+
+body .admin_page_class .each-field input {width:100%; padding: 9px 4px; box-shadow: none; border-color:#CCC;color: #999999;}
+
+/* =Uploaded Images
+----------------------------------------------- */
+.at-images li { margin: 5px 10px 0px 0; float: left; width: 150px; height: 150px; text-align: center; border: 3px solid #ccc; cursor: move; position: relative; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+.at-images img { width: 150px; height: 150px; }
+.at-images a { position: absolute; top: -12px; right: -12px; color: #fff;  font-weight: bold; padding: 5px; }
+.at-images .at-delete-file img{ width: 16px; height: 16px; }
+
+/* =Upload Button
+----------------------------------------------- */
+body .admin_page_class .at-upload-button { float: left; clear: both; margin-top: 10px;}
+.at-upload-button:hover {}
+.at-add-file { float: left; clear: both; margin-top: 10px; }
+body .admin_page_class .at-upload_image_button {background: #FF9900;font-size: 15px;color: #FFF;border: none;border-radius: 5px;padding: 0px 12px 0px 12px;box-shadow: none;line-height: 0;height: 34px;text-transform: uppercase;border-width: 0}
+body .admin_page_class .at-upload_image_button:hover, body .admin_page_class .at-upload_image_button:focus {background: #FF9900; color: #FFF; box-shadow: none; border-color:transparent;border-width: 0}
+/* Delete Button
+----------------------------------------------- */
+body .admin_page_class .at-delete_image_button {background: url(../images/papelera.png) no-repeat scroll 9px 8px #CCCCCC;font-size: 15px;color: #666666;border: none;border-radius: 5px;padding: 0px 12px 0px 30px;box-shadow: none;line-height: 0;height: 34px;text-transform: uppercase; margin-top: 5px; display: block;}
+body .admin_page_class .at-delete_image_button:hover, body .admin_page_class .at-delete_image_button:focus {background: url(../images/papelera.png) no-repeat scroll 9px 8px #CCCCCC;color: #666666;box-shadow: none; border:none;border-width: 0}
+
+/* Checkbox Button
+----------------------------------------------- */
+body .admin_page_class .iphone-style {background: url('../images/checkbox.png') no-repeat; background-position: 0 0; height: 35px; width: 89px;-webkit-border-radius: 8px;-moz-border-radius: 8px;border-radius: 8px; }
+body .admin_page_class .iphone-style.off {background-position: -42px 0;}
+
+/* Radiobox Button
+----------------------------------------------- */
+body .admin_page_class input[type=radio] {border-color: #999999;border-width: 2px;height: 20px;width: 20px;}
+body .admin_page_class input[type=radio]:checked:before {width: 8px;height: 8px;background-color: #00CCFF;}
+
+/* Select
+----------------------------------------------- */
+.admin_page_class  .select2-container {width: 100%}
+.admin_page_class .select2-container .select2-choice {box-shadow: none; border: 1px solid #CCC;
+background-image: none; border-radius:0; width: 90%;height: auto;line-height: 1;margin-top: 1px;padding: 10px 0px 11px 10px;color: #999999;}
+.admin_page_class .select2-container .select2-choice div { background:url(../images/select.png) no-repeat scroll 0 0; width:36px; border:none; top:-1px;}
+.admin_page_class .select2-container .select2-choice div b {background:none;}
+body  .select2-search {display: none;}
+body .select2-drop {color: #999999;border-radius: 0;box-shadow: none;border: 1px solid #CCC;}
+
+/* =Time Picker
+----------------------------------------------- */
+.ui-timepicker-div { font-size: 0.9em; }
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; }
+.ui-timepicker-div dl dd { margin: -25px 0 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+#ui-datepicker-div{display: none;}
+
+/* =Repater Block
+----------------------------------------------- */
+.admin_page_class .at-repater-block {border:0;border-bottom: 1px solid #E9EAEE;padding-bottom: 20px;margin: 0 0 15px 0;position: relative;}
+.admin_page_class .repeater-table {display: block;overflow: hidden;}
+/* inline */
+.at-inline label{font-size: 12px !important;}
+.at-inline textarea{height: 130px;width: 200px;}
+.final-content { margin-bottom: 20px; clear: both; display: none;}
+.add_button {color:#FFF; background-color: #66CC00; border-radius:8px;text-transform: uppercase;
+padding: 9px 9px;font-size: 13px; display: inline-block;}
+.remove_button {color:#FFF; /*background-color: #FF0000;*/ border-radius:8px;text-transform: uppercase;/*padding: 9px 9px;font-size: 13px;*/ position: absolute;right: 0;
+bottom: 10px; background:url(../images/remove.png) no-repeat scroll 0 0; width:20px; height:20px; text-indent: -9999px;}
+#edit-re_ {color:#00CCFF; background:url(../images/edit.png) no-repeat scroll 6px 12px #CCF5FF; border-radius:8px;text-transform: uppercase;padding:9px 9px 9px 22px;font-size: 13px; display: inline-block; margin-right: 10px;display: none;}
+
+/* each-field
+----------------------------------------------- */
+.each-field {width: 45%; float: left;}
+.admin_page_class .repeater-table .each-field {margin-left: 5px;}
+.admin_page_class .repeater-table .each-field:first-child {margin-left: 0;}
+/* =panel style
+----------------------------------------------- */
+.wrap{background: transparent; margin: 17px 0 40px 10px;width: 800px}
+.header_wrap{ background:url(../images/logo_theme.png) no-repeat 0 0; margin-bottom: 20px;}
+.header_wrap h2 {font-size: 29px; color:#000; display: none;}
+.footer_wrap{border-radius: 6px 6px 6px 6px;background: -moz-linear-gradient(center top , #E9EAEE,#FEFEFE) repeat scroll 0 0 transparent;  padding: 5px 0px 10px 20px;}
+.footer_wrap .btn-info {margin-right: -3px;}
+/* ----- panel_menu -------*/
+.panel_menu{float: left;width: 175px;}
+.panel_menu ul {margin:0;}
+.panel_menu ul li { background-color: #DEDEDE; font-size: 17px; color:#666666;margin: 0; border-top:1px solid #D8D8D8; position: relative;}
+.panel_menu ul li:first-child {border-top:0;}
+.panel_menu ul li.active_tab{background: #CCCCCC; }
+.panel_menu ul li.active_tab:after {content: ""; position: absolute; top:9px; right:0; border-style:solid; border-color:transparent #FFF; border-width:9px 8px 9px 0; z-index: 1000}
+.nav_tab_link{display: block;padding: 10px 20px;text-decoration: none;color:#666666;}
+.nav_tab_link:hover{background: #CCCCCC;color:#666666;}
+/* ----- sections -------*/
+
+.f_row{border-bottom: 1px solid #F9F9F9;}
+.sections{background: none repeat scroll 0 0 #FFFFFF;float: left;min-height: 520px;padding-bottom: 10px;width: 625px;}
+.setingstab{min-height: 500px;margin-left: 25px;}
+.sections h2 {display: none;}
+.form-table {margin-top: 0;}
+.field{padding: 5px 0 10px 0; margin-right: 25px; border-top: 1px solid #E9EAEE;}
+.field:first-child {border-top: 0;}
+.sections textarea{background: -moz-linear-gradient(center top , #F9F9F9, #FFFFFF) repeat scroll 0 0 transparent;color: #333333;font-size: 12px;height: 175px;line-height: 1.5em;padding: 4px;    width: 390px;}
+.sections label{clear: both;display: block;font-size: 17px;width: 100%;}
+
+.sections input[type="text"], .sections input[type="password"], .sections input[type="file"], .sections select {background: -moz-linear-gradient(center top , #F9F9F9, #FFFFFF) repeat scroll 0 0 transparent;color: #333333;font-size: 12px;line-height: 1em;padding:9px 4px;}
+
+.description{color: #999999;display: block;float: right;font-size: 11px;margin-top: -2px;width: 200px;}
+
+.editorcontainer { -webkit-border-radius:6px; border:1px solid #DEDEDE;}
+.btn {background-color: #FAFAFA;background-repeat: no-repeat;border-radius: 8px 8px 8px 8px;    color: #FFF;  cursor: pointer;  display: inline-block;  font-size: 17px; text-transform: uppercase;  line-height: 18px;  padding: 4px 10px;  text-align: center;border: 0;}
+
+.btn , .btn-info, .btn-info:hover , .btn-primary, .btn-primary:hover , .btn-warning, .btn-warning:hover{    color: #FFFFFF;border: 0;}
+.btn-info { background:url(../images/stick-white.png)no-repeat scroll 9px center #00CCFF;color: #FFFFFF;border: 0;  padding: 10px 15px 10px 30px;  }
+.btn-primary {background-color: #006DCC !important;}
+.btn-warning {background-color: #FAA732;}
+
+/* alerts */
+.alert { background-color: #FCF8E3; border-radius: 5px;  margin: 20px 0 20px; padding:10px 35px 10px 14px;}
+
+.alert, .alert-heading {
+    color: #C09853;
+}
+.alert h4 {
+    font-size: 17px;
+    margin: 0;
+}
+.alert-success {background-color: #D1F0B2; font-size:17px; }
+.alert-success strong {font-weight: normal;}
+
+.alert-success, .alert-success .alert-heading { color: #66CC00;}
+.alert-danger, .alert-error {
+    background-color: #F2DEDE;
+    border-color: #EED3D7;
+    color: #B94A48;
+}
+.alert .close { background:url(../images/alert-succes-close.png)no-repeat scroll 0 0; width:15px; height: 15px; text-indent:-9999px;line-height: 20px; position: relative; right: -19px;
+    top: 2px; opacity: 1;}
+button.close {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    cursor: pointer;
+    padding: 0;
+}
+.close {
+    color: #000000;
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    opacity: 0.2;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+/* Sort */
+.widget-sort{
+    background-color: #F5F5F5;
+    background-image: -moz-linear-gradient(center top , #F9F9F9, #F5F5F5);
+    border: 1px solid #DFDFDF;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 0 #FFFFFF inset;
+    padding: 4px;
+    text-align: center;
+    width: 65%;
+}
+.ui-state-highlight{
+    background-color: #FFFFE0;
+    border-color: #E6DB55;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 0 #FFFFFF inset;
+    padding: 14px;
+    width: 60%;
+}
+.ui-sortable li{cursor: move;}
+.ui-sortable .at-repater-block{cursor: move;}
+
+/* Typo field iris color picker */
+.wp-picker-container{height: 20px;}
+/* issue #17 number 7 */
+div.iris-picker{z-index: 100;}
+
+/* Select 2 typo  field Fix*/
+.at-typography-size{width: 11%;}
+.at-typography-face{width: 30%;}
+.hidden{display: none;}

@@ -6,6 +6,7 @@
 
 <title><?php wp_title('&laquo;', true, 'right'); ?> <?php bloginfo('name'); ?></title>
 <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
+<link rel="stylesheet" href="<?php bloginfo('stylesheet_directory'); ?>/css/dynamic-layout.css" type="text/css" media="screen" />
 
 <?php wp_head(); ?>
 
@@ -18,29 +19,33 @@
 	   <div class="span-6">
             <div class="top-header-lf">
                 <?php // SOCIAL NETWORK ?>
-                <?php if ($data['ps_header-redes']==1){ ?>
-                    <ul class="social-network">
-                    <?php foreach ($data['ps_redes'] as $red) {
-                        echo '<li class="'.$red['ps_redes_sociales_nombre'].'"><a target="_blank" title="'.$red['ps_redes_sociales_nombre'].'" href="'.$red['ps_redes_sociales_url'].'">'.$red['ps_redes_sociales_nombre'].'</a></li>';
-                    }?>
-                    </ul>
-                <?php } ?>
+                <?php if ($data['ps_header-net']==1){ 
+                    if($data['ps_network']) { ?>
+                        <ul class="social-network">
+                        <?php foreach ($data['ps_network'] as $red) {
+                            echo '<li class="'.$red['ps_social_network_name'].'"><a target="_blank" title="'.$red['ps_social_network_name'].'" href="'.$red['ps_social_network_url'].'">'.$red['ps_social_network_name'].'</a></li>';
+                        }?>
+                        </ul>
+                <?php }
+                } ?>
                 <?php // IDIOMAS ?>
-                <?php if ($data['ps_header_idiomas']=='header_idiomas_Activar'){ ?>
+                <?php if ($data['ps_header_lang']=='header_lang_show'){ ?>
                     <p class="idiomas">Idiomas</p>
                 <?php } ?>
             </div><!-- top-header-lf -->
             <div class="top-header-rg">
-                <?php // UNETE ?>
-                <a class="btn" href="#" title="">&Uacute;nete a nosotros</a>
                 <?php // MENU SUPERIOR ?>
-                <nav class="menu-top">
-                    <ul>
-                    <?php foreach ($data['ps_menu_top_header'] as $menu) {
-                        echo '<li class="li-'.$menu['ps_menu_top_header_icono'].'"><a title="'.$menu['ps_menu_top_header_nombre'].'" href="'.$menu['ps_menu_top_header_url'].'">'.$menu['ps_menu_top_header_nombre'].'</a></li>';
-                    }?>
-                    </ul>
-                </nav>
+                <?php if ($data['ps_menu_top_header']){?>
+                    <nav class="menu-top">
+                        <ul>
+                        <?php foreach ($data['ps_menu_top_header'] as $menu) {
+                            echo '<li><a class="positive-icon '.$menu['ps_menu_top_header_icon'].'" title="'.$menu['ps_menu_top_header_name'].'" href="'.$menu['ps_menu_top_header_url'].'">'.$menu['ps_menu_top_header_name'].'</a></li>';
+                        }?>
+                        </ul>
+                    </nav>
+                <?php } ?>
+                <?php // Searchform ?>
+                <?php get_search_form(); ?>
             </div><!-- top-header-rg -->
         </div><!-- .span-6 -->
     </div><!-- .top-header -->
@@ -57,6 +62,6 @@
                 <span><?php bloginfo('name');?></span>
             </a></div>
         <?php } ?>
-        <?php wp_nav_menu( array('menu' => 'Menu principal' )); ?>
+        <?php wp_nav_menu( array('header-menu' => 'Header Menu', 'container' => 'nav', 'container_id' => 'menu-main', )); ?>
     </div><!-- .span-6 -->
 </header>
