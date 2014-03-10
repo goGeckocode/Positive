@@ -81,7 +81,7 @@ class Positive_Panels_Widget_Button extends WP_Widget {
 
 	function widget( $args, $instance ) {
 		$tag = ( $instance['link'] == '' ? 'span' : 'a');
-		echo '<p class="btn-container align-'.$instance['align'].'">';
+		echo '<p class="panel btn-container align-'.$instance['align'].'">';
 		echo '<'.$tag;
 		if($instance['link'] != ''){
 			echo ' href="'.$instance['link'].'"';
@@ -158,11 +158,18 @@ class Positive_Panels_Widget_Image extends WP_Widget {
 	 * @param array $instance
 	 */
 	function widget( $args, $instance ) {
-		echo $args['before_widget'];
-		if(!empty($instance['href'])) echo '<a href="' . $instance['href'] . '">';
-		echo wp_get_attachment_image( $instance['id'], $instance['size'] );
-		if(!empty($instance['href'])) echo '</a>';
-		echo $args['after_widget'];
+		// css image (background)
+		if($instance['size'] == 'background'){
+			echo '<div class="positive-panels-css-image" style="background-image:url('.$instance['src'].')"></div>';
+
+		// html image
+		} else {
+			echo $args['before_widget'];
+			if(!empty($instance['href'])) echo '<a href="' . $instance['href'] . '">';
+			echo wp_get_attachment_image( $instance['id'], $instance['size'] );
+			if(!empty($instance['href'])) echo '</a>';
+			echo $args['after_widget'];
+		}
 	}
 
 	function update($new, $old){
@@ -200,7 +207,9 @@ class Positive_Panels_Widget_Image extends WP_Widget {
 				<option value="large" <?php selected('large', $instance['size']) ?>><?php esc_html_e( 'Large', 'siteorigin-panels' ) ?></option>
 				<option value="medium" <?php selected('medium', $instance['size']) ?>><?php esc_html_e( 'Medium', 'siteorigin-panels' ) ?></option>
 				<option value="thumbnail" <?php selected('thumbnail', $instance['size']) ?>><?php esc_html_e( 'Thumbnail', 'siteorigin-panels' ) ?></option>
+				<option value="background" <?php selected('background', $instance['size']) ?>><?php esc_html_e( 'Background', 'siteorigin-panels' ) ?></option>
 			</select>
+			<p><small><?php _e('In the "background" choice the image will resize to fit all the area, some parts of the image wouldn\'t show','siteorigin-panels'); ?></small></p>
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'href' ) ?>"><?php _e( 'Destination URL', 'siteorigin-panels' ) ?></label>
@@ -219,7 +228,7 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 			'positive-panels-slider',
 			__( 'Slider (Positive)', 'siteorigin-panels' ),
 			array(
-				'description' => __( 'Displays a simple image.', 'siteorigin-panels' ),
+				'description' => __( 'Inserts a content or image slider.', 'siteorigin-panels' ),
 			)
 		);
 	}
@@ -236,7 +245,7 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 				echo '<img src="'.$slide['image'].'">';
 			}
 			if ($slide['title'] != '' || $slide['text'] != '') {
-				echo '<div class="span-4">';
+				echo '<div class="span-6">';
 				if ($slide['title'] != '') echo '<h2>'.$slide['title'].'</h2>';
 				if ($slide['text'] != '') echo '<p>'.$slide['text'].'</p>';
 				echo '</div>';
@@ -262,7 +271,7 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'effect' ) ?>"><?php _e( 'Transitions effect', 'siteorigin-panels' ) ?></label>
+			<label for="<?php echo $this->get_field_id( 'effect' ) ?>"><?php _e( 'Transition effect', 'siteorigin-panels' ) ?></label>
 			<select name="<?php echo $this->get_field_name( 'effect' ) ?>" id="<?php echo $this->get_field_id( 'effect' ) ?>">
 				<option value="fade" <?php selected('fade', $instance['effect']) ?>><?php esc_html_e( 'Fade', 'siteorigin-panels' ) ?></option>
 				<option value="horizontal" <?php selected('horizontal', $instance['effect']) ?>><?php esc_html_e( 'Horizontal slide', 'siteorigin-panels' ) ?></option>
@@ -274,30 +283,56 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 		<div class="cloneable-fields" data-name="<?php echo $this->get_field_name( 'slides' ); ?>" data-id="<?php echo $this->get_field_id( 'slides' ); ?>">
 			<?php foreach($instance['slides'] as $i => $slide){ ?>
 				<div class="fields slide-fields">
-					<p class="image-fields">
-						<label><?php _e( 'Image', 'siteorigin-panels' ) ?></label>
+					<h4 class="slide-fields-header toggle-collapse">
+						<strong>
+							<?php if($slide['title'] != '') echo $slide['title'];
+							else echo __('Slide').' '.($i+1); ?>
+						</strong>
 						<span class="thumbnail">
-							<?php if($slide['image'] !='') echo '<img src="'.$slide['image'].'">' ?>
+							<?php if($slide['image'] != '') echo '<img src="'.$slide['image'].'">'; ?>
 						</span>
-						<input type="button" class="positive-panels-uploadimage" value="<?php _e('Select or Upload image','siteorigin-panels');?>">
-						<?php // en el caso del slider no necesitamos ID 
-							// porque pintamos la imagen a tamaño completo ?>
-						<input type="hidden" data-key="image" class="positive-image-src" 
-							id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][image]' ?>" 
-							name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][image]' ?>" value="<?php echo $slide['image'] ?>">
-					</p>
-					<p>
-						<label><?php _e( 'Title', 'siteorigin-panels' ) ?></label>
-						<input type="text" data-key="title" class="widefat"
-							id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][title]' ?>" 
-							name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][title]' ?>" value="<?php echo $slide['title'] ?>">
-					</p>
-					<p>
-						<label><?php _e( 'Text', 'siteorigin-panels' ) ?></label>
-						<textarea data-key="text" class="widefat"
-							id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][text]' ?>" 
-							name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][text]' ?>"><?php echo $slide['text'] ?></textarea>
-					</p>
+					</h4>
+					<div class="collapsible">
+						<p class="image-fields">
+							<label><?php _e( 'Image', 'siteorigin-panels' ) ?></label>
+							<span class="thumbnail">
+								<?php if($slide['image'] !='') echo '<img src="'.$slide['image'].'">' ?>
+							</span>
+							<input type="button" class="positive-panels-uploadimage" value="<?php _e('Select or Upload image','siteorigin-panels');?>">
+							<?php // en el caso del slider no necesitamos ID 
+								// porque pintamos la imagen a tamaño completo ?>
+							<input type="hidden" data-key="image" class="positive-image-src" 
+								id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][image]' ?>" 
+								name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][image]' ?>" value="<?php echo $slide['image'] ?>">
+						</p>
+						<p class="color-fields"><label><?php _e( 'Background color', 'siteorigin-panels' ) ?></label>
+							<span><input type="text" data-key="bgcolor"
+								id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][bgcolor]' ?>" 
+								name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][bgcolor]' ?>" value="<?php echo $slide['bgcolor'] ?>">
+								<span class="color-selector"></span>
+							</span>
+
+							<label><?php _e( 'Text color', 'siteorigin-panels' ) ?></label>
+							<span><input type="text" data-key="textcolor"
+								id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][textcolor]' ?>" 
+								name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][textcolor]' ?>" value="<?php echo $slide['textcolor'] ?>">
+								<span class="color-selector"></span>
+							</span>
+							<small><?php _e('Leave blank for transparent background color or default color text.','siteorigin-panels') ?></small>
+						</p>
+						<p>
+							<label><?php _e( 'Title', 'siteorigin-panels' ) ?></label>
+							<input type="text" data-key="title" class="widefat"
+								id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][title]' ?>" 
+								name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][title]' ?>" value="<?php echo $slide['title'] ?>">
+						</p>
+						<p>
+							<label><?php _e( 'Text', 'siteorigin-panels' ) ?></label>
+							<textarea data-key="text" class="widefat"
+								id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][text]' ?>" 
+								name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][text]' ?>"><?php echo $slide['text'] ?></textarea>
+						</p>
+					</div>
 				</div>
 			<?php } ?>
 

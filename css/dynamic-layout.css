@@ -2,11 +2,21 @@
 
 /* puebas */
 .grid {display:-webkit-box; display:-moz-box; display:-ms-flexbox; display:-webkit-flex; display:flex}
-.column {
+.column {position:relative;
 	-moz-box-sizing:border-box; -ms-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
-.panel {text-align:justify; margin-bottom: 15px}
+.panel {text-align:justify}
 
 
+/* **************************
+/* SECTIONS
+/* **************************/
+.color-box {background-color:#F36639; color:white;}
+.color-box a {color:white;}
+
+
+/* **************************
+/* COLUMNS
+/* **************************/
 .span-6 {width:100%}
 .span-4 {width:65.5%}
 .span-3 {width:50%}
@@ -14,7 +24,7 @@
 .span-2.column-1, .span-2.column-3, 
 .span-4 + .span-2.column-2 {width:34.5%}
 
-.panel+.panel {margin-top:15px}
+.panel {margin:15px 0}
 /* espaciado horizontal */
 .panel {padding:0 8%}
 .span-4 .panel {padding:0 4.5%}
@@ -27,8 +37,14 @@
 .span-2.column-3 .panel,
 .span-4 + .span-2.column-2 .panel {padding:0 24% 0 4%}
 
-/* widgets al 100% (sin padding) */
-.positive-panels-slider, .positive-panels-video {padding:0!important}
+
+/* **************************
+/* WIDGETS
+/* **************************/
+/* widgets al 100% (sin padding ni margin) */
+.positive-panels-slider, .positive-panels-video {padding:0!important; margin:0!important;}
 
 /* widget image */
 .grid img {max-width:100%;}
+.positive-panels-css-image {min-height:315px; background-size:cover;}
+.positive-panels-css-image:only-child {position:absolute; height:100%; width:100%; min-height:0; }

@@ -82,10 +82,12 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 	$screen = get_current_screen();
 
 	if ( $screen->base == 'post' && in_array( $screen->id, siteorigin_panels_setting('post-types') ) ) {
-		wp_enqueue_script( 'jquery-ui-resizable' );
-		wp_enqueue_script( 'jquery-ui-sortable' );
-		wp_enqueue_script( 'jquery-ui-dialog' );
-		wp_enqueue_script( 'jquery-ui-button' );
+		wp_enqueue_script('jquery-ui-resizable');
+		wp_enqueue_script('jquery-ui-sortable');
+		wp_enqueue_script('jquery-ui-dialog');
+		wp_enqueue_script('jquery-ui-button');
+		wp_enqueue_style('farbtastic');
+		wp_enqueue_script('farbtastic');
 
 		wp_enqueue_script('so-undomanager', POSITIVE_PANELS_URL.'js/undomanager.min.js', array(), POSITIVE_PANELS_VERSION);
 		wp_enqueue_script('so-panels-chosen', POSITIVE_PANELS_URL.'js/chosen/chosen.jquery.min.min.js', array('jquery'), POSITIVE_PANELS_VERSION);
