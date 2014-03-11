@@ -1,6 +1,6 @@
 <?php
 // Include all the basic widgets
-include POSITIVE_PANELS_URL.'less/functions.php';
+//include POSITIVE_PANELS_URL.'less/functions.php';
 
 /**
  * Include all the widget files and register their widgets
@@ -22,13 +22,13 @@ function positive_extra_widgets(){
 add_action('widgets_init', 'positive_extra_widgets');
 
 // enqueue scripts on admin Widgets
-function origin_widgets_enqueue($prefix){
+/*function positive_widgets_enqueue(){
 	if($prefix == 'widgets.php'){
 		wp_enqueue_media();
 		wp_enqueue_script('origin-widgets-admin-script', POSITIVE_PANELS_URL.'js/panels.admin.forms.js', array('jquery'), POSITIVE_PANELS_VERSION);
 	} 
 }
-add_action('admin_enqueue_scripts', 'origin_widgets_enqueue');
+add_action('admin_enqueue_scripts', 'positive_widgets_enqueue');*/
 
 function origin_widgets_display_css(){
 	if(is_admin()) return;
@@ -157,10 +157,10 @@ abstract class SiteOrigin_Panels_Widget extends WP_Widget{
 
 		?>
 		<p>
-			<?php _e("We're moving this widget into a separate plugin in order to keep Page Builder core light weight.", 'siteorigin-panels') ?>
+			<?php _e("We're moving this widget into a separate plugin in order to keep Page Builder core light weight.", 'positive-panels') ?>
 			<?php
 			printf(
-				__("Either find an alternative in our <a href='%s' target='_blank'>recommended widgets</a> or install the <a href='%s' target='_blank'>Legacy Widgets plugin</a> to continue using it.", 'siteorigin-panels'),
+				__("Either find an alternative in our <a href='%s' target='_blank'>recommended widgets</a> or install the <a href='%s' target='_blank'>Legacy Widgets plugin</a> to continue using it.", 'positive-panels'),
 				admin_url('plugin-install.php?tab=favorites&user=siteorigin-pagebuilder'),
 				'http://siteorigin.com/page-builder-legacy-widgets/'
 			)
@@ -218,7 +218,7 @@ abstract class SiteOrigin_Panels_Widget extends WP_Widget{
 		if( !empty( $styles ) ) {
 			?>
 			<p>
-				<label for="<?php echo $this->get_field_id('origin_style') ?>"><?php _e('Style', 'siteorigin-panels') ?></label>
+				<label for="<?php echo $this->get_field_id('origin_style') ?>"><?php _e('Style', 'positive-panels') ?></label>
 				<select name="<?php echo $this->get_field_name('origin_style') ?>" id="<?php echo $this->get_field_id('origin_style') ?>">
 					<?php foreach($this->get_styles() as $style_id => $style_info) : $presets = $this->get_style_presets($style_id); ?>
 						<?php if(!empty($presets)) : foreach($presets as $preset_id => $preset) : ?>
@@ -242,7 +242,7 @@ abstract class SiteOrigin_Panels_Widget extends WP_Widget{
 
 			?>
 			<p>
-				<label for="<?php echo $this->get_field_id('origin_style_'.$id) ?>"><?php printf(__('%s Style', 'siteorigin-panels'), $sub[0]) ?></label>
+				<label for="<?php echo $this->get_field_id('origin_style_'.$id) ?>"><?php printf(__('%s Style', 'positive-panels'), $sub[0]) ?></label>
 				<select name="<?php echo $this->get_field_name('origin_style_'.$id) ?>" id="<?php echo $this->get_field_id('origin_style_'.$id) ?>">
 					<?php foreach($the_widget->get_styles() as $style_id => $style_info) : $presets = $the_widget->get_style_presets($style_id); ?>
 						<?php if(!empty($presets)) : foreach($presets as $preset_id => $preset) : ?>
@@ -579,58 +579,58 @@ abstract class SiteOrigin_Panels_Widget extends WP_Widget{
 		$this->form_args['query_post_type'] = array(
 			'type' => 'select',
 			'options' => $post_types,
-			'label' => __('Post Type', 'siteorigin-panels')
+			'label' => __('Post Type', 'positive-panels')
 		);
 
 		// Add the posts per page field
 		$this->form_args['query_posts_per_page'] = array(
 			'type' => 'number',
 			'default' => 10,
-			'label' => __('Posts Per Page', 'siteorigin-panels'),
+			'label' => __('Posts Per Page', 'positive-panels'),
 		);
 
 		$this->form_args['query_orderby'] = array(
 			'type' => 'select',
-			'label' => __('Order By', 'siteorigin-panels'),
+			'label' => __('Order By', 'positive-panels'),
 			'options' => array(
-				'none'  => __('None', 'siteorigin-panels'),
-				'ID'  => __('Post ID', 'siteorigin-panels'),
-				'author'  => __('Author', 'siteorigin-panels'),
-				'name'  => __('Name', 'siteorigin-panels'),
-				'name'  => __('Name', 'siteorigin-panels'),
-				'date'  => __('Date', 'siteorigin-panels'),
-				'modified'  => __('Modified', 'siteorigin-panels'),
-				'parent'  => __('Parent', 'siteorigin-panels'),
-				'rand'  => __('Random', 'siteorigin-panels'),
-				'comment_count'  => __('Comment Count', 'siteorigin-panels'),
-				'menu_order'  => __('Menu Order', 'siteorigin-panels'),
+				'none'  => __('None', 'positive-panels'),
+				'ID'  => __('Post ID', 'positive-panels'),
+				'author'  => __('Author', 'positive-panels'),
+				'name'  => __('Name', 'positive-panels'),
+				'name'  => __('Name', 'positive-panels'),
+				'date'  => __('Date', 'positive-panels'),
+				'modified'  => __('Modified', 'positive-panels'),
+				'parent'  => __('Parent', 'positive-panels'),
+				'rand'  => __('Random', 'positive-panels'),
+				'comment_count'  => __('Comment Count', 'positive-panels'),
+				'menu_order'  => __('Menu Order', 'positive-panels'),
 			)
 		);
 
 		$this->form_args['query_order'] = array(
 			'type' => 'select',
-			'label' => __('Order', 'siteorigin-panels'),
+			'label' => __('Order', 'positive-panels'),
 			'options' => array(
-				'ASC'  => __('Ascending', 'siteorigin-panels'),
-				'DESC'  => __('Descending', 'siteorigin-panels'),
+				'ASC'  => __('Ascending', 'positive-panels'),
+				'DESC'  => __('Descending', 'positive-panels'),
 			)
 		);
 
 		$this->form_args['query_sticky'] = array(
 			'type' => 'select',
-			'label' => __('Sticky Posts', 'siteorigin-panels'),
+			'label' => __('Sticky Posts', 'positive-panels'),
 			'options' => array(
-				''  => __('Default', 'siteorigin-panels'),
-				'ignore'  => __('Ignore Sticky', 'siteorigin-panels'),
-				'exclude'  => __('Exclude Sticky', 'siteorigin-panels'),
-				'only'  => __('Only Sticky', 'siteorigin-panels'),
+				''  => __('Default', 'positive-panels'),
+				'ignore'  => __('Ignore Sticky', 'positive-panels'),
+				'exclude'  => __('Exclude Sticky', 'positive-panels'),
+				'only'  => __('Only Sticky', 'positive-panels'),
 			)
 		);
 
 		$this->form_args['query_additional'] = array(
 			'type' => 'text',
-			'label' => __('Additional Arguments', 'siteorigin-panels'),
-			'description' => sprintf(__('Additional query arguments. See <a href="%s" target="_blank">query_posts</a>.', 'siteorigin-panels'), 'http://codex.wordpress.org/Function_Reference/query_posts'),
+			'label' => __('Additional Arguments', 'positive-panels'),
+			'description' => sprintf(__('Additional query arguments. See <a href="%s" target="_blank">query_posts</a>.', 'positive-panels'), 'http://codex.wordpress.org/Function_Reference/query_posts'),
 		);
 	}
 

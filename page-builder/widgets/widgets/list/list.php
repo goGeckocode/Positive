@@ -3,21 +3,21 @@
 class SiteOrigin_Panels_Widget_List extends SiteOrigin_Panels_Widget  {
 	function __construct() {
 		parent::__construct(
-			__('List (PB)', 'siteorigin-panels'),
+			__('List (PB)', 'positive-panels'),
 			array(
-				'description' => __('Displays a bullet list of elements', 'siteorigin-panels'),
+				'description' => __('Displays a bullet list of elements', 'positive-panels'),
 				'default_style' => 'simple',
 			),
 			array(),
 			array(
 				'title' => array(
 					'type' => 'text',
-					'label' => __('Title', 'siteorigin-panels'),
+					'label' => __('Title', 'positive-panels'),
 				),
 				'text' => array(
 					'type' => 'textarea',
-					'label' => __('Text', 'siteorigin-panels'),
-					'description' => __('Start each new point with an asterisk (*)', 'siteorigin-panels'),
+					'label' => __('Text', 'positive-panels'),
+					'description' => __('Start each new point with an asterisk (*)', 'positive-panels'),
 				),
 			)
 		);

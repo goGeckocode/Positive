@@ -1,3 +1,3 @@
 jQuery(function($){
-    $('.siteorigin-fitvids').fitVids();
+    $('.positive-fitvids').fitVids();
 });

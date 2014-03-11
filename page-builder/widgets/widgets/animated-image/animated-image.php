@@ -3,26 +3,26 @@
 class SiteOrigin_Panels_Widget_Animated_Image extends SiteOrigin_Panels_Widget  {
 	function __construct() {
 		parent::__construct(
-			__('Animated Image (PB)', 'siteorigin-panels'),
+			__('Animated Image (PB)', 'positive-panels'),
 			array(
-				'description' => __('An image that animates in when it enters the screen.', 'siteorigin-panels'),
+				'description' => __('An image that animates in when it enters the screen.', 'positive-panels'),
 				'default_style' => 'simple',
 			),
 			array(),
 			array(
 				'image' => array(
 					'type' => 'text',
-					'label' => __('Image URL', 'siteorigin-panels'),
+					'label' => __('Image URL', 'positive-panels'),
 				),
 				'animation' => array(
 					'type' => 'select',
-					'label' => __('Animation', 'siteorigin-panels'),
+					'label' => __('Animation', 'positive-panels'),
 					'options' => array(
-						'fade' => __('Fade In', 'siteorigin-panels'),
-						'slide-up' => __('Slide Up', 'siteorigin-panels'),
-						'slide-down' => __('Slide Down', 'siteorigin-panels'),
-						'slide-left' => __('Slide Left', 'siteorigin-panels'),
-						'slide-right' => __('Slide Right', 'siteorigin-panels'),
+						'fade' => __('Fade In', 'positive-panels'),
+						'slide-up' => __('Slide Up', 'positive-panels'),
+						'slide-down' => __('Slide Down', 'positive-panels'),
+						'slide-left' => __('Slide Left', 'positive-panels'),
+						'slide-right' => __('Slide Right', 'positive-panels'),
 					)
 				),
 			)

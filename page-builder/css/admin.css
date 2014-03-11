@@ -532,26 +532,27 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 }
 
 .panels-admin-dialog h4 {margin:1em 0 0;}
-.panels-admin-dialog small {display:block; margin-top:5px; color:#999;}
+.panels-admin-dialog small {color:#999; font-style:italic}
 
 .cloneable-fields {position:relative; padding-bottom:25px}
-.cloneable-fields .fields {position:relative; padding:0 15px 0 25px; background-color:#f1f1f1; border:solid 1px #ddd; margin-bottom:10px; overflow:hidden; position:relative;}
-.fields .reorder-handle {height:100%; width:22px; position:absolute; top:0; left:0; cursor:move; background:url(images/reorder.png) no-repeat center 10px}
+.cloneable-fields .fields {position:relative; padding:0 15px 0 25px; background-color:#f1f1f1; border:solid 1px #ddd; margin-bottom:5px; overflow:hidden; position:relative;}
+.fields .reorder-handle {height:100%; width:22px; position:absolute; top:0; left:0; cursor:move; background:url(images/reorder.png) no-repeat center 20px}
 .cloneable-fields > span {position:absolute; left:0; bottom:3px; cursor:pointer}
 .cloneable-fields .fields > span {float:right; cursor:pointer; margin:8px 0 5px!important;}
-.ui-dialog.panels-admin-dialog .ui-dialog-content .slide-fields .image-fields {float:left; margin-left:0;}
-.ui-dialog.panels-admin-dialog .ui-dialog-content .slide-fields p {margin-left:190px;}
+.ui-dialog.panels-admin-dialog .ui-dialog-content .image-fields {float:left; margin-left:0!important; width:170px;}
+.ui-dialog.panels-admin-dialog .ui-dialog-content .slide-fields p,
+.ui-dialog.panels-admin-dialog .ui-dialog-content .image-fields ~ p {margin-left:190px;}
 
 .color-fields span + label {margin-left:20px;}
 .color-fields input {width:75px;}
 .color-fields > span {position:relative;}
 .color-selector {position:absolute; right:-128px; background-color:white; border:solid 1px #ddd; padding:5px;}
 
-.panels-admin-dialog .toggle-collapse {margin:0; padding:1.2em 25px 1.2em 0; cursor:pointer; overflow: hidden; position: relative;}
+.panels-admin-dialog .toggle-collapse {margin:0; padding:15px 25px 15px 0; cursor:pointer; overflow: hidden; position: relative;}
 .panels-admin-dialog .toggle-collapse:after {content:''; position:absolute; right:0; top:50%; margin-top:-4px; border-style:solid; border-width:8px 6px 0; border-color:#ddd transparent;}
 .panels-admin-dialog .toggle-collapse.open:after {border-width:0 6px 8px}
-.panels-admin-dialog .toggle-collapse strong {float:left; padding-top:8px}
-.panels-admin-dialog .toggle-collapse .thumbnail {float:right; margin:-8px 0!important; height:50px; max-width:150px;}
+.panels-admin-dialog .toggle-collapse strong {float:left; padding-top:16px}
+.panels-admin-dialog .toggle-collapse .thumbnail {float:left; margin-right:20px; height:50px; max-width:150px;}
 
 .panels-admin-dialog .collapsible {padding-top:10px; border-top:solid 1px #ddd;}
 .panels-admin-dialog .collapsible + .positive-delete-fields {display:none}

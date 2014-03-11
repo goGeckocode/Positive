@@ -48,3 +48,9 @@
 .grid img {max-width:100%;}
 .positive-panels-css-image {min-height:315px; background-size:cover;}
 .positive-panels-css-image:only-child {position:absolute; height:100%; width:100%; min-height:0; }
+
+/* widget video */
+.positive-panels-video .video-poster {position:relative; overflow:hidden;}
+.positive-panels-video .video-poster img {position:absolute; top:0; min-width:100%; min-height:100%; width: auto; height: auto}
+/*.positive-panels-video .video-poster > div {opacity:0;}*/
+/*.positive-panels-video .video-poster > span {position:absolute; top:50%; left:50%; z-index:2000; background-color:orange; width:30px; height:30px; margin:-15px 0 0 -15px; cursor:pointer;}*/
