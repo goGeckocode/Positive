@@ -39,7 +39,7 @@ include 'includes/themeOptions.php';
        			'name'=>'Footer %d',
              	'id' => "footer$i",
              	'description' => __( 'Este es el area de widgets para footer' ),
-             	'before_widget' => '<div class="panel %2$s">',
+             	'before_widget' => '<div id="%1$s" class="panel %2$s">',
              	'after_widget' => '</div>'
        ));
 }
