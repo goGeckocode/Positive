@@ -1,15 +1,7 @@
 $(document).ready(function(){
-	$('#redes>ul li a').click(function(){
-		capaId = $(this).attr('href');
-		$('#redes>div').each(function(){
-			$this = $(this);
-			if( $this.is(capaId) ){
-				$this.show();
-			} else {
-				$this.hide();
-			}
-		})
-		return false;
+	$('#menu-main > ul > li').mouseenter(function(){
+		$(this).find('.sub-menu').stop(true,true).fadeIn(400);
+	}).mouseleave(function(){
+		$(this).find('.sub-menu').stop(true,true).fadeOut(400);
 	})
-
 })

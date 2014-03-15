@@ -21,7 +21,12 @@ class Positive_Panels_Widget_Heading extends WP_Widget {
 	function widget( $args, $instance ) {
 		// align attribute is used on before_widget
 		echo $args['before_widget'];
+		if($instance['heading']=='h2'){ echo '<div class="heading-content">';}
 		echo '<'.$instance['heading'].'>'.$instance['title'].'</'.$instance['heading'].'>';
+		if($instance['subheading']){
+			echo '<p class="subheading"><em>'.$instance['subheading'].'</em></p>';
+		}
+		if($instance['heading']=='h2'){echo '</div>';}
 		echo $args['after_widget'];
 	}
 
@@ -29,7 +34,8 @@ class Positive_Panels_Widget_Heading extends WP_Widget {
 		$new = wp_parse_args($new, array(
 			'title' => '',
 			'heading' => '',
-			'align' => ''
+			'align' => '',
+			'subHeading' => ''
 		));
 		return $new;
 	}
@@ -38,7 +44,8 @@ class Positive_Panels_Widget_Heading extends WP_Widget {
 		$instance = wp_parse_args($instance, array(
 			'title' => '',
 			'heading' => '',
-			'align' => ''
+			'align' => '',
+			'subheading' => ''
 		));
 
 		?>
@@ -61,6 +68,10 @@ class Positive_Panels_Widget_Heading extends WP_Widget {
 				<option value="align-right" <?php selected('align-right', $instance['align']) ?>><?php _e( 'Right', 'positive-panels' ) ?></option>
 				<option value="align-center" <?php selected('align-center', $instance['align']) ?>><?php _e( 'Center', 'positive-panels' ) ?></option>
 			</select>
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'subheading' ) ?>"><?php _e( 'Sub Heading', 'positive-panels' ) ?></label>
+			<textarea class="widefat" id="<?php echo $this->get_field_id('subheading') ?>" name="<?php echo $this->get_field_name( 'subheading' ) ?>"><?php echo esc_attr($instance['subheading']) ?></textarea>
 		</p>
 	<?php
 	}

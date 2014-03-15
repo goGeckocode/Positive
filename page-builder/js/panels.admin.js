@@ -87,7 +87,8 @@ jQuery( function ( $ ) {
 						// section TITLE to show in admin
 						if('white-box'==newSectionClass) sectionTitle = 'White section';
 						else if('gray-box'==newSectionClass) sectionTitle = 'Gray section';
-						else sectionTitle = 'Color section';
+						else if('blue-box'==newSectionClass) sectionTitle = 'Blue section';
+						else sectionTitle = 'Orange section';
 
 						section = $(this).attr('data-section');
 						section = $('.section-container').eq( Number(section) );

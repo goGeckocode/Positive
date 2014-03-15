@@ -56,7 +56,8 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 		<select name="section-style-class" id="section-style-class">
 			<option value="white-box" <?php selected(true) ?>><?php _e( 'White', 'positive-panels' ) ?></option>
 			<option value="gray-box"><?php _e( 'Gray', 'positive-panels' ) ?></option>
-			<option value="color-box"><?php _e( 'Color', 'positive-panels' ) ?></option>
+			<option value="orange-box"><?php _e( 'Orange', 'positive-panels' ) ?></option>
+			<option value="blue-box"><?php _e( 'Blue', 'positive-panels' ) ?></option>
 		</select>
 		<?php // Añadir imagen de backgroud ?>
 	</div>

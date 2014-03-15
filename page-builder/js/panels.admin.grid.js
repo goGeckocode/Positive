@@ -49,7 +49,8 @@
 		// section TITLE to show in admin
 		if('white-box'==sectionClass) sectionTitle = 'White section';
 		else if('gray-box'==sectionClass) sectionTitle = 'Gray section';
-		else sectionTitle = 'Color section';
+		else if('blue-box'==sectionClass) sectionTitle = 'Blue section';
+		else sectionTitle = 'Orange section';
 
 		// Create a new SECTION container
 		var container = $('<div class="section-container '+sectionClass+'" data-id="'+sectionId+'" />').appendTo('#panels-container');

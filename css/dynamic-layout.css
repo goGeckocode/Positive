@@ -11,10 +11,11 @@
 /* **************************
 /* SECTIONS
 /* **************************/
-.color-box {background-color:#F36639; color:white;}
-.color-box a {color:white;}
-
-
+.orange-box {background-color:#F36639; color:white;}
+.orange-box a {color:white;}
+.blue-box {background-color: #8FAFAE; color: white;}
+.blue-box a {color:white;}
+.blue-box .btn {background: transparent}
 /* **************************
 /* COLUMNS
 /* **************************/
@@ -65,6 +66,6 @@
 .cycle-slideshow > div:not(:first-child) {display:none;}
 .cycle-slideshow > div > img {min-width:100%; min-height:100%; position:absolute; top:0; left:0; z-index:1; }
 .cycle-slideshow > div > div,
-.cycle-slideshow > div:after {display:inline-block; vertical-align:middle;}
+.cycle-slideshow > div:after {/*display:inline-block; vertical-align:middle;*/}
 .cycle-slideshow > div:after {content:''}
-.cycle-slideshow > div > div {display:inline-block; vertical-align:middle; position:relative; z-index:2; width:83%;}
+.cycle-slideshow > div > div {/*display:inline-block; vertical-align:middle;*/ position:relative; z-index:2; width:83%;}
