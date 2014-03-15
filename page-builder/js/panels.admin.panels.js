@@ -327,7 +327,10 @@
         return $(this).each(function(){
             if( typeof data != 'undefined' ) {
                 if( typeof data.title != 'undefined' && data.title != '' ) {
-                    $(this ).find( 'h4' ).append('<strong>' + data.title + '</strong>');
+                    strong = $(this).find('h4 strong');
+                    if( $(strong).length ) $(strong).text(data.title);
+                    else $(this).find('h4').append('<strong>' + data.title + '</strong>');
+                    
                 }
 
                 if( typeof data.text != 'undefined' && data.text != '' ){
