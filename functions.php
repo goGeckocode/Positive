@@ -78,14 +78,8 @@ add_action('wp_enqueue_scripts', 'add_scripts');
 /* =============================================================================
 	 excerpt
 	 ========================================================================== */
-function new_excerpt_more($more) {
-    global $post;
-	return ' <a href="'. get_permalink($post->ID) . '">'.__('Seguir leyendo','fotografosev').'&raquo;</a>';
-}
-add_filter('excerpt_more', 'new_excerpt_more');
-
 function custom_excerpt_length( $length ) {
-       return 40;
+       return 35;
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 

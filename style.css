@@ -44,7 +44,7 @@ textarea { resize:vertical; vertical-align:top!important}
   } 
 /* general */
 body, input, select, textarea {font: 16px/1.4 'georgia', Arial, Helvetica, sans-serif;}
-body { background:#ffF; color:#333; }
+body { background:#FFF; color:#333; }
 a { color:#F26639; text-decoration: none; }
 
 h1, h2, h3, h4 { font-weight:bold; line-height:1.2}
@@ -144,6 +144,16 @@ h3, h4 { font-size:14px; }
 .positive-panels-slider h2 {color: #FFF; font-size: 75px; padding-top: 15px;}
 .positive-panels-slider .panel p {color: #FFF; font-size: 32px; font-style: italic; margin-bottom: 120px;}
 .positive-panels-slider .panel a {position: absolute;bottom: 80px;left: 50%;margin-left: -135px;}
+
+/* *** WIDGET LIST POSTS *** */
+.list-posts {background-color: #F0F0F0;}
+.list-posts .column-2 {background-color: #F8F8F8;}
+.list-posts h3 {font:40px/1.2 'heroicBold', Arial, Helvetica, sans-serif ; text-transform: uppercase; color:#000;}
+.list-posts .date {font-size: 18px; font-style: italic; color:#000; border-bottom: 3px solid #000;padding-bottom: 11px;display: inline-block;margin-bottom: 12px;}
+.list-posts .excerpt {line-height: 1.6; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 12px;}
+.list-posts .cat a {color:#333; font-style:italic; display: inline-block;vertical-align: middle;}
+.list-posts .cat a:first-child:before {content:""; background:url(images/sprite.png) no-repeat -90px -120px; width:25px; height: 25px; display: inline-block;vertical-align: middle;margin-right: 10px;}
+
 /*  *******  FOOTER  *******  */
 footer {display: block; background: #000;}
 footer .panel {color:#CCC;}

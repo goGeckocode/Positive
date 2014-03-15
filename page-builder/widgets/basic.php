@@ -490,266 +490,6 @@ class Positive_Panels_Widget_PostContent extends WP_Widget {
 
 
 /* **********************
- * LOOP POSTS
- */
-class SiteOrigin_Panels_Widgets_PostLoop extends WP_Widget{
-	function __construct() {
-		parent::__construct(
-			'siteorigin-panels-postloop',
-			__( 'Post Loop (PB)', 'positive-panels' ),
-			array(
-				'description' => __( 'Displays a post loop.', 'positive-panels' ),
-			)
-		);
-	}
-
-	/**
-	 * @param array $args
-	 * @param array $instance
-	 */
-	function widget( $args, $instance ) {
-		if( empty( $instance['template'] ) ) return;
-		if( is_admin() ) return;
-
-		$template = $instance['template'];
-		$query_args = $instance;
-		unset($query_args['template']);
-		unset($query_args['additional']);
-		unset($query_args['sticky']);
-		unset($query_args['title']);
-
-		$query_args = wp_parse_args($instance['additional'], $query_args);
-
-		global $wp_rewrite;
-
-		if( $wp_rewrite->using_permalinks() ) {
-
-			if( get_query_var('paged') ) {
-				// When the widget appears on a sub page.
-				$query_args['paged'] = get_query_var('paged');
-			}
-			elseif( strpos( $_SERVER['REQUEST_URI'], '/page/' ) !== false ) {
-				// When the widget appears on the home page.
-				preg_match('/\/page\/([0-9]+)\//', $_SERVER['REQUEST_URI'], $matches);
-				if(!empty($matches[1])) $query_args['paged'] = intval($matches[1]);
-				else $query_args['paged'] = 1;
-			}
-			else $query_args['paged'] = 1;
-		}
-		else {
-			// Get current page number when we're not using permalinks
-			$query_args['paged'] = isset($_GET['paged']) ? intval($_GET['paged']) : 1;
-		}
-
-		switch($instance['sticky']){
-			case 'ignore' :
-				$query_args['ignore_sticky_posts'] = 1;
-				break;
-			case 'only' :
-				$query_args['post__in'] = get_option( 'sticky_posts' );
-				break;
-			case 'exclude' :
-				$query_args['post__not_in'] = get_option( 'sticky_posts' );
-				break;
-		}
-
-		// Exclude the current post to prevent possible infinite loop
-
-		global $siteorigin_panels_current_post;
-
-		if( !empty($siteorigin_panels_current_post) ){
-
-			if(!empty($query_args['post__not_in'])){
-				$query_args['post__not_in'][] = $siteorigin_panels_current_post;
-			}
-			else {
-				$query_args['post__not_in'] = array( $siteorigin_panels_current_post );
-			}
-
-		}
-
-		// Create the query
-		query_posts($query_args);
-		echo $args['before_widget'];
-
-		// Filter the title
-		$instance['title'] = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
-		if ( !empty( $instance['title'] ) ) {
-			echo $args['before_title'] . $instance['title'] . $args['after_title'];
-		}
-
-		if(strpos('/'.$instance['template'], '/content') !== false) {
-			while(have_posts()) {
-				the_post();
-				locate_template($instance['template'], true, false);
-			}
-		}
-		else {
-			locate_template($instance['template'], true, false);
-		}
-
-		echo $args['after_widget'];
-
-		// Reset everything
-		wp_reset_query();
-	}
-
-	/**
-	 * Update the widget
-	 *
-	 * @param array $new
-	 * @param array $old
-	 * @return array
-	 */
-	function update($new, $old){
-		return $new;
-	}
-
-	/**
-	 * Get all the existing files
-	 *
-	 * @return array
-	 */
-	function get_loop_templates(){
-		$templates = array();
-
-		$template_files = array(
-			'loop*.php',
-			'*/loop*.php',
-			'content*.php',
-			'*/content*.php',
-		);
-
-		$template_dirs = array(get_template_directory(), get_stylesheet_directory());
-		$template_dirs = array_unique($template_dirs);
-		foreach($template_dirs  as $dir ){
-			foreach($template_files as $template_file) {
-				foreach((array) glob($dir.'/'.$template_file) as $file) {
-					if( file_exists( $file ) ) $templates[] = str_replace($dir.'/', '', $file);
-				}
-			}
-		}
-
-		$templates = array_unique($templates);
-		sort($templates);
-
-		return $templates;
-	}
-
-	/**
-	 * Display the form for the post loop.
-	 *
-	 * @param array $instance
-	 * @return string|void
-	 */
-	function form( $instance ) {
-		$instance = wp_parse_args($instance, array(
-			'title' => '',
-			'template' => 'loop.php',
-
-			// Query args
-			'post_type' => 'post',
-			'posts_per_page' => '',
-
-			'order' => 'DESC',
-			'orderby' => 'date',
-
-			'sticky' => '',
-
-			'additional' => '',
-		));
-
-		$templates = $this->get_loop_templates();
-		if( empty($templates) ) {
-			?><p><?php _e("Your theme doesn't have any post loops.", 'positive-panels') ?></p><?php
-			return;
-		}
-
-		// Get all the loop template files
-		$post_types = get_post_types(array('public' => true));
-		$post_types = array_values($post_types);
-		$post_types = array_diff($post_types, array('attachment', 'revision', 'nav_menu_item'));
-
-		?>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ) ?>"><?php _e( 'Title', 'positive-panels' ) ?></label>
-			<input type="text" class="widefat" name="<?php echo $this->get_field_name( 'title' ) ?>" id="<?php echo $this->get_field_id( 'title' ) ?>" value="<?php echo esc_attr( $instance['title'] ) ?>">
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('template') ?>"><?php _e('Template', 'positive-panels') ?></label>
-			<select id="<?php echo $this->get_field_id( 'template' ) ?>" name="<?php echo $this->get_field_name( 'template' ) ?>">
-				<?php foreach($templates as $template) : ?>
-					<option value="<?php echo esc_attr($template) ?>" <?php selected($instance['template'], $template) ?>>
-						<?php
-						$headers = get_file_data( locate_template($template), array(
-							'loop_name' => 'Loop Name',
-						) );
-						echo esc_html(!empty($headers['loop_name']) ? $headers['loop_name'] : $template);
-						?>
-					</option>
-				<?php endforeach; ?>
-			</select>
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id('post_type') ?>"><?php _e('Post Type', 'positive-panels') ?></label>
-			<select id="<?php echo $this->get_field_id( 'post_type' ) ?>" name="<?php echo $this->get_field_name( 'post_type' ) ?>" value="<?php echo esc_attr($instance['post_type']) ?>">
-				<?php foreach($post_types as $type) : ?>
-					<option value="<?php echo esc_attr($type) ?>" <?php selected($instance['post_type'], $type) ?>><?php echo esc_html($type) ?></option>
-				<?php endforeach; ?>
-			</select>
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id('posts_per_page') ?>"><?php _e('Posts Per Page', 'positive-panels') ?></label>
-			<input type="text" class="small-text" id="<?php echo $this->get_field_id( 'posts_per_page' ) ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ) ?>" value="<?php echo esc_attr($instance['posts_per_page']) ?>" />
-		</p>
-
-		<p>
-			<label <?php echo $this->get_field_id('orderby') ?>><?php _e('Order By', 'positive-panels') ?></label>
-			<select id="<?php echo $this->get_field_id( 'orderby' ) ?>" name="<?php echo $this->get_field_name( 'orderby' ) ?>" value="<?php echo esc_attr($instance['orderby']) ?>">
-				<option value="none" <?php selected($instance['orderby'], 'none') ?>><?php esc_html_e('None', 'positive-panels') ?></option>
-				<option value="ID" <?php selected($instance['orderby'], 'ID') ?>><?php esc_html_e('Post ID', 'positive-panels') ?></option>
-				<option value="author" <?php selected($instance['orderby'], 'author') ?>><?php esc_html_e('Author', 'positive-panels') ?></option>
-				<option value="name" <?php selected($instance['orderby'], 'name') ?>><?php esc_html_e('Name', 'positive-panels') ?></option>
-				<option value="name" <?php selected($instance['orderby'], 'name') ?>><?php esc_html_e('Name', 'positive-panels') ?></option>
-				<option value="date" <?php selected($instance['orderby'], 'date') ?>><?php esc_html_e('Date', 'positive-panels') ?></option>
-				<option value="modified" <?php selected($instance['orderby'], 'modified') ?>><?php esc_html_e('Modified', 'positive-panels') ?></option>
-				<option value="parent" <?php selected($instance['orderby'], 'parent') ?>><?php esc_html_e('Parent', 'positive-panels') ?></option>
-				<option value="rand" <?php selected($instance['orderby'], 'rand') ?>><?php esc_html_e('Random', 'positive-panels') ?></option>
-				<option value="comment_count" <?php selected($instance['orderby'], 'comment_count') ?>><?php esc_html_e('Comment Count', 'positive-panels') ?></option>
-				<option value="menu_order" <?php selected($instance['orderby'], 'menu_order') ?>><?php esc_html_e('Menu Order', 'positive-panels') ?></option>
-				<option value="menu_order" <?php selected($instance['orderby'], 'menu_order') ?>><?php esc_html_e('Menu Order', 'positive-panels') ?></option>
-			</select>
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id('order') ?>"><?php _e('Order', 'positive-panels') ?></label>
-			<select id="<?php echo $this->get_field_id( 'order' ) ?>" name="<?php echo $this->get_field_name( 'order' ) ?>" value="<?php echo esc_attr($instance['order']) ?>">
-				<option value="DESC" <?php selected($instance['order'], 'DESC') ?>><?php esc_html_e('Descending', 'positive-panels') ?></option>
-				<option value="ASC" <?php selected($instance['order'], 'ASC') ?>><?php esc_html_e('Ascending', 'positive-panels') ?></option>
-			</select>
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id('sticky') ?>"><?php _e('Sticky Posts', 'positive-panels') ?></label>
-			<select id="<?php echo $this->get_field_id( 'sticky' ) ?>" name="<?php echo $this->get_field_name( 'sticky' ) ?>" value="<?php echo esc_attr($instance['sticky']) ?>">
-				<option value="" <?php selected($instance['sticky'], '') ?>><?php esc_html_e('Default', 'positive-panels') ?></option>
-				<option value="ignore" <?php selected($instance['sticky'], 'ignore') ?>><?php esc_html_e('Ignore Sticky', 'positive-panels') ?></option>
-				<option value="exclude" <?php selected($instance['sticky'], 'exclude') ?>><?php esc_html_e('Exclude Sticky', 'positive-panels') ?></option>
-				<option value="only" <?php selected($instance['sticky'], 'only') ?>><?php esc_html_e('Only Sticky', 'positive-panels') ?></option>
-			</select>
-		</p>
-
-		<p>
-			<label for="<?php echo $this->get_field_id('additional') ?>"><?php _e('Additional ', 'positive-panels') ?></label>
-			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'additional' ) ?>" name="<?php echo $this->get_field_name( 'additional' ) ?>" value="<?php echo esc_attr($instance['additional']) ?>" />
-			<small><?php printf(__('Additional query arguments. See <a href="%s" target="_blank">query_posts</a>.', 'positive-panels'), 'http://codex.wordpress.org/Function_Reference/query_posts') ?></small>
-		</p>
-	<?php
-	}
-}
-
-/* **********************
  * VIDEO (embeded)
  */
 class Positive_Panels_Widget_Video extends WP_Widget {
@@ -830,7 +570,67 @@ class Positive_Panels_Widget_Video extends WP_Widget {
 		return $new;
 	}
 }
+/* **********************
+ * CATEGORY - LIST POSTS
+ */
+class Positive_Panels_Widget_listPosts extends WP_Widget {
+	function __construct() {
+		parent::__construct(
+			'positive-panels-listPosts',
+			__( 'List Posts (Positive)', 'positive-panels' ),
+			array(
+				'description' => __( 'Create a custom List Posts.', 'positive-panels' ),
+			)
+		);
+	}
 
+	function widget( $args, $instance ) {
+		echo $args['before_widget'];
+		echo '<h2>'.get_category($instance['category'])->name.'</h2>';
+		echo $args['after_widget'];
+		echo '</div></div>';// .column - .grid
+		echo '<ul class="grid list-posts">';?>
+		<?php 
+		$i=1; 
+		$query = new WP_Query( array(/*'cat' => $instance['category']*/'post_type' => 'post' , 'posts_per_page'  => 3) );
+		while ( $query->have_posts() ) : $query->the_post();?>
+			<li class="column span-2 column-<?php echo $i; ?>">
+				<div class="panel">
+					<h3><?php the_title(); ?></h3>
+					<span class="date"><?php the_date(); ?></span>
+					<div class="excerpt"><?php the_excerpt();?></div>
+					<p class="cat"><?php the_category(' &gt; '); ?></p>
+				</div>
+			</li>
+		<?php $i++; endwhile; wp_reset_query(); ?>
+		<?php echo '</ul>';		
+		echo $args['after_widget'];
+	}
+
+	function update($new, $old){
+		$new = wp_parse_args($new, array(
+			'category' => ''
+		));
+		return $new;
+	}
+
+	function form( $instance ) {
+		$instance = wp_parse_args($instance, array(
+			'category' => ''
+		));
+
+		?>
+		<?php // Category ?>
+		<label for="<?php echo $this->get_field_id( 'category' ) ?>"><?php _e( 'Choose a category to display the last posts', 'positive-panels' ) ?></label>
+		<select id="<?php echo $this->get_field_id( 'category' ) ?>" name="<?php echo $this->get_field_name( 'category' ) ?>" value="">
+		<?php $categories = get_categories();
+		foreach ($categories as $category ) { ?>
+			<option value="<?php echo $category->term_id; ?>" <?php selected($category->term_id, $instance['category']) ?>><?php echo $category->name; ?></option>
+		<?php } ?>
+		</select>		
+	<?php
+	}
+}
 
 /**
  * Register the widgets.
@@ -842,7 +642,7 @@ function positive_panels_basic_widgets(){
 	register_widget('Positive_Panels_Widget_Slider');
 	register_widget('Positive_Panels_Widget_PostContent');
 	register_widget('Positive_Panels_Widget_Video');
-	//register_widget('SiteOrigin_Panels_Widgets_PostLoop');
+	register_widget('Positive_Panels_Widget_listPosts');
 }
 add_action('widgets_init', 'positive_panels_basic_widgets');
 
