@@ -240,12 +240,14 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 	 */
 	function widget( $args, $instance ) {
 		if(!wp_script_is('cycle2'))
-			wp_enqueue_script('cycle2', POSITIVE_PANELS_URL.'/js/jquery.cycle2.min.js', array('jquery'), '2.1.2');
+			wp_enqueue_script('cycle2', POSITIVE_PANELS_URL.'widgets/js/jquery.cycle2.min.js', array('jquery'), '2.1.2');
 
 		$autoplay = ($instance['autoplay'] == 1 ? 0 : 6000);
 
 		echo $args['before_widget'];
-		echo '<div class="cycle-slideshow" 
+		echo '<div class="cycle-slideshow"
+				data-cycle-loader="wait"
+				data-cycle-swipe=true
 				data-cycle-prev="#prev" 
 				data-cycle-next="#next" 
 				data-cycle-fx="'.$instance['effect'].'"
