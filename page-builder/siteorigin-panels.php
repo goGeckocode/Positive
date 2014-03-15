@@ -58,7 +58,7 @@ add_action( 'add_meta_boxes', 'siteorigin_panels_metaboxes' );
 function siteorigin_panels_is_panel($can_edit = false){
 	// Check if this is a panel
 	$is_panel = ( is_singular() && get_post_meta(get_the_ID(), 'panels_data', false) != '' );
-	return $is_panel && (!$can_edit || ( (is_singular() && current_user_can('edit_post', get_the_ID())) || ( siteorigin_panels_is_home() && current_user_can('edit_theme_options') ) ));
+	return $is_panel && (!$can_edit || ( is_singular() && current_user_can('edit_post', get_the_ID()) ));
 }
 
 /**
@@ -73,10 +73,6 @@ function siteorigin_panels_metabox_render( $post ) {
 
 /**
  * Enqueue the panels admin scripts
- *
- * @action admin_print_scripts-post-new.php
- * @action admin_print_scripts-post.php
- * @action admin_print_scripts-appearance_page_so_panels_home_page
  */
 function positive_panels_admin_scripts($prefix) {
 	$screen = get_current_screen();
@@ -159,8 +155,6 @@ function positive_panels_admin_scripts($prefix) {
 		do_action( 'siteorigin_panel_enqueue_admin_scripts' );
 	}
 }
-//add_action( 'admin_print_scripts-post-new.php', 'siteorigin_panels_admin_enqueue_scripts' );
-//add_action( 'admin_print_scripts-post.php', 'siteorigin_panels_admin_enqueue_scripts' );
 add_action('admin_enqueue_scripts', 'positive_panels_admin_scripts');
 
 
@@ -418,6 +412,7 @@ function siteorigin_panels_the_widget( $widget, $instance, $section, $grid, $cel
 	$classes = array( 'panel' );
 	if ( !empty( $the_widget->id_base ) ) $classes[] = $the_widget->id_base;
 	if ( $is_last ) $classes[] = 'panel-last';
+	if ($instance['align']) $classes[] = $instance['align'];
 	$classes[] = 'panel-'.($panel+1);
 
 	$the_widget->widget( array(
@@ -484,14 +479,6 @@ function siteorigin_panels_preview_load_data($val){
  */
 function siteorigin_panels_body_class($classes){
 	if(siteorigin_panels_is_panel()) $classes[] = 'siteorigin-panels';
-	if(siteorigin_panels_is_home()) $classes[] = 'siteorigin-panels-home';
-
-	if(isset($_GET['siteorigin_panels_preview']) && isset($_GET['_wpnonce']) && wp_verify_nonce($_GET['_wpnonce'], 'siteorigin-panels-preview')) {
-		// This is a home page preview
-		$classes[] = 'siteorigin-panels';
-		$classes[] = 'siteorigin-panels-home';
-	}
-
 	return $classes;
 }
 add_filter('body_class', 'siteorigin_panels_body_class');

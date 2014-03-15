@@ -19,8 +19,9 @@ class Positive_Panels_Widget_Heading extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
+		// align attribute is used on before_widget
 		echo $args['before_widget'];
-		echo '<'.$instance['heading'].' class="align-'.$instance['align'].'">'.$instance['title'].'</'.$instance['heading'].'>';
+		echo '<'.$instance['heading'].'>'.$instance['title'].'</'.$instance['heading'].'>';
 		echo $args['after_widget'];
 	}
 
@@ -47,8 +48,8 @@ class Positive_Panels_Widget_Heading extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'heading' ) ?>"><?php _e( 'Heading level', 'positive-panels' ) ?></label>
 			<select name="<?php echo $this->get_field_name( 'heading' ) ?>" id="<?php echo $this->get_field_id( 'heading' ) ?>">
-				<option value="h1" <?php selected(empty($instance['heading'])) ?>>H1</option>
-				<option value="h2" <?php selected('h2', $instance['heading']) ?>>H2</option>
+				<?php /*<option value="h1" <?php selected(empty($instance['heading'])) ?>>H1</option>*/ ?>
+				<option value="h2" <?php selected(empty($instance['heading'])) ?>>H2</option>
 				<option value="h3" <?php selected('h3', $instance['heading']) ?>>H3</option>
 			</select>
 		</p>
@@ -56,9 +57,9 @@ class Positive_Panels_Widget_Heading extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'align' ) ?>"><?php _e( 'Heading Align', 'positive-panels' ) ?></label>
 			<select name="<?php echo $this->get_field_name( 'align' ) ?>" id="<?php echo $this->get_field_id( 'align' ) ?>">
-				<option value="left" <?php selected(empty($instance['align'])) ?>><?php esc_html_e( 'left', 'positive-panels' ) ?></option>
-				<option value="right" <?php selected('right', $instance['align']) ?>><?php esc_html_e( 'right', 'positive-panels' ) ?></option>
-				<option value="center" <?php selected('center', $instance['align']) ?>><?php esc_html_e( 'center', 'positive-panels' ) ?></option>
+				<option value="align-left" <?php selected(empty($instance['align'])) ?>><?php _e( 'Left', 'positive-panels' ) ?></option>
+				<option value="align-right" <?php selected('align-right', $instance['align']) ?>><?php _e( 'Right', 'positive-panels' ) ?></option>
+				<option value="align-center" <?php selected('align-center', $instance['align']) ?>><?php _e( 'Center', 'positive-panels' ) ?></option>
 			</select>
 		</p>
 	<?php
@@ -238,7 +239,21 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 	 * @param array $instance
 	 */
 	function widget( $args, $instance ) {
+		if(!wp_script_is('cycle2'))
+			wp_enqueue_script('cycle2', POSITIVE_PANELS_URL.'/js/jquery.cycle2.min.js', array('jquery'), '2.1.2');
+
+		$autoplay = ($instance['autoplay'] == 1 ? 0 : 6000);
+
 		echo $args['before_widget'];
+		echo '<div class="cycle-slideshow" 
+				data-cycle-prev="#prev" 
+				data-cycle-next="#next" 
+				data-cycle-fx="'.$instance['effect'].'"
+				data-cycle-timeout="'.$autoplay.'"
+				data-cycle-slides="> div"
+				data-pager="#slider-pager"
+				data-pager-template="<span></span>"
+			>';
 		foreach ($instance['slides'] as $slide) {
 			$layerstyle = '';
 			if (!empty($slide['bgcolor']) || !empty($slide['textcolor']) ) {
@@ -254,7 +269,7 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 			}
 			// slide content
 			if(!empty($slide['title']) || !empty($slide['text']) || !empty($slide['buttontext']) ) {
-				echo '<div class="span-6">';
+				echo '<div class="panel '.$slide['align'].'">';
 				if( !empty($slide['title']) ) echo '<h2>'.$slide['title'].'</h2>';
 				if( !empty($slide['text']) ) echo '<p>'.$slide['text'].'</p>'; // apply_filters falla
 				if( !empty($slide['buttontext']) ) echo '<a href="'.$slide['buttonurl'].'" class="btn">'.$slide['buttontext'].'</a>';
@@ -262,12 +277,14 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 			}
 			echo '</div>';
 		}
+		echo '</div><!-- cycle-slideshow -->';
 		echo $args['after_widget'];
 	}
 
 	function update($new, $old){
 		$new = wp_parse_args($new, array(
 			'effect' => '',
+			'autoplay' => '',
 			'slides' => array()
 		));
 		return $new;
@@ -276,6 +293,7 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 	function form( $instance ) {
 		$instance = wp_parse_args($instance, array(
 			'effect' => '',
+			'autoplay' => '',
 			'slides' => array(0 => array())
 		));
 
@@ -284,8 +302,16 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'effect' ) ?>"><?php _e( 'Transition effect', 'positive-panels' ) ?></label>
 			<select name="<?php echo $this->get_field_name( 'effect' ) ?>" id="<?php echo $this->get_field_id( 'effect' ) ?>">
 				<option value="fade" <?php selected('fade', $instance['effect']) ?>><?php esc_html_e( 'Fade', 'positive-panels' ) ?></option>
-				<option value="horizontal" <?php selected('horizontal', $instance['effect']) ?>><?php esc_html_e( 'Horizontal slide', 'positive-panels' ) ?></option>
+				<option value="scrollHorz" <?php selected('horizontal', $instance['effect']) ?>><?php esc_html_e( 'Horizontal slide', 'positive-panels' ) ?></option>
 			</select>
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('autoplay') ?>">
+				<input type="checkbox" 
+					id="<?php echo $this->get_field_id('autoplay'); ?>" 
+					name="<?php echo $this->get_field_name( 'autoplay' ); ?>" 
+					value="1">
+				<?php _e( 'Check for auto play slider', 'positive-panels' ) ?></label>
 		</p>
 
 		<?php // cloneable fields for each slide ?>
@@ -347,6 +373,14 @@ class Positive_Panels_Widget_Slider extends WP_Widget {
 								id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][text]' ?>" 
 								name="<?php echo $this->get_field_name( 'slides' ).'['.$i.'][text]' ?>"><?php echo $slide['text'] ?></textarea>
 						</p>
+						<?php /*<p>
+							<label><?php _e( 'Text align', 'positive-panels' ) ?></label>
+							<select name="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][align]' ?>" id="<?php echo $this->get_field_id( 'slides' ).'['.$i.'][align]' ?>">
+								<option value="align-center" <?php selected(empty($instance['slides'][$i]['align'])) ?>><?php esc_html_e( 'Center', 'positive-panels' ) ?></option>
+								<option value="align-left" <?php selected('align-left', $instance['slides'][$i]['align']) ?>><?php esc_html_e( 'Left', 'positive-panels' ) ?></option>
+								<option value="align-right" <?php selected('align-right', $instance['slides'][$i]['align']) ?>><?php esc_html_e( 'Right', 'positive-panels' ) ?></option>
+							</select>
+						</p>*/ ?>
 						<?php // BUTTON ?>
 						<p><strong><?php _e('Do you want to include a button?','positive-panels') ?></strong></p>
 						<p><label><?php _e( 'Button text', 'positive-panels' ) ?></label>
