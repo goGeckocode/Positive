@@ -67,7 +67,7 @@ function add_scripts() {
 	$template = get_template_directory_uri();
 
 	wp_deregister_script( 'jquery' ); // Unregister WordPress jQuery
-    wp_register_script( 'jquery', $template.'/js/jquery-1.7.1.min.js', 'jquery', '1.7.1');
+    wp_register_script( 'jquery', $template.'/js/jquery-1.9.1.min.js', 'jquery', '1.9.1');
 	wp_enqueue_script('jquery');
 
 	wp_register_script('custom', $template.'/js/custom.js', 'jquery', '1.0.0');
