@@ -1,8 +1,6 @@
 /**
  * admin pages class
- *
  * CSS used for the admin pages class and other form items.
- *
  * Copyright 2011 Ohad Raz (admin@bainternet.info)
  */
 
@@ -19,21 +17,25 @@
 /* =Form Fields
 ----------------------------------------------- */
 .postbox .at-field input,
-.postbox .at-field textarea { padding: 5px; line-height: 18px; } 
+.postbox .at-field textarea { padding:5px; line-height: 18px; } 
 .postbox .at-field input.at-radio{}
 .postbox .at-field input.at-color{ border: 0px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; margin-right: 10px; min-width: 100px; }
 .at-field input:focus, 
 .at-field textarea:focus { background: #fffff8; }
-#wpcontent select.at-select { min-height: 30px !important; padding: 5px; display: block; min-width: 200px; }
-.at-field .desc-field { color: #AAA; font-style: italic; margin: 5px 0 0 3px !important; font-size: 13px; }
- .desc-field { color: #999999;margin: 25px 0 10px 0; font-size: 15px;   }
+#wpcontent select.at-select {height:auto; padding:8px 4px}
+.desc-field {color:#AAA; margin:15px 0; font-size:13px}
+.at-field .desc-field {margin: 5px 0 0 3px!important}
 .at-field .wp_themeSkin table.mceLayout{ border: 1px solid #DFDFDF; }
 #post-body .at-field .wp_themeSkin .mceStatusbar a.mceResize{ top: -25px; } 
 
 /* input text
 ----------------------------------------------- */
 
-body .admin_page_class .each-field input {width:100%; padding: 9px 4px; box-shadow: none; border-color:#CCC;color: #999999;}
+body .admin_page_class input,
+body .admin_page_class select,
+body .admin_page_class textarea {width:99%; padding:9px 4px; box-shadow:none; border-color:#CCC;color: #999999; font-size:14px; line-height:1; background:white; color:#999; 
+    -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box;}
+body .admin_page_class .button {width:auto;}
 
 /* =Uploaded Images
 ----------------------------------------------- */
@@ -41,6 +43,7 @@ body .admin_page_class .each-field input {width:100%; padding: 9px 4px; box-shad
 .at-images img { width: 150px; height: 150px; }
 .at-images a { position: absolute; top: -12px; right: -12px; color: #fff;  font-weight: bold; padding: 5px; }
 .at-images .at-delete-file img{ width: 16px; height: 16px; }
+.admin_page_class .mupload_img_holder img {height:auto!important; max-height:120px;}
 
 /* =Upload Button
 ----------------------------------------------- */
@@ -68,8 +71,8 @@ body .admin_page_class input[type=radio]:checked:before {width: 8px;height: 8px;
 ----------------------------------------------- */
 .admin_page_class  .select2-container {width: 100%}
 .admin_page_class .select2-container .select2-choice {box-shadow: none; border: 1px solid #CCC;
-background-image: none; border-radius:0; width: 90%;height: auto;line-height: 1;margin-top: 1px;padding: 10px 0px 11px 10px;color: #999999;}
-.admin_page_class .select2-container .select2-choice div { background:url(../images/select.png) no-repeat scroll 0 0; width:36px; border:none; top:-1px;}
+background-image: none; border-radius:0; width: 90%;height: auto;line-height: 1;margin-top: 1px;padding: 12px 0px 11px 10px;color: #999999;}
+.admin_page_class .select2-container .select2-choice div { background:url(../images/select.png) no-repeat scroll 0 0; width:36px; border:none; top:0;}
 .admin_page_class .select2-container .select2-choice div b {background:none;}
 body  .select2-search {display: none;}
 body .select2-drop {color: #999999;border-radius: 0;box-shadow: none;border: 1px solid #CCC;}
@@ -86,23 +89,21 @@ body .select2-drop {color: #999999;border-radius: 0;box-shadow: none;border: 1px
 
 /* =Repater Block
 ----------------------------------------------- */
-.admin_page_class .at-repater-block {border:0;border-bottom: 1px solid #E9EAEE;padding-bottom: 20px;margin: 0 0 15px 0;position: relative;}
+.admin_page_class .at-repater-block {border:0; border-bottom:1px solid #E9EAEE; padding-bottom:35px; margin:0 0 15px 0; position:relative}
 .admin_page_class .repeater-table {display: block;overflow: hidden;}
 /* inline */
 .at-inline label{font-size: 12px !important;}
 .at-inline textarea{height: 130px;width: 200px;}
 .final-content { margin-bottom: 20px; clear: both; display: none;}
 .add_button {color:#FFF; background-color: #66CC00; border-radius:8px;text-transform: uppercase;
-padding: 9px 9px;font-size: 13px; display: inline-block;}
-.remove_button {color:#FFF; /*background-color: #FF0000;*/ border-radius:8px;text-transform: uppercase;/*padding: 9px 9px;font-size: 13px;*/ position: absolute;right: 0;
-bottom: 10px; background:url(../images/remove.png) no-repeat scroll 0 0; width:20px; height:20px; text-indent: -9999px;}
+padding:9px; padding-right:11px; font-size:13px; display: inline-block; cursor:pointer;}
+.remove_button {color:#FFF; text-transform: uppercase; position:absolute; right:0; bottom:6px; background:url(../images/remove.png) no-repeat scroll 0 0; width:20px; height:20px; text-indent: -9999px;}
 #edit-re_ {color:#00CCFF; background:url(../images/edit.png) no-repeat scroll 6px 12px #CCF5FF; border-radius:8px;text-transform: uppercase;padding:9px 9px 9px 22px;font-size: 13px; display: inline-block; margin-right: 10px;display: none;}
 
 /* each-field
 ----------------------------------------------- */
-.each-field {width: 45%; float: left;}
-.admin_page_class .repeater-table .each-field {margin-left: 5px;}
-.admin_page_class .repeater-table .each-field:first-child {margin-left: 0;}
+.each-field {width:48%; display:inline-block; vertical-align:top}
+.admin_page_class .repeater-table .each-field {margin-right: 5px;}
 /* =panel style
 ----------------------------------------------- */
 .wrap{background: transparent; margin: 17px 0 40px 10px;width: 800px}
@@ -122,7 +123,7 @@ bottom: 10px; background:url(../images/remove.png) no-repeat scroll 0 0; width:2
 /* ----- sections -------*/
 
 .f_row{border-bottom: 1px solid #F9F9F9;}
-.sections{background: none repeat scroll 0 0 #FFFFFF;float: left;min-height: 520px;padding-bottom: 10px;width: 625px;}
+.admin_page_class .sections{background-color:#FFFFFF; float:left; min-height:520px; padding-bottom:10px; width:625px; color:#999;}
 .setingstab{min-height: 500px;margin-left: 25px;}
 .sections h2 {display: none;}
 .form-table {margin-top: 0;}
@@ -131,17 +132,21 @@ bottom: 10px; background:url(../images/remove.png) no-repeat scroll 0 0; width:2
 .sections textarea{background: -moz-linear-gradient(center top , #F9F9F9, #FFFFFF) repeat scroll 0 0 transparent;color: #333333;font-size: 12px;height: 175px;line-height: 1.5em;padding: 4px;    width: 390px;}
 .sections label{clear: both;display: block;font-size: 17px;width: 100%;}
 
-.sections input[type="text"], .sections input[type="password"], .sections input[type="file"], .sections select {background: -moz-linear-gradient(center top , #F9F9F9, #FFFFFF) repeat scroll 0 0 transparent;color: #333333;font-size: 12px;line-height: 1em;padding:9px 4px;}
-
 .description{color: #999999;display: block;float: right;font-size: 11px;margin-top: -2px;width: 200px;}
 
 .editorcontainer { -webkit-border-radius:6px; border:1px solid #DEDEDE;}
 .btn {background-color: #FAFAFA;background-repeat: no-repeat;border-radius: 8px 8px 8px 8px;    color: #FFF;  cursor: pointer;  display: inline-block;  font-size: 17px; text-transform: uppercase;  line-height: 18px;  padding: 4px 10px;  text-align: center;border: 0;}
 
-.btn , .btn-info, .btn-info:hover , .btn-primary, .btn-primary:hover , .btn-warning, .btn-warning:hover{    color: #FFFFFF;border: 0;}
-.btn-info { background:url(../images/stick-white.png)no-repeat scroll 9px center #00CCFF;color: #FFFFFF;border: 0;  padding: 10px 15px 10px 30px;  }
-.btn-primary {background-color: #006DCC !important;}
-.btn-warning {background-color: #FAA732;}
+body .admin_page_class .btn, 
+body .admin_page_class .btn-info, 
+body .admin_page_class .btn-info:hover, 
+body .admin_page_class .btn-primary, 
+body .admin_page_class .btn-primary:hover, 
+body .admin_page_class .btn-warning, 
+body .admin_page_class .btn-warning:hover {color:#FFFFFF; border:0; width:auto;}
+body .admin_page_class .btn-info {background:url(../images/stick-white.png)no-repeat scroll 9px center #00CCFF;color: #FFFFFF;border: 0;  padding: 10px 15px 10px 30px;  }
+body .admin_page_class .btn-primary {background-color: #006DCC !important;}
+body .admin_page_class .btn-warning {background-color: #FAA732;}
 
 /* alerts */
 .alert { background-color: #FCF8E3; border-radius: 5px;  margin: 20px 0 20px; padding:10px 35px 10px 14px;}

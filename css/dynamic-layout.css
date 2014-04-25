@@ -1,42 +1,38 @@
-.align-left {text-align:left}
-.align-center {text-align:center}
-.align-right {text-align:right}
-
-/* puebas */
-.grid {display:-webkit-box; display:-moz-box; display:-ms-flexbox; display:-webkit-flex; display:flex}
-.column {position:relative;
-	-moz-box-sizing:border-box; -ms-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box;}
-
+/*
+ * CSS related to page builder
+ */
 
 /* **************************
 /* SECTIONS
 /* **************************/
-.color-box {background-color:#F36639; color:white;}
-.color-box a {color:white;}
-
+.gray-box {background-color:#F0F0F0; color: #000; }
+.orange-box {background-color:#f8981d; color:white;}
+.blue-box {background-color: #8FAFAE; color: white;}
+.orange-box a, .orange-box h1, .orange-box h2, .orange-box h3, .orange-box h4, 
+.blue-box a, .blue-box h1, .blue-box h2, .blue-box h3, .blue-box h4 {color:inherit;}
+.blue-box .btn {background: transparent; border:3px solid #FFF}
 
 /* **************************
 /* COLUMNS
 /* **************************/
+.no-flexbox-no-tweener .grid {display:table; width:100%; position:relative}
+.no-flexbox-no-tweener .column {display:table-cell; vertical-align:top;}
+
+.grid {display:-webkit-box; display:-moz-box; display:-ms-flexbox; display:-webkit-flex; display:flex}
+.column {position:relative; display:block;}
+
+
 .span-6 {width:100%}
 .span-4 {width:65.5%}
 .span-3 {width:50%}
-.span-2 {width:31%}
-.span-2.column-1, .span-2.column-3, 
-.span-4 + .span-2.column-2 {width:34.5%}
+.span-2 {width:33.3%}
 
 .panel {margin:15px 0}
 /* espaciado horizontal */
-.panel {padding:0 8%}
-.span-4 .panel {padding:0 4.5%}
-.span-4.column-1 .panel {padding-left:12.5%}
-.span-4.column-2 .panel {padding-right:12.5%}
-.span-3.column-1 .panel {padding:0 5% 0 16.5%}
-.span-3.column-2 .panel {padding:0 16.5% 0 5%}
-.span-2 .panel {padding:0 10%}
-.span-2.column-1 .panel {padding:0 4% 0 24%}
-.span-2.column-3 .panel,
-.span-4 + .span-2.column-2 .panel {padding:0 24% 0 4%}
+.panel {padding:0 4%}
+.span-4 .panel {padding-right:4.5%; padding-left:4.5%}
+.span-3 .panel {padding-right:5%; padding-left:5%}
+.span-2 .panel {padding-right:10%; padding-left:10%}
 
 
 /* **************************
@@ -46,25 +42,93 @@
 .positive-panels-slider, .positive-panels-video {padding:0!important; margin:0!important;}
 
 /* widget image */
-.grid img {max-width:100%;}
-.positive-panels-css-image {min-height:315px; background-size:cover;}
-.positive-panels-css-image:only-child {position:absolute; height:100%; width:100%; min-height:0; }
+.grid img {max-width:100%; height:auto;}
+.positive-panels-css-image {min-height:315px; background-size:cover; background-position:center}
+.positive-panels-css-image:only-child {position:absolute; height:100%; width:100%; min-height:0}
+.span-6 .positive-panels-image {text-align:center}
 
 /* widget video */
-.positive-panels-video .video-poster {position:relative; overflow:hidden;}
-.positive-panels-video .video-poster img {position:absolute; top:0; min-width:100%; min-height:100%; width: auto; height: auto}
-/*.positive-panels-video .video-poster > div {opacity:0;}*/
-/*.positive-panels-video .video-poster > span {position:absolute; top:50%; left:50%; z-index:2000; background-color:orange; width:30px; height:30px; margin:-15px 0 0 -15px; cursor:pointer;}*/
+.positive-panels-video a {display:block; position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden;}
+.positive-panels-video > div {position:relative;}
+.positive-panels-video a img {position:absolute; top:0; min-width:100%; min-height:100%; height:auto; z-index:1}
+.positive-panels-video a:before {position:absolute; top:50%; left:50%; z-index:2;}
 
 /* widget slider */
-.cycle-slideshow,
-.cycle-slideshow > div,
-.cycle-slideshow > div:after {height:500px;}
+.cycle-slideshow {overflow:hidden}
+.cycle-slideshow.big,.cycle-slideshow,
+.cycle-slideshow.big > div,.cycle-slideshow > div,
+.cycle-slideshow.big > div:after, .cycle-slideshow > div:after  {height:500px;}
+.cycle-slideshow.small,
+.cycle-slideshow.samll > div,
+.cycle-slideshow.small > div:after {height:250px;}
 
-.cycle-slideshow > div {width:100%; position:relative; overflow:hidden;}
+.cycle-slideshow > div {width:100%; position:relative; overflow:hidden; background-position:center; background-size:cover;}
 .cycle-slideshow > div:not(:first-child) {display:none;}
-.cycle-slideshow > div > img {min-width:100%; min-height:100%; position:absolute; top:0; left:0; z-index:1; }
+/*.cycle-slideshow > div > img {max-width:none; width:100%; height:auto; position:absolute; top:0; left:0; z-index:1; }
+.cycle-slideshow > div > img.portrait {width:auto; height:100%}*/
 .cycle-slideshow > div > div,
-.cycle-slideshow > div:after {display:inline-block; vertical-align:middle;}
+.cycle-slideshow > div:after {/*display:inline-block; vertical-align:middle;*/}
 .cycle-slideshow > div:after {content:''}
-.cycle-slideshow > div > div {display:inline-block; vertical-align:middle; position:relative; z-index:2; width:83%;}
+.cycle-slideshow > div > div {/*display:inline-block; vertical-align:middle;*/ position:relative; z-index:2; width:auto;}
+
+/* widget carousel */
+.positive-panels-carousel .carousel {position:relative}
+.simply-scroll-clip {position:relative; overflow:hidden}
+.carousel ul {overflow:hidden; margin:0; padding:0; list-style:none;}
+.carousel li {display:inline-block; vertical-align: middle; margin-left:20px}
+.carousel li:first-child {margin:0;}
+.positive-panels-carousel .simply-scroll-btn {position:absolute; top:0; width:40px; height:100%; cursor:pointer;}
+.positive-panels-carousel .simply-scroll-btn.disabled {opacity:.2;}
+.positive-panels-carousel .simply-scroll-btn:before {content:''; position:absolute; top:50%; left:50%; width:16px; height:27px; margin:-13px 0 0 -8px; background:url(../images/sprite.png) no-repeat; cursor:pointer;}
+.positive-panels-carousel .simply-scroll-btn-left {left:-40px}
+.positive-panels-carousel .simply-scroll-btn-left:before {background-position:-280px -49px}
+.positive-panels-carousel .simply-scroll-btn-right {right:-40px}
+.positive-panels-carousel .simply-scroll-btn-right:before {background-position:-300px -49px}
+
+
+/* **************************
+/* top and bottom espaces
+/* **************************/
+.panel:first-child {margin-top:30px}
+.panel:last-child { margin-bottom:25px}
+
+.span-6 .panel.black-studio-tinymce { margin:25px 0 35px;}
+
+/* footer separation */
+#main > .section:last-child {padding-bottom:60px}
+#main > .section.blog-layout {padding-bottom:0}
+#main .blog-layout aside,
+#main .blog-layout article.panel {padding-bottom:60px}
+
+
+
+/* ************************************************************
+/* MEDIA QUERIES
+/* ************************************************************/
+
+/* big scrrens > 1100px */
+@media only screen and (min-width:1100px) {
+	.span-2 {width:31%}
+	.span-2.column-1, .span-2.column-3, 
+	.span-4 + .span-2.column-2 {width:34.5%}
+
+	/* horizontal spacing */
+	.panel {padding:0 8%}
+	.span-4.column-1 .panel {padding-left:12.5%}
+	.span-4.column-2 .panel {padding-right:12.5%}
+	.span-3.column-1 .panel {padding-left:16.5%}
+	.span-3.column-2 .panel {padding-right:16.5%}
+  	.span-2.column-1 .panel {padding:0 4% 0 24%}
+	.span-2.column-3 .panel,
+	.span-4 + .span-2.column-2 .panel {padding:0 24% 0 4%}
+
+}
+
+/* mobile < 700px */
+@media only screen and (max-width:700px) {
+	.grid {display:block;}
+	.span-2,.span-3,.span-4 {width:100%}
+
+	.cycle-slideshow, .cycle-slideshow > div, .cycle-slideshow > div:after {height:290px;}
+}
+

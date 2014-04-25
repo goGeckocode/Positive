@@ -398,7 +398,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
             'url'                 => admin_url('admin-ajax.php'),
             'flash_swf_url'       => includes_url('js/plupload/plupload.flash.swf'),
             'silverlight_xap_url' => includes_url('js/plupload/plupload.silverlight.xap'),
-            'filters'             => array(array('title' => __('Allowed Files','apc'), 'extensions' => '*')),
+            'filters'             => array(array('title' => __('Allowed Files','positive'), 'extensions' => '*')),
             'multipart'           => true,
             'urlstream_upload'    => true,
             'multi_selection'     => false, // will be added per uploader
@@ -635,9 +635,9 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     public function edit_insert_to_post_text( $safe_text, $text ) {
       if( is_admin() && 'Insert into Post' == $safe_text){
         if (isset($_REQUEST['apc']) && 'insert_file' == $_REQUEST['apc'] )
-          return str_replace(__('Insert into Post'), __('Use this File','apc'), $safe_text);
+          return str_replace(__('Insert into Post'), __('Use this File','positive'), $safe_text);
         else
-          return str_replace(__('Insert into Post'), __('Use this Image','apc'), $safe_text);
+          return str_replace(__('Insert into Post'), __('Use this Image','positive'), $safe_text);
       }
       return $safe_text;
     }
@@ -669,7 +669,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
         echo '<h2>'.apply_filters('admin_page_class_h2',$this->args['page_title']).'</h2>'.((isset($this->args['page_header_text']))? $this->args['page_header_text'] : '').' 
         </div>
         <div style="float:right;margin:17px 0 0 0">
-          <input type="submit" style="margin-left: 25px;" value="'.esc_attr(__('Save','apc')).'" name="Submit" class="'.apply_filters('admin_page_class_submit_class', 'btn-info').' btn">
+          <input type="submit" value="'.esc_attr(__('Save','positive')).'" name="Submit" class="'.apply_filters('admin_page_class_submit_class', 'btn-info').' btn">
         </div>
       <br style="clear:both">
       </div>';
@@ -682,7 +682,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
           $this->errors_flag = true;
           $this->displayErrors();
         }else{
-          echo '<div class="alert alert-success"><button data-dismiss="alert" class="close" type="button">×</button><strong>'.__('Settings saved.','apc').'</strong></div>';
+          echo '<div class="alert alert-success"><button data-dismiss="alert" class="close" type="button">×</button><strong>'.__('Settings saved.','positive').'</strong></div>';
         }
         echo '</div>';
       }
@@ -767,7 +767,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     if($this->tab_div) echo '</div>';
     echo '</div><div style="clear:both"></div><div class="footer_wrap">
         <div style="float:right;margin:17px 0 0 0">
-          <input type="submit" style="margin-left: 25px;" name="Submit" class="'.apply_filters('admin_page_class_submit_class', 'btn-info').' btn" value="'.esc_attr(__('Save','apc')).'" />
+          <input type="submit" name="Submit" class="'.apply_filters('admin_page_class_submit_class', 'btn-info').' btn" value="'.esc_attr(__('Save','positive')).'" />
           <br><br>
         </div>
         <br style="clear:both"><br>
@@ -1143,7 +1143,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       $li    = "<li id='item_{$attachment_id}'>";
       $li   .= "<img src='{$attachment['url']}' alt='image_{$attachment_id}' />";
       //$li   .= "<a title='" . __( 'Delete this image' ) . "' class='at-delete-file' href='#' rel='{$nonce}|{$post_id}|{$id}|{$attachment_id}'>" . __( 'Delete' ) . "</a>";
-      $li   .= "<a title='" . __( 'Delete this image','apc' ) . "' class='at-delete-file' href='#' rel='{$nonce}|{$post_id}|{$id}|{$attachment_id}'><img src='" . $this->SelfPath. "/images/delete-16.png' alt='" . __( 'Delete' ,'apc') . "' /></a>";
+      $li   .= "<a title='" . __( 'Delete this image','positive' ) . "' class='at-delete-file' href='#' rel='{$nonce}|{$post_id}|{$id}|{$attachment_id}'><img src='" . $this->SelfPath. "/images/delete-16.png' alt='" . __( 'Delete' ,'positive') . "' /></a>";
       $li   .= "<input type='hidden' name='{$id}[]' value='{$attachment_id}' />";
       $li   .= "</li>";
       $html .= $li;
@@ -1238,7 +1238,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       echo json_encode( array('status' => 'success' ));
       die();
     }else{
-      echo json_encode(array('message' => __( 'Cannot delete file. Something\'s wrong.','apc')));
+      echo json_encode(array('message' => __( 'Cannot delete file. Something\'s wrong.','positive')));
       die();
     }
   }
@@ -1431,13 +1431,13 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
         }
         echo '</div>';
         echo '<span class="at-re-toggle" id="edit-re_" title="Edit"/>Edit</span> 
-        <span title="'.__('Remove','apc').'" class="remove_button" id="remove-'.$field['id'].'">'.__('Remove','apc').'</span></div>';
+        <span title="'.__('Remove','positive').'" class="remove_button" id="remove-'.$field['id'].'">'.__('Remove','positive').'</span></div>';
         $c = $c + 1;
         
         }
       }
 
-    echo '<span title="'.__('Add','apc').'" class="add_button" id="add-'.$jsid.'">+ '.__('Add','apc').'</span></div>';
+    echo '<span title="'.__('Add','positive').'" class="add_button" id="add-'.$jsid.'">+ '.__('Add','positive').'</span></div>';
     
     //create all fields once more for js function and catch with object buffer
     ob_start();
@@ -1463,14 +1463,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     if ($field['inline']){
       echo '</div>';
     } 
-    echo '</div><img src="';
-    if ($this->_Local_images){
-      echo $plugin_path.'/images/remove.png';
-    }else{
-      echo 'http://i.imgur.com/g8Duj.png';
-    }
-    
-    echo '" alt="'.__('Remove','apc').'" title="'.__('Remove','apc').'" id="remove-'.$jsid.'"></div>';
+    echo '</div><span title="'.__('Remove','positive').'" class="remove_button" id="remove-'.$jsid.'">Remove</span></div>';
     $counter = 'countadd_'.$jsid;
     $js_code = ob_get_clean ();    
     $js_code = str_replace("'","\"",$js_code);
@@ -1609,7 +1602,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     $html = '
         <input type="hidden" name="'.$id.'" id="'. $id.'" value="'.$meta .'" />
         <div class="plupload-upload-uic hide-if-no-js '.$m1.'" id="'.$id.'plupload-upload-ui">
-          <input id="'.$id.'plupload-browse-button" type="button" value="'.__('Select Files','apc').'" class="button" />
+          <input id="'.$id.'plupload-browse-button" type="button" value="'.__('Select Files','positive').'" class="button" />
           <span class="ajaxnonceplu" id="ajaxnonceplu'.wp_create_nonce($id . 'pluploadan').'"></span>';
           if ($width && $height){
             $html .= '<span class="plupload-resize"></span><span class="plupload-width" id="plupload-width'.$width.'"></span>
@@ -1814,24 +1807,24 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
 
       if ( ! empty( $meta ) ) {
         $nonce = wp_create_nonce( 'at_ajax_delete' );
-        echo '<div style="margin-bottom: 10px"><strong>' . __('Uploaded files','apc') . '</strong></div>';
+        echo '<div style="margin-bottom: 10px"><strong>' . __('Uploaded files','positive') . '</strong></div>';
         echo '<ol class="at-upload">';
         foreach ( $meta as $att ) {
           // if (wp_attachment_is_image($att)) continue; // what's image uploader for?
-          echo "<li>" . wp_get_attachment_link( $att, '' , false, false, ' ' ) . " (<a class='at-delete-file' href='#' rel='{$nonce}|{$post->ID}|{$field['id']}|{$att}'>" . __( 'Delete' ,'apc') . "</a>)</li>";
+          echo "<li>" . wp_get_attachment_link( $att, '' , false, false, ' ' ) . " (<a class='at-delete-file' href='#' rel='{$nonce}|{$post->ID}|{$field['id']}|{$att}'>" . __( 'Delete' ,'positive') . "</a>)</li>";
         }
         echo '</ol>';
       }
 
       // show form upload
       echo "<div class='at-file-upload-label'>";
-        echo "<strong>" . __( 'Upload new files' ,'apc') . "</strong>";
+        echo "<strong>" . __( 'Upload new files' ,'positive') . "</strong>";
       echo "</div>";
       echo "<div class='new-files'>";
         echo "<div class='file-input'>";
           echo "<input type='file' name='{$field['id']}[]' />";
         echo "</div><!-- End .file-input -->";
-        echo "<a class='at-add-file button' href='#'>" . __( 'Add more files','apc' ) . "</a>";
+        echo "<a class='at-add-file button' href='#'>" . __( 'Add more files','positive' ) . "</a>";
       echo "</div><!-- End .new-files -->";
     echo "</td>";
   }
@@ -1851,12 +1844,12 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       $html .= "<span class='mupload_img_holder' data-wi='".$width."' data-he='".$height."'><img src='".$meta['src']."' style='height: ".$height.";width: ".$width.";' /></span>";
       $html .= "<input type='hidden' name='".$field['id']."[id]' id='".$field['id']."[id]' value='".$meta['id']."' />";
       $html .= "<input type='hidden' name='".$field['id']."[src]' id='".$field['id']."[src]' value='".$meta['src']."' />";
-      $html .= "<input class='at-delete_image_button button' type='button' rel='".$field['id']."' value='".__('Delete Image','apc')."' />";
+      $html .= "<input class='at-delete_image_button button' type='button' rel='".$field['id']."' value='".__('Delete Image','positive')."' />";
     }else{
       $html .= "<span class='mupload_img_holder'  data-wi='".$width."' data-he='".$height."' data-multi='".$multi."'></span>";
       $html .= "<input type='hidden' name='".$field['id']."[id]' id='".$field['id']."[id]' value='' />";
       $html .= "<input type='hidden' name='".$field['id']."[src]' id='".$field['id']."[src]' value='' />";
-      $html .= "<input class='at-mm-upload_image_button button' type='button' rel='".$field['id']."' value='".__('Upload Image','apc')."' />";
+      $html .= "<input class='at-mm-upload_image_button button' type='button' rel='".$field['id']."' value='".__('Upload Image','positive')."' />";
     }
     echo $html;
     $this->show_field_end( $field, $meta );
@@ -1884,12 +1877,12 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       $html .= "<span class='mupload_img_holder' data-wi='".$width."' data-he='".$height."'><img src='".$meta['src']."' style='height: ".$height.";width: ".$width.";' /></span>";
       $html .= "<input type='hidden' name='".$field['id']."[id]' id='".$field['id']."[id]' value='".$meta['id']."' />";
       $html .= "<input type='hidden' name='".$field['id']."[src]' id='".$field['id']."[src]' value='".$meta['src']."' />";
-      $html .= "<input class='at-delete_image_button button' type='button' data-u='".$upload_type."' rel='".$field['id']."' value='".__('Delete Image','apc')."' />";
+      $html .= "<input class='at-delete_image_button button' type='button' data-u='".$upload_type."' rel='".$field['id']."' value='".__('Delete Image','positive')."' />";
     }else{
       $html .= "<span class='mupload_img_holder'  data-wi='".$width."' data-he='".$height."'></span>";
       $html .= "<input type='hidden' name='".$field['id']."[id]' id='".$field['id']."[id]' value='' />";
       $html .= "<input type='hidden' name='".$field['id']."[src]' id='".$field['id']."[src]' value='' />";
-      $html .= "<input class='at-upload_image_button button' type='button' data-u='".$upload_type."' rel='".$field['id']."' value='".__('Upload Image','apc')."' />";
+      $html .= "<input class='at-upload_image_button button' type='button' data-u='".$upload_type."' rel='".$field['id']."' value='".__('Upload Image','positive')."' />";
     }
     echo $html;
     $this->show_field_end( $field, $meta );
@@ -1966,7 +1959,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       $html .= "<input class='at-color-iris' type='text' name='{$field['id']}[color]' id='{$field['id']}[color]' value='".$meta['color']."' size='8' />";  
     }else{
       $html .= "<input class='at-color' type='text' name='".$field['id']."[color]' id='".$field['id']."[color]' value='".$meta['color'] ."' size='6' />";
-      $html .= "<input type='button' class='at-color-select button' rel='".$field['id']."[color]' value='" . __( 'Select a color' ,'apc') . "'/>";
+      $html .= "<input type='button' class='at-color-select button' rel='".$field['id']."[color]' value='" . __( 'Select a color' ,'positive') . "'/>";
       $html .= "<div style='display:none' class='at-color-picker' rel='".$field['id']."[color]'></div>";
     }
     
@@ -1992,7 +1985,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       echo "<input class='at-color-iris".(isset($field['class'])? " {$field['class']}": "")."' type='text' name='{$field['id']}' id='{$field['id']}' value='{$meta}' size='8' />";  
     }else{
       echo "<input class='at-color".(isset($field['class'])? " {$field['class']}": "")."' type='text' name='{$field['id']}' id='{$field['id']}' value='{$meta}' size='8' />";
-      echo "<input type='button' class='at-color-select button' rel='{$field['id']}' value='" . __( 'Select a color' ,'apc') . "'/>";
+      echo "<input type='button' class='at-color-select button' rel='{$field['id']}' value='" . __( 'Select a color' ,'positive') . "'/>";
       echo "<div style='display:none' class='at-color-picker' rel='{$field['id']}'></div>";
     }
     $this->show_field_end($field, $meta);
@@ -2082,6 +2075,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     // select
     else {
       echo "<select class='at-posts-select".(isset($field['class'])? " {$field['class']}": "")."' name='{$field['id']}" . ($field['multiple'] ? "[]' multiple='multiple'  style='height:auto'" : "'") . ">";
+      echo '<option value="">'.__('Select','positive').'</option>';
       foreach ($posts as $p) {
         echo "<option value='$p->ID'" . selected(in_array($p->ID, $meta), true, false) . ">$p->post_title</option>";
       }
@@ -2994,7 +2988,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
    *  @param $repeater bool  is this a field inside a repeatr? true|false(default)
    */
   public function addPosts($id,$options,$args,$repeater=false){
-    $temp = array('type'=>'select','args'=>array('posts_per_page' => -1,'post_type' =>'post'));
+    $temp = array('type'=>'select','args'=>array('posts_per_page' => -1,'orderby' => 'title','order'=>'ASC', 'post_type' =>'page'));
     $options = array_merge($temp,$options);
     $new_field = array('type' => 'posts','id'=> $id,'desc' => '','name' => 'Posts Field','options'=> $options, 'multiple' => false);
     $new_field = array_merge($new_field, $args);
@@ -3221,22 +3215,22 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     $this->show_field_begin(array('name' => ''),null);
     $ret ='
     <div class="apc_ie_panel field">
-      <div style="padding 10px;" class="apc_export"><h3>'.__('Export','apc').'</h3>
-        <p>'. __('To export saved settings click the Export button bellow and you will get the export Code in the box bellow, which you can later use to import.','apc').'</p>
+      <div style="padding 10px;" class="apc_export"><h3>'.__('Export','positive').'</h3>
+        <p>'. __('To export saved settings click the Export button bellow and you will get the export Code in the box bellow, which you can later use to import.','positive').'</p>
         <div class="export_code">
-          <label for="export_code">'. __('Export Code','apc').'</label><br/>
+          <label for="export_code">'. __('Export Code','positive').'</label><br/>
           <textarea id="export_code"></textarea>        
-          <input class="button-primary" type="button" value="'. __('Get Export','apc').'" id="apc_export_b" />'.$this->create_export_download_link().'
+          <input class="button-primary" type="button" value="'. __('Get Export','positive').'" id="apc_export_b" />'.$this->create_export_download_link().'
           <div class="export_status" style="display: none;"><img src="http://i.imgur.com/l4pWs.gif" alt="loading..."/></div>
           <div class="export_results alert" style="display: none;"></div>
         </div>
       </div>
-      <div style="padding 10px;" class="apc_import"><h3>'.__('Import','apc').'</h3>
-        <p>'. __('To Import saved settings paste the Export output in to the Import Code box bellow and click Import.','apc').'</p>
+      <div style="padding 10px;" class="apc_import"><h3>'.__('Import','positive').'</h3>
+        <p>'. __('To Import saved settings paste the Export output in to the Import Code box bellow and click Import.','positive').'</p>
         <div class="import_code">
-          <label for="import_code">'. __('Import Code','apc').'</label><br/>
+          <label for="import_code">'. __('Import Code','positive').'</label><br/>
           <textarea id="import_code"></textarea>
-                  <input class="button-primary" type="button"  value="'. __('Import','apc').'" id="apc_import_b" />
+                  <input class="button-primary" type="button"  value="'. __('Import','positive').'" id="apc_import_b" />
           <div class="import_status" style="display: none;"><img src="http://i.imgur.com/l4pWs.gif" alt="loading..."/></div>
           <div class="import_results alert" style="display: none;"></div>
         </div>
@@ -3261,7 +3255,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
   public function export(){
     check_ajax_referer( 'apc_export', 'seq' );
     if (!isset($_GET['group'])){
-      $re['err'] = __('error in ajax request! (1)','apc');
+      $re['err'] = __('error in ajax request! (1)','positive');
       $re['nonce'] = wp_create_nonce("apc_export");
       echo json_encode($re);
       die();
@@ -3271,7 +3265,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     if ($options !== false)
       $re['code']= "<!*!* START export Code !*!*>\n".base64_encode(serialize($options))."\n<!*!* END export Code !*!*>";
     else
-      $re['err'] = __('error in ajax request! (2)','apc');
+      $re['err'] = __('error in ajax request! (2)','positive');
     
     //update_nonce
     $re['nonce'] = wp_create_nonce("apc_export");
@@ -3292,7 +3286,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
   public function import(){
     check_ajax_referer( 'apc_import', 'seq' );
     if (!isset($_POST['imp'])){
-      $re['err'] = __('error in ajax request! (3)','apc');
+      $re['err'] = __('error in ajax request! (3)','positive');
       $re['nonce'] = wp_create_nonce("apc_import");
       echo json_encode($re);
       die();
@@ -3304,9 +3298,9 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     $import_code = unserialize($import_code);
     if (is_array($import_code)){
       update_option($this->option_group,$import_code);
-      $re['success']= __('Setting imported, make sure you ','apc'). '<input class="button-primary" type="button"  value="'. __('Refresh this page','apc').'" id="apc_refresh_page_b" />';
+      $re['success']= __('Setting imported, make sure you ','positive'). '<input class="button-primary" type="button"  value="'. __('Refresh this page','positive').'" id="apc_refresh_page_b" />';
     }else{
-      $re['err'] = __('Could not import settings! (4)','apc');
+      $re['err'] = __('Could not import settings! (4)','positive');
     }
     //update_nonce
       $re['nonce'] = wp_create_nonce("apc_import");
@@ -3327,10 +3321,10 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     header('HTTP/1.1 200 OK');
 
     if ( !current_user_can('edit_themes') )
-        wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site.','apc').'</p>');
+        wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site.','positive').'</p>');
     
     if ($content === null || $file_name === null){
-        wp_die('<p>'.__('Error Downloading file.','apc').'</p>');     
+        wp_die('<p>'.__('Error Downloading file.','positive').'</p>');     
     }
     $fsize = strlen($content);
     header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
@@ -3352,10 +3346,10 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
     );
     $export_url = add_query_arg($args, $site_url);
     if ($echo === true)
-        echo '<a href="'.$export_url.'" target="_blank">'.__('Download Export','apc').'</a>';
+        echo '<a href="'.$export_url.'" target="_blank">'.__('Download Export','positive').'</a>';
     elseif ($echo == 'url')
         return $export_url;
-    return '<a class="button-primary" href="'.$export_url.'" target="_blank">'.__('Download Export','apc').'</a>';
+    return '<a class="button-primary" href="'.$export_url.'" target="_blank">'.__('Download Export','positive').'</a>';
   }
 
   //first  add a new query var
@@ -3422,7 +3416,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
         if (call_user_func ( array( $this, 'is_' . $type ), $meta ,$args['param']) === false){
           $this->errors_flag = true;
           $this->errors[$field['id']]['name'] = $field['name'];
-          $this->errors[$field['id']]['m'][] = (isset($args['message'])? $args['message'] : __('Not Valid ','apc') . $type);
+          $this->errors[$field['id']]['m'][] = (isset($args['message'])? $args['message'] : __('Not Valid ','positive') . $type);
           $ret = false;
         }
       }
@@ -3465,7 +3459,7 @@ if ( ! class_exists( 'BF_Admin_Page_Class') ) :
       if (isset($this->errors[$field_id]))
         return $this->errors[$field_id];
     }
-    return __('Unkown Error','apc');
+    return __('Unkown Error','positive');
   }
 
   /**

@@ -1,0 +1,76 @@
+/*
+ * POSITIVE RESPONSIVE
+ */
+
+/* *****************************
+/* big screns > 1100px
+/* *****************************/
+@media only screen and (min-width:1100px) {
+	#header-main .span-6 {padding:0 8%}
+	.top-header-lf {display:block;}
+	.menu-top ul li {margin-left:35px}
+
+}
+
+/* *****************************
+/* normal screns 1100px / 700px
+/* *****************************/
+@media only screen and (max-width:1100px) and (min-width:700px) {
+	footer .column-1, footer .column-3 {width:30%;}
+	footer .column-2 {width:40%;}
+	footer .column-2 .panel {padding:0!important; width:47%;}
+	footer .column-2 .panel+.panel {margin-left:6%;}
+}
+
+/* *****************************
+/* tablets vertical < 750px
+/* *****************************/
+@media only screen and (max-width:750px) {
+	.positive-panels-subpages ul {padding: 0}
+	.span-6 .positive-panels-heading, .span-6 .black-studio-tinymce, .span-6 .text {padding-right:4%; padding-left:4%;/*!important*/}
+	/* css columns */
+	.positive-css-columns,
+	.span-6 .ninja-forms-all-fields-wrap {-webkit-column-count:2; -moz-column-count:2; -ms-column-count:2; -o-column-count:2; column-count:2;}
+	.ninja-forms-form-wrap hr {display:none}
+
+	.pt-content .close {right:8%;}
+}
+
+/* *****************************
+/* mobile < 700px
+/* *****************************/
+@media only screen and (max-width:700px) {
+	/* header */
+	#header-main .span-6 {padding:0}
+	#logo {margin-left:4%;}
+	.menu-top ul li, header #searchform, #menu-main {display:none;}
+	.menu-top ul li:first-child,
+	#mobile-nav {display:block;}
+	.top-header-rg {float:none; text-align:center}
+
+	/* menu */
+	#mobile-nav {position:relative; z-index:1000; text-transform:uppercase;}
+	#mobile-nav .toggle {display:block; float:right; width:94px; height:90px; background:url(../images/sprite.png) no-repeat -260px -140px; text-indent:-9999px; overflow:hidden; cursor:pointer;}
+	#mobile-nav .toggle.open {background-position:-260px -80px; background-color:black}
+	#mobile-nav ul {position:absolute; left:100%; top:0; width:100%; background-color:black; color:white;}
+	#mobile-nav ul.menu {top:90px}
+	#mobile-nav ul.sub-menu {display:none;}
+	#mobile-nav li {border-top:solid 2px #6A2C19}
+	#mobile-nav li:first-child {border-top:none}
+	#mobile-nav li a {display:block; color:white; padding:8px 4%; position:relative;}
+	#mobile-nav li a:after,
+	#mobile-nav .sub-menu li.submenu-title:after {content:''; position:absolute; width:9px; top:50%; height:14px; margin-top:-7px; background:url(../images/sprite.png) no-repeat -122px -40px; right:4%}
+	#mobile-nav li.go-back {padding:8px 4% 8px 8%; cursor:pointer; color:#f8981d; position:relative;}
+	#mobile-nav li.go-back:before {content:''; position:absolute; width:9px; top:50%; height:14px; margin-top:-7px; background:url(../images/sprite.png) no-repeat -131px -40px; left:4%}
+	#mobile-nav li.go-back {padding:8px 4% 8px 8%; cursor:pointer; color:#f8981d;}
+	#mobile-nav .sub-menu li.submenu-title {padding:8px 4%; position:relative;}
+	#mobile-nav .sub-menu li.submenu-title:after {width:14px; height:9px; margin-top:-4px; background-position:-90px -40px;}
+	#mobile-nav .sub-menu li a {padding-left:8%}
+
+	.panel {margin:0!important; padding:15px 4%}
+	/* slider */
+	/*.positive-panels-slider {padding-bottom:80px!important; background-color: white}*/
+	.positive-panels-slider h2 {font-size:44px; margin:0 8%;}
+	.positive-panels-slider .panel p {font-size:20px; margin:0}
+	.positive-panels-slider .panel .btn {bottom:40px}
+}
