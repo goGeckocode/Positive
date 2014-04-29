@@ -75,6 +75,7 @@ $layouts = apply_filters('positive_panels_prebuilt_layouts', array());
 		<p><label><input type="radio" name="column_count" value="2x"> <img src="<?php echo get_template_directory_uri() ?>/includes/page-builder/css/images/columns-2col.png" alt="<?php _e('2 columns','positive-backend') ?>"></label></p>
 		<p><label><input type="radio" name="column_count" value="2x1x"> <img src="<?php echo get_template_directory_uri() ?>/includes/page-builder/css/images/columns-2x1x.png" alt="<?php _e('2 columns (wide + thin)','positive-backend') ?>"></label></p>
 		<p><label><input type="radio" name="column_count" value="3x"> <img src="<?php echo get_template_directory_uri() ?>/includes/page-builder/css/images/columns-3col.png" alt="<?php _e('3 columns','positive-backend') ?>"></label></p>
+		<p><label><input type="radio" name="column_count" value="4x"> <img src="<?php echo get_template_directory_uri() ?>/includes/page-builder/css/images/columns-4col.png" alt="<?php _e('4 columns','positive-backend') ?>"></label></p>
 	</div>
 
 	<?php // The edit row dialog ?>

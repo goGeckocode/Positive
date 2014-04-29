@@ -26,6 +26,9 @@
 			case '3x':
 				weights=['span-2','span-2','span-2'];
 				break;
+			case '4x':
+				weights=['span-1','span-1','span-1','span-1'];
+				break;
 			case '2x':
 				weights=['span-3','span-3'];
 				break;

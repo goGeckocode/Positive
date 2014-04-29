@@ -42,12 +42,26 @@ function positive_sidebars() {
      	'before_widget' => '<section id="%1$s" class="panel %2$s">',
      	'after_widget' => '</section>'
     ));
+    register_sidebar(array(
+		'name'=>'Comunicacion sidebar',
+     	'id' => 'comunicacion-sidebar',
+     	'description' => 'Este Sidebar se mostrara en Comunicacion',
+     	'before_widget' => '<section id="%1$s" class="panel %2$s">',
+     	'after_widget' => '</section>'
+    ));
     register_sidebars(3, array(
 		'name'=>'Footer %d',
      	'id' => "footer$i",
      	'description' => __('Footer widgets area', 'positive-backend'),
      	'before_widget' => '<div id="%1$s" class="panel %2$s">',
      	'after_widget' => '</div>'
+    ));
+    register_sidebar(array(
+		'name'=>'directorio',
+     	'id' => 'directorio-sidebar',
+     	'description' => 'Este Sidebar se mostrara en directorio',
+     	'before_widget' => '<section id="%1$s" class="panel blue-box %2$s">',
+     	'after_widget' => '</section>'
     ));
 }
 add_action('init', 'positive_sidebars');
@@ -111,6 +125,30 @@ function positive_post_types() {
 			'show_in_nav_menus' => false,
 			'menu_position' => 5,
 			'rewrite' => array( 'slug' => 'evento' ),
+		)
+	);
+	register_post_type( 'comunicacion',
+		array(
+			'labels' => array(
+				'name' => 'comunicacion',
+				'singular_name' => 'comunicacion',
+				'add_new' => 'Crear nuevo' ,
+				'add_new_item' => 'Crear nuevo',
+				'edit' => __('Edit'),
+				'edit_item' => 'Editar comunicacion',
+				'new_item' => 'Nuevo comunicacion',
+				'view' => __('View'),
+				'view_item' => __('View'),
+				'search_items' => __('Search')
+			),
+			'public' => true,
+			'hierarchical' => false, // Allows your posts to behave like Hierarchy Pages
+			'has_archive' => false,
+			'supports' => array('title', 'editor'),
+			'can_export' => true,
+			'show_in_nav_menus' => false,
+			'menu_position' => 5,
+			'rewrite' => array( 'slug' => 'comunicaciones' )
 		)
 	);
 	register_post_type( 'sectores',
@@ -181,6 +219,20 @@ function custom_taxonomies() {
 		),
 		'hierarchical' => true,
 		//'rewrite' => array( 'slug' => '' )
+	));
+	register_taxonomy('tipo_comunicacion',array('comunicacion'), array(
+		'labels' => array(
+			'name' => __( 'Categorias de comunicacion', 'taxonomy general name' ),
+			'singular_name' => __( 'Categorias de comunicacion', 'taxonomy singular name' ),
+			'search_items' =>  'Buscar Categorias de comunicacion',
+			'all_items' => 'Todos las Categorias de comunicacion',
+			'parent_item' => 'Categorias de comunicacion superior',
+			'parent_item_colon' => 'Categorias decomunicacion superior:',
+			'new_item_name' => 'Nuevo Categorias de comunicacion',
+			'menu_name' => 'Categorias de comunicacion',
+		),
+		'hierarchical' => true,
+		'rewrite' => array( 'slug' => 'comunicacion' )
 	));
 }
 add_action( 'init', 'custom_taxonomies', 0 );
@@ -291,6 +343,20 @@ function positive_events_title(){
 
 	return $events_title;
 }
+function positive_comunicacion_title(){
+	global $theme_data, $post;
+	$comunicacion_page = $theme_data['ps_page_comunicacion'];
+	$comunicacion_title = ($comunicacion_page ? get_the_title($comunicacion_page) : __('comunicacion','positive'));
+
+	if (is_front_page()) {
+		$comunicacion_title = '<a class="positive-icon i-comunicacion-title" href="#post-comunicacion">'.$comunicacion_title.'</a>';
+	} elseif ($post->ID != $comunicacion_page){
+		$comunicacion_title = '<a href="'.get_permalink($comunicacion_page).'">'.$comunicacion_title.'</a>';
+	}
+	
+
+	return $comunicacion_title;
+}
 
 // Function to know if a page has children
 function has_children($post_id) {
@@ -302,7 +368,13 @@ function has_children($post_id) {
 // Conditional tag for custom post type events
 function is_event() {
 	global $post;
-	if(is_single() && $post->post_type == 'actividades') { return true; }
+	if(is_single() && $post->post_type == 'actividades' || is_archive() && get_post_type() == 'actividades') { return true; }
+	else { return false; }
+}
+// Conditional tag for custom post type comunicacion
+function is_comunicacion() {
+	global $post;
+	if(is_single() && $post->post_type == 'comunicacion'|| is_archive() && get_post_type() == 'comunicacion') { return true; }
 	else { return false; }
 }
 

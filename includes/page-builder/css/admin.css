@@ -77,6 +77,7 @@ html {overflow-y: scroll; /* This fixes the tooltips */}
 #panels-container .grid .cell.span-4 {width:66%}
 #panels-container .grid .cell.span-3 {width:49%}
 #panels-container .grid .cell.span-2 {width:32%}
+#panels-container .grid .cell.span-1 {width:23.5%}
 
 #so-panels-panels {background:#F8F8F8; margin-top:5px;}
 #so-panels-panels .hndle {margin-top:0!important}

@@ -20,9 +20,14 @@ get_header(); ?>
 							<span class="cat-title positive-icon i-news-title"><?php echo positive_blog_title(); ?></span>
 							<h1><?php single_cat_title(); ?></h1>
 						</div>
-					<?php } elseif (is_archive()) { ?>
+					<?php } elseif (is_archive() && get_post_type()=='actividades') { ?>
 						<div class="heading-in">
-							<span class="cat-title positive-icon i-news-title"><?php echo positive_blog_title(); ?></span>
+							<span class="cat-title positive-icon i-events-title"><?php echo positive_events_title(); ?></span>
+							<h1><?php echo get_the_date('F Y'); ?></h1>
+						</div>
+					<?php } elseif (is_archive() && get_post_type()=='comunicacion') { ?>
+						<div class="heading-in">
+							<span class="cat-title"><?php echo positive_comunicacion_title(); ?></span>
 							<h1><?php echo get_the_date('F Y'); ?></h1>
 						</div>
 					<?php } ?> 

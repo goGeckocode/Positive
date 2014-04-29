@@ -799,6 +799,141 @@ class Positive_Panels_Widget_Last_Actividades extends WP_Widget {
 	}
 }
 
+
+/* **********************
+ * TAXONOMY COMUNICACION
+ */
+class Positive_Panels_Widget_Taxonomy_Comunicacion extends WP_Widget {
+	function __construct() {
+		parent::__construct(
+			'positive-panels-taxonomy-actividades',
+			__( 'Categorias de Comunicacion (Positive)', 'positive-backend' ),
+			array(
+				'description' => __( 'Lista de categorías de Comunicacion.', 'positive-backend' ),
+			)
+		);
+	}
+
+	function widget( $args, $instance ) {
+		echo $args['before_widget'];?>
+		<?php $categories = get_terms( 'tipo_comunicacion', 'orderby=count&hide_empty=0' );
+		echo '<h2 class="widgettitle">'.$instance['title'].'</h2>';
+		echo '<ul>';
+			 foreach ( $categories as $category ) { 
+		echo	'<li>';
+		echo 		'<a href="'. esc_url(get_term_link($category)).'">'.$category->name .'</a>';
+		echo 	'</li>';
+			}	
+		echo '</ul>'; 
+		echo $args['after_widget'];
+	}
+
+	function update($new, $old){
+		$new = wp_parse_args($new, array(
+			'title' => ''
+		));
+		return $new;
+	}
+
+	function form($instance) {
+		$instance = wp_parse_args($instance, array(
+			'title' => ''
+		)); ?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'title' ) ?>">Titulo:</label><br>
+			<input type="text" class="widefat" name="<?php echo $this->get_field_name( 'title' ) ?>" id="<?php echo $this->get_field_id( 'title' ) ?>" value="<?php echo esc_attr( $instance['title'] ) ?>" />
+		</p>		
+	<?php
+	}
+}
+
+/* **********************
+ * LAST POST COMUNICACION
+ */
+class Positive_Panels_Widget_Last_Comunicacion extends WP_Widget {
+	function __construct() {
+		parent::__construct(
+			'positive-panels-last-comunicacion',
+			__( 'Ultimas Comunicacion (Positive)', 'positive-backend' ),
+			array(
+				'description' => __( 'Listado de las últimas entradas de comunicacion.', 'positive-backend' ),
+			)
+		);
+	}
+
+	function widget( $args, $instance ) {
+		echo $args['before_widget'];
+		echo '<h2 class="widgettitle">'.$instance['title'].'</h2>';
+			$query = new WP_Query( array('post_type' => 'comunicacion', 'posts_per_page' => 3, 'order' => 'ASC') );
+			if ( $query->have_posts()) {
+		echo '<ul>';
+				while ( $query->have_posts() ) { $query->the_post();
+		echo	'<li>';
+		echo 		'<a href="'.get_permalink().'">'. get_the_title() .'</a>';
+		echo 	'</li>';	 
+				} wp_reset_query();
+		echo '</ul>';
+			}
+		echo $args['after_widget'];
+	}
+
+	function update($new, $old){
+		$new = wp_parse_args($new, array(
+			'title' => ''
+		));
+		return $new;
+	}
+
+	function form($instance) {
+		$instance = wp_parse_args($instance, array(
+			'title' => ''
+		)); ?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'title' ) ?>">Titulo:</label><br>
+			<input type="text" class="widefat" name="<?php echo $this->get_field_name( 'title' ) ?>" id="<?php echo $this->get_field_id( 'title' ) ?>" value="<?php echo esc_attr( $instance['title'] ) ?>" />
+		</p>		
+	<?php
+	}
+}
+
+/* **********************
+ * WHITE SPACE
+ */
+class Positive_Panels_Widget_white_space extends WP_Widget {
+	function __construct() {
+		parent::__construct(
+			'positive-panels-white_space',
+			__( 'white space (Positive)', 'positive-backend' ),
+			array(
+				'description' => __( 'Insert a white space.', 'positive-backend' ),
+			)
+		);
+	}
+
+	function widget( $args, $instance ) {
+		echo $args['before_widget'];
+		echo '<div class="white-space"></div>';
+		echo $args['after_widget'];
+	}
+
+	function update($new, $old){
+		$new = wp_parse_args($new, array(
+
+		));
+		return $new;
+	}
+
+	function form( $instance ) {
+		$instance = wp_parse_args($instance, array(
+		
+		));
+
+		?>
+		
+		<p><label><?php _e( 'Insert a White space 50px', 'positive-backend' ) ?></label></p>
+	<?php
+	}
+}
 /**
  * Register the widgets.
  */
@@ -813,6 +948,9 @@ function positive_panels_basic_widgets(){
 	register_widget('Positive_Panels_Widget_Quote');
 	register_widget('Positive_Panels_Widget_Taxonomy_Actividades');
 	register_widget('Positive_Panels_Widget_Last_Actividades');
+	register_widget('Positive_Panels_Widget_Taxonomy_Comunicacion');
+	register_widget('Positive_Panels_Widget_Last_Comunicacion');
+	register_widget('Positive_Panels_Widget_white_space');
 }
 add_action('widgets_init', 'positive_panels_basic_widgets');
 

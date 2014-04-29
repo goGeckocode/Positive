@@ -143,9 +143,11 @@ $(document).ready(function(){
 	}*/
 
 	// DIALOG JQUERY UI PARA INTERNACIONALIZACION
-	$('.page-template-page-internacionalizacion-php .span-2 .btn-container').click(function(){
-		if ($(this).next().is('.ninja_forms_widget')){
-			$(this).next('.ninja_forms_widget').modal();
+	$('.page-template-page-internacionalizacion-php .section .span-2 .black-studio-tinymce h3').click(function(){
+		//if ($(this).next().is('.ninja_forms_widget')){
+		//	$(this).next('.ninja_forms_widget').modal();
+		if ($(this).closest('.column.span-2').find('.ninja_forms_widget').is('.ninja_forms_widget')){
+			$(this).closest('.column.span-2').find('.ninja_forms_widget').modal();
 		}
 		return false;
 	})

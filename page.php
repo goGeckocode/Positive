@@ -12,6 +12,8 @@ if(!empty($page)){
 // si existe la pagina de eventos(actividades) me pintas plantilla especial
 } elseif ($theme_data['ps_page_events'] && $post->ID==$theme_data['ps_page_events']){
 	include'actividades.php';
+} elseif ($theme_data['ps_page_comunicacion'] && $post->ID==$theme_data['ps_page_comunicacion']){
+	include'comunicacion.php';
 } else {
 	get_header();
 	// Si la pagina actual tiene un padre [0] se le añade a main la clase con su slug.

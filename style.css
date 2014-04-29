@@ -305,6 +305,8 @@ header .social-network {margin-right:20px;}
 .positive-panels-member .members li div { text-align: left; font-size: 12px; font-family:'Arial',Helevetica, sans-serif; margin-top: 5px;}
 .positive-panels-member .members li div a { display: inline-block; }
 
+/* *** WIDGET WHITE SPACE *** */
+.white-space {display: block; clear: both; height: 50px;}
 
 /*  *******  FORMS *******  */
 input, textarea, select {background-color:white; border:none; padding:9px 10px; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; box-sizing:border-box; }
@@ -392,26 +394,31 @@ form.jqtransformdone div.rowElem{
 /*  *******  BLOG LAYOUT (news & events)  *******  */
 .blog-layout .span-4 > header.panel {margin:0; padding-top:25px; padding-bottom:30px; text-align:center}
 .blog-layout .cat-title {font:50px 'heroicBold', Arial, Helvetica, sans-serif;text-transform: uppercase; display: block;}
+.blog-layout .cat-title a {color:#000;}
 .blog-layout .heading-in h1 {font-style: italic; font-size: 34px; font-weight: normal; margin-top: 12px;}
 .blog-layout .panel.posts-list {padding-left:0; min-height:150px; margin-top:30px;}
-.posts-list article {display:inline-block; vertical-align:top; margin-left:7%; width:43%; margin-bottom:50px}
-.posts-list article h2 {border:none; display:block;}
+.posts-list article {display:inline-block; vertical-align:top; margin-left:5%; width:28.3%; margin-bottom:50px}
+.posts-list article h2 {border:none; display:block; }
+.posts-list article h2 a {color:#f8981d;}
+.posts-list article h2 a:hover {color:#000;}
 time {font-size:16px; color:#000; border-bottom:3px solid #000;padding-bottom:11px; display:inline-block; margin-bottom:12px;}
 p.cat {border-top: 1px solid #666; padding-top: 10px; margin:12px 0 0;}
-p.cat a {color:#333; font-style:italic; display:inline-block; vertical-align:baseline;}
+p.cat a {color:#333; font-style:italic; display: inline-block;vertical-align: middle; margin-top: -3px; margin-left: 5px;}
+p.cat a:first-child, p.cat span a {margin: 0;}
 p.cat a:hover {color:#f8981d}
-p.cat > a:first-child:before {content:""; background:url(images/sprite.png) no-repeat -90px -120px; width:25px; height: 25px; display: inline-block;vertical-align: middle;margin-right: 10px;}
+p.cat > a:first-child:before {content:""; background:url(images/sprite.png) no-repeat -90px -120px; width:25px; height: 25px; display: inline-block;vertical-align: middle;margin-right: 10px;margin-top: 0;}
 .event-info {font:20px/1.2 'heroicBold', Arial, Helvetica, sans-serif ;text-transform:uppercase}
-.event-info time {font:300 16px/1.4 'Roboto', Arial, Helvetica, sans-serif; color:#f8981d; border-bottom:0; text-transform:none; padding-bottom:0; margin:0 0 3px 5px;}
-.event-info span {font-size:24px;color:#f8981d;padding-bottom: 8px;display: block;}
+.event-info time {font:300 20px/1.4 'heroicRegular', Arial, Helvetica, sans-serif; color:#000; border-bottom:0; text-transform:none; padding-bottom:0; margin:0 0 3px 5px;}
+.event-info span {font-size:24px;color:#000;padding-bottom: 8px;display: block;}
 .event-info:after {content:""; height:3px; background:#000; width:65%; display:block;}
 
 /* ** ASIDE ** */
-.blog-layout aside p.panel:first-child {padding-left:32%; font-size: 22px}
-.blog-layout aside p.panel:first-child strong {font:24px/1.2 'heroicBold', Arial, Helvetica, sans-serif ; font-weight: normal;  text-transform: uppercase;border-bottom: 1px solid #FFF}
-.blog-layout aside.span-2 section.panel {margin-bottom: 29px; padding-left:36%}
-.blog-layout aside.span-2 section.panel h2 { font:italic 700 18px/1.4 'Roboto', Arial, Helvetica, sans-serif; border-bottom: none; text-transform: none}
-.blog-layout aside.span-2 section.panel a {font-size: 14px; font-style: italic; text-decoration: underline;margin-bottom: 12px; display: block;}
+.blog-layout aside p.panel:first-child {padding-left:30%; font-size: 22px}
+.blog-layout aside p.panel:first-child strong {font:40px/1.2 'heroicBold', Arial, Helvetica, sans-serif ; font-weight: normal;  text-transform: uppercase;border-bottom: 3px solid #FFF}
+.blog-layout aside.span-2 section.panel {margin-bottom: 29px; padding-left:30%}
+.blog-layout aside.span-2 section.panel h2 { font:24px/1.4 'heroicBold', Arial, Helvetica, sans-serif; border-bottom: none; text-transform: uppercase;}
+.blog-layout aside.span-2 section.panel a {font-size: 14px; margin-bottom: 12px; display: block;}
+.blog-layout aside.span-2 section.panel .menu a {font:24px/1.2 'heroicBold', Arial, Helvetica, sans-serif ; text-transform: uppercase;}
 
 /* ** PAGINATE ** */
 .paginate {overflow:hidden; margin-left:7%; color:#999; font-size:20px; text-align:center; font-style:italic}
@@ -426,7 +433,6 @@ p.cat > a:first-child:before {content:""; background:url(images/sprite.png) no-r
 .single article h2 {border-bottom:none; font-size:34px; color:#f8981d; margin-bottom:11px; padding-bottom:0; display: block;}
 .single article img {margin:15px 0;}
 .single p.cat {margin-bottom: 15px}
-.single .cat > a {float:left;}
 .addthis_toolbox {display:block; min-height:26px}
 .addthis_toolbox a {float:right!important;}
 
@@ -440,12 +446,33 @@ p.cat > a:first-child:before {content:""; background:url(images/sprite.png) no-r
 .single .event-info:after {display: none;}
 
 /* ****** INTERNACIONALIZACION****** */
+.page-template-page-internacionalizacion-php .section .column .black-studio-tinymce h3 {margin:0px 0 15px; cursor:pointer;}
 .page-template-page-internacionalizacion-php .span-2 .panel h2 {font-size:30px}
 .page-template-page-internacionalizacion-php .ninja_forms_widget {display: none;}
 /* SIMPLE MODAL */
 #simplemodal-overlay {background-color:#000;}
-#simplemodal-container {background-color:#333; border:8px solid #444; padding:12px;}
-#simplemodal-container a.modalCloseImg {background:url(images/x.png) no-repeat;width:25px;	height:29px;display:inline;	z-index:3200;position:absolute;	top:-15px;right:-18px;cursor:pointer;}
+#simplemodal-container {background-color:#FFF; border:8px solid #F8991F; padding:25px 22px; width: 50%!important; height: 430px!important}
+#simplemodal-container a.modalCloseImg {background:url(images/sprite.png) no-repeat scroll -1px -180px ;width:32px;	height:27px;display:inline;	z-index:3200;position:absolute;	top: 25px;
+right: 30px;cursor:pointer;}
+#simplemodal-container .panel {margin:0; padding: 0}
+#simplemodal-container .textbox {float: left; width: 52%; margin-right:5%; min-height: 350px; }
+#simplemodal-container .panel h3 {font:24px/1.2 'heroicBold', Arial, helvetica, sans-serif; color:#f8981d;border-bottom: 1px solid #E9E9E9;padding-bottom: 12px;margin-bottom: 14px;}
+#simplemodal-container .panel ul li {position: relative;padding-left: 15px;}
+#simplemodal-container .panel ul li:before {content: "";position: absolute;left: 0;top: 8px;border-radius: 100%;background-color: #f8981d;width: 5px;height: 5px;}
+#simplemodal-container .panel .field-wrap, #simplemodal-container .panel .informacion {float: left; width:43%; }
+#simplemodal-container .panel .informacion {font:30px/1.2 'heroicBold', Arial, helvetica, sans-serif; text-transform: uppercase; color:#000; margin-bottom: 25px;}
+#simplemodal-container .text-wrap label {font:20px/1.2 'heroicBold', Arial, helvetica, sans-serif; color:#f8981d;}
+#simplemodal-container .text-wrap input {background-color: #7F7F7F;padding: 13px 10px;}
+#simplemodal-container .submit-wrap input[type=submit] {width: 100%!important;}
+
+/* ****** DIRECTORIO ****** */
+.widget_wpbdp_searchwidget .search-filter {display: inline-block; width: 31%; padding: 0 2%;}
+.widget_wpbdp_searchwidget .search-filter:first-child {width: 34.5%; padding: 0;}
+.widget_wpbdp_searchwidget form label {font:20px/1.2 'heroicBold', Arial, helvetica, sans-serif; text-transform: uppercase; color: #FFF; display: block;margin-bottom: 5px;}
+.widget_wpbdp_searchwidget form input[type=text], .widget_wpbdp_searchwidget form select{min-width: 330px; padding: 14px 10px;}
+.widget_wpbdp_searchwidget .input-submit {display: inline-block; width: 30%;}
+.widget_wpbdp_searchwidget form input[type=submit] {color: #FFF; border-color:#FFF;background: url(images/sprite.png) no-repeat scroll 20px -217px;min-width: 70px;padding: 3px 27px 3px 70px;font-size: 40px!important; }
+.widget_wpbdp_searchwidget form select {padding: 15px 10px;}
 
 /*  *******  FOOTER  *******  */
 footer {display: block; background:#000; line-height:1.2; color: #999;}

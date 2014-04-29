@@ -20,7 +20,7 @@ get_header(); ?>
 							<h2><?php the_title();?></h2>
 							<p class="cat">
 								<?php 
-								if( is_event() ) the_terms($post->ID, 'tipo_actividades','', ' &gt; '); ?>
+								if( is_event() ) the_terms($post->ID, 'tipo_actividades','', ','); ?>
 								
 								<!-- Share buttons -->
 								<span class="addthis_toolbox addthis_default_style">

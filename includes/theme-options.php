@@ -56,8 +56,11 @@ require_once("admin-page-class/admin-page-class.php");
   $options_panel->addPosts('ps_page_blog', array('post_type' => 'page'), array('name'=> __('P&aacute;gina de entradas', 'positive-backend'),'std'=>'','desc'=>__('Selecciona la p&aacute;gina en la que mostrar el listado de entradas. <br>Solo disponible si se ha seleccionado una p&aacute;gina de inicio arriba. No puede ser la misma que la p&aacute;gina de inicio.', 'positive-backend') ));
   $options_panel->addImage('ps_blog_image',array('name'=> __('Imagen de cabecera', 'positive-backend'),'preview_height' => 'auto', 'preview_width' => 'auto', 'desc' => __('Selecciona la imagen de cabecera de la página de entradas', 'positive-backend')));
   // events page
-   $options_panel->addPosts('ps_page_events', array('post_type' => 'page'), array('name'=> __('P&aacute;gina de eventos', 'positive-backend'),'std'=>'','desc'=>__('Selecciona la p&aacute;gina en la que mostrar el listado de eventos. <br>No puede ser la misma que la ninguna de las anteriores.', 'positive-backend') ));
+   $options_panel->addPosts('ps_page_events', array('post_type' => 'page'), array('name'=> __('P&aacute;gina de eventos', 'positive-backend'),'std'=>'','desc'=>__('Selecciona la p&aacute;gina en la que mostrar el listado de eventos. <br>No puede ser la misma que ninguna de las anteriores.', 'positive-backend') ));
    $options_panel->addImage('ps_events_image',array('name'=> __('Imagen de cabecera', 'positive-backend'),'preview_height' => 'auto', 'preview_width' => 'auto', 'desc' => __('Selecciona la imagen de cabecera de la página de eventos', 'positive-backend')));
+   // comunicacion page
+   $options_panel->addPosts('ps_page_comunicacion', array('post_type' => 'page'), array('name'=> __('P&aacute;gina de comunicacion', 'positive-backend'),'std'=>'','desc'=>__('Selecciona la p&aacute;gina en la que mostrar el listado de comunicacion. <br>No puede ser la misma que ninguna de las anteriores.', 'positive-backend') ));
+   $options_panel->addImage('ps_comunicacion_image',array('name'=> __('Imagen de cabecera', 'positive-backend'),'preview_height' => 'auto', 'preview_width' => 'auto', 'desc' => __('Selecciona la imagen de cabecera de la página de comunicacion', 'positive-backend')));
 
   // Close third tab
   $options_panel->CloseTab();

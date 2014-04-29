@@ -26,12 +26,14 @@
 .span-4 {width:65.5%}
 .span-3 {width:50%}
 .span-2 {width:33.3%}
+.span-2 {width:25%}
 
 .panel {margin:15px 0}
 /* espaciado horizontal */
 .panel {padding:0 4%}
 .span-4 .panel {padding-right:4.5%; padding-left:4.5%}
-.span-3 .panel {padding-right:5%; padding-left:5%}
+.span-3 .panel,
+.span-4 .panel {padding-right:5%; padding-left:5%}
 .span-2 .panel {padding-right:10%; padding-left:10%}
 
 
@@ -95,7 +97,6 @@
 .span-6 .panel.black-studio-tinymce { margin:25px 0 35px;}
 
 /* footer separation */
-#main > .section:last-child {padding-bottom:60px}
 #main > .section.blog-layout {padding-bottom:0}
 #main .blog-layout aside,
 #main .blog-layout article.panel {padding-bottom:60px}
@@ -106,11 +107,15 @@
 /* MEDIA QUERIES
 /* ************************************************************/
 
-/* big scrrens > 1100px */
+/* big screens > 1100px */
 @media only screen and (min-width:1100px) {
 	.span-2 {width:31%}
 	.span-2.column-1, .span-2.column-3, 
 	.span-4 + .span-2.column-2 {width:34.5%}
+	.span-1 {width:22%;}
+	.span-1.column-1, .span-1.column-4 {width:28%;}
+	#main .blog-layout aside.column-1.span-2 {width: 27%;}
+	#main .blog-layout section.column-2.span-4 {width: 73%;}
 
 	/* horizontal spacing */
 	.panel {padding:0 8%}
@@ -121,12 +126,15 @@
   	.span-2.column-1 .panel {padding:0 4% 0 24%}
 	.span-2.column-3 .panel,
 	.span-4 + .span-2.column-2 .panel {padding:0 24% 0 4%}
+	.span-1.column-1 .panel {padding-left:29.5%}
+	.span-1.column-4 .panel {padding-right:29.5%}
 
 }
 
 /* mobile < 700px */
 @media only screen and (max-width:700px) {
 	.grid {display:block;}
+	.span-1 {width:50%;}
 	.span-2,.span-3,.span-4 {width:100%}
 
 	.cycle-slideshow, .cycle-slideshow > div, .cycle-slideshow > div:after {height:290px;}
